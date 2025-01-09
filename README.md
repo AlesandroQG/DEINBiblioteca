@@ -2,7 +2,7 @@
 ## DM2 DEIN 2024-2025
 ### Alesandro Quirós Gobbato
 
-Esta es una aplicación hecha con JavaFX y JasperReports que muestra varios informes de un supermercado.
+Esta es una aplicación para la gestión de una biblioteca hecha con JavaFX y JasperReports.
 
 JasperReport está compilado en 7.0.1. La ejecución funciona en VSCode.
 
@@ -13,7 +13,7 @@ La estructura del proyecto es la siguiente:
     - `java > com.alesandro.biblioteca`:
         - `BibliotecaApplicacion.java`: Clase que lanza la aplicación
         - `controller`:
-          - `SupermercadoController.java`: Clase que controla los eventos de la ventana principal de la aplicación
+          - `MainController.java`: Clase que controla los eventos de la ventana principal de la aplicación
         - `dao`:
           - `DaoProducto.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
           - `DaoSeccion.java`: Clase que realiza las operaciones con la base de datos del modelo Sección
@@ -24,7 +24,7 @@ La estructura del proyecto es la siguiente:
           - `Sección.java`: Clase que define el objeto Sección
     - `resources > com.alesandro.biblioteca`:
         - `fxml`:
-          - `Supermercado.fxml`: Ventana principal de la aplicación
+          - `Main.fxml`: Ventana principal de la aplicación
         - `images`: Carpeta que contiene las imágenes de la aplicación
         - `reports`:
           - `InformeProductos.jasper`: Fichero del informe de JasperReport de productos
