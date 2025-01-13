@@ -1,6 +1,7 @@
 module com.alesandro.biblioteca {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
     requires net.sf.jasperreports.core;
     requires java.sql;
 
