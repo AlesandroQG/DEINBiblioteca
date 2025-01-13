@@ -30,7 +30,7 @@ La estructura del proyecto es la siguiente:
           - `Libro.java`: Clase que define el objeto Libro
           - `Prestamo.java`: Clase que define el objeto Préstamo
     - `resources > com.alesandro.biblioteca`:
-        - - `fonts`: Carpeta que contiene las fuentes de la aplicación
+        - `fonts`: Carpeta que contiene las fuentes de la aplicación
         - `fxml`:
           - `Main.fxml`: Ventana principal de la aplicación
         - `help`:
@@ -45,6 +45,8 @@ La estructura del proyecto es la siguiente:
           - `InformeAlumnos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de alumnos
           - `InformeGraficos.jasper`: Fichero del informe de JasperReport de gráficos
           - `InformeGraficos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de gráficos
+          - `InformeAltaPrestamo.jasper`: Fichero del informe de JasperReport de alta de préstamo
+          - `InformeAltaPrestamo.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de alta de préstamo
         - `sql`:
           - `libros_con_imagen.sql`: Fichero para la creación de la base de datos
         - `style`: Carpeta que contiene los estilos de la aplicación
