@@ -1,5 +1,6 @@
 package com.alesandro.biblioteca.model;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 /**
@@ -12,6 +13,7 @@ public class Libro {
     private String editorial;
     private String estado;
     private int baja;
+    private Blob portada;
 
     /**
      * Constructor con parámetros de libro
@@ -22,14 +24,16 @@ public class Libro {
      * @param editorial del libro
      * @param estado del libro
      * @param baja del libro
+     * @param portada del libro
      */
-    public Libro(int codigo, String titulo, String autor, String editorial, String estado, int baja) {
+    public Libro(int codigo, String titulo, String autor, String editorial, String estado, int baja, Blob portada) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.estado = estado;
         this.baja = baja;
+        this.portada = portada;
     }
 
     /**
@@ -143,6 +147,24 @@ public class Libro {
      */
     public void setBaja(int baja) {
         this.baja = baja;
+    }
+
+    /**
+     * Getter para el portada
+     *
+     * @return portada
+     */
+    public Blob getPortada() {
+        return portada;
+    }
+
+    /**
+     * Setter para el portada
+     *
+     * @param portada nuevo valor de portada
+     */
+    public void setPortada(Blob portada) {
+        this.portada = portada;
     }
 
     @Override

@@ -5,6 +5,11 @@ import com.alesandro.biblioteca.model.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +29,7 @@ public class DaoLibro {
         Libro libro = null;
         try {
             connection = new DBConnect();
-            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja FROM Libros WHERE codigo = ?";
+            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libros WHERE codigo = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -35,7 +40,8 @@ public class DaoLibro {
                 String editorial = rs.getString("apellido2");
                 String estado = rs.getString("estado");
                 int baja = rs.getInt("baja");
-                libro = new Libro(codigo_db, titulo, autor, editorial, estado, baja);
+                Blob portada = rs.getBlob("portada");
+                libro = new Libro(codigo_db, titulo, autor, editorial, estado, baja, portada);
             }
             rs.close();
             connection.closeConnection();
@@ -55,7 +61,7 @@ public class DaoLibro {
         ObservableList<Libro> libros = FXCollections.observableArrayList();
         try{
             connection = new DBConnect();
-            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja FROM Libros";
+            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libros";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -65,7 +71,8 @@ public class DaoLibro {
                 String editorial = rs.getString("apellido2");
                 String estado = rs.getString("estado");
                 int baja = rs.getInt("baja");
-                Libro libro = new Libro(codigo_db, titulo, autor, editorial, estado, baja);
+                Blob portada = rs.getBlob("portada");
+                Libro libro = new Libro(codigo_db, titulo, autor, editorial, estado, baja, portada);
                 libros.add(libro);
             }
             rs.close();
@@ -74,6 +81,36 @@ public class DaoLibro {
             System.err.println(e.getMessage());
         }
         return libros;
+    }
+
+    /**
+     * Función que convierto un objeto File a Blob
+     *
+     * @param file fichero imagen
+     * @return blob
+     */
+    public static Blob convertFileToBlob(File file) {
+        DBConnect connection;
+        try {
+            connection = new DBConnect();
+            try (Connection conn = connection.getConnection();
+                 FileInputStream inputStream = new FileInputStream(file)) {
+                // Create Blob
+                Blob blob = conn.createBlob();
+                // Write the file's bytes to the Blob
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                try (var outputStream = blob.setBinaryStream(1)) {
+                    while ((bytesRead = inputStream.read(buffer)) != -1) {
+                        outputStream.write(buffer, 0, bytesRead);
+                    }
+                }
+                return blob;
+            }
+        } catch (SQLException | IOException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -131,14 +168,15 @@ public class DaoLibro {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "UPDATE Libros SET titulo = ?,autor = ?,editorial = ?,estado = ?,baja = ? WHERE codigo = ?";
+            String consulta = "UPDATE Libros SET titulo = ?,autor = ?,editorial = ?,estado = ?,baja = ?,portada = ? WHERE codigo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, libro.getTitulo());
             ps.setString(2, libro.getAutor());
             ps.setString(3, libro.getEditorial());
             ps.setString(4, libro.getEstado());
             ps.setInt(5, libro.getBaja());
-            ps.setInt(6, libro.getCodigo());
+            ps.setBlob(6, libro.getPortada());
+            ps.setInt(7, libro.getCodigo());
             int filasAfectadas = ps.executeUpdate();
             System.out.println("Actualizado libro");
             ps.close();
@@ -161,13 +199,14 @@ public class DaoLibro {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "INSERT INTO Libros (titulo,autor,editorial,estado,baja) VALUES (?,?,?,?,?) ";
+            String consulta = "INSERT INTO Libros (titulo,autor,editorial,estado,baja,portada) VALUES (?,?,?,?,?,?) ";
             ps = connection.getConnection().prepareStatement(consulta, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, libro.getTitulo());
             ps.setString(2, libro.getAutor());
             ps.setString(3, libro.getEditorial());
             ps.setString(4, libro.getEstado());
             ps.setInt(5, libro.getBaja());
+            ps.setBlob(6, libro.getPortada());
             int filasAfectadas = ps.executeUpdate();
             System.out.println("Nueva entrada en libro");
             if (filasAfectadas > 0) {
