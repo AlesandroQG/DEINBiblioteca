@@ -15,23 +15,36 @@ La estructura del proyecto es la siguiente:
         - `controller`:
           - `MainController.java`: Clase que controla los eventos de la ventana principal de la aplicación
         - `dao`:
-          - `DaoProducto.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
-          - `DaoSeccion.java`: Clase que realiza las operaciones con la base de datos del modelo Sección
+          - `DaoAlumno.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
+          - `DaoHistorialPrestamo.java`: Clase que realiza las operaciones con la base de datos del modelo Historial Préstamo
+          - `DaoLibro.java`: Clase que realiza las operaciones con la base de datos del modelo Libro
+          - `DaoPrestamo.java`: Clase que realiza las operaciones con la base de datos del modelo Préstamo
         - `db`:
           - `DBConnect.java`: Clase que se conecta a la base de datos
+        - `language`:
+          - `LanguageManager.java`: Clase que maneja los idiomas de la aplicación
+          - `LanguageSwitcher.java`: Clase que permite cambiar entre los idiomas de la aplicación
         - `model`:
-          - `Producto.java`: Clase que define el objeto Producto
-          - `Sección.java`: Clase que define el objeto Sección
+          - `Alumno.java`: Clase que define el objeto Alumno
+          - `HistorialPrestamo.java`: Clase que define el objeto Historia Préstamo
+          - `Libro.java`: Clase que define el objeto Libro
+          - `Prestamo.java`: Clase que define el objeto Préstamo
     - `resources > com.alesandro.biblioteca`:
+        - - `fonts`: Carpeta que contiene las fuentes de la aplicación
         - `fxml`:
           - `Main.fxml`: Ventana principal de la aplicación
+        - `help`:
+          - `html`: Directorio con los ficheros html para la ayuda de la aplicación
+          - `pdf`: Directorio con los ficheros pdf para la ayuda de la aplicación
         - `images`: Carpeta que contiene las imágenes de la aplicación
+        - `languages`: Carpeta que contiene los idiomas de la aplicación
         - `reports`:
-          - `InformeProductos.jasper`: Fichero del informe de JasperReport de productos
-          - `InformeProductos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de productos
-          - `InformeSecciones.jasper`: Fichero del informe de JasperReport de las secciones
-          - `InformeSecciones.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de las secciones
-          - `InformeTablaProductos.jasper`: Fichero del informe de JasperReport de tabla productos
-          - `InformeTablaProductos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de tabla productos
+          - `InformeLibros.jasper`: Fichero del informe de JasperReport de libros
+          - `InformeLibros.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de libros
+          - `InformeAlumnos.jasper`: Fichero del informe de JasperReport de alumnos
+          - `InformeAlumnos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de alumnos
+          - `InformeGraficos.jasper`: Fichero del informe de JasperReport de gráficos
+          - `InformeGraficos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de gráficos
         - `sql`:
-          - `biblioteca.sql`: Fichero para la creación de la base de datos
+          - `libros_con_imagen.sql`: Fichero para la creación de la base de datos
+        - `style`: Carpeta que contiene los estilos de la aplicación

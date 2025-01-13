@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "Ubuntu, Regular";
+    src: url("../fonts/Ubuntu/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Ubuntu, Bold";
+    src: url("../fonts/Ubuntu/Ubuntu-Bold.ttf");
+}
+
+* {
+    -fx-font-family: "Ubuntu, Regular";
+}
+
+.root {
+    -fx-background-color: linear-gradient(to right, #99ff00, yellow);
+}
+
+.button {
+    -fx-font-family: "Ubuntu, Bold";
+    -fx-font-weight: bold;
+}
+
+.btnGuardar {
+    -fx-background-color: #88E788;
+}
+
+.btnEliminar {
+    -fx-background-color: #FF9999;
+}
+
+.btnEliminar:disabled {
+    -fx-border-color: red;
+    -fx-background-color: pink;
+}
+
+.btnCerrar {
+    -fx-background-color: orange;
+}
+
+.btnAccion {
+    -fx-background-color: lightblue;
+}
+
+.rojo {
+    -fx-text-fill: red;
+}

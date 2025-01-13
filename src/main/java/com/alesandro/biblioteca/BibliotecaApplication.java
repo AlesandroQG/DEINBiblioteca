@@ -1,11 +1,13 @@
 package com.alesandro.biblioteca;
 
+import com.alesandro.biblioteca.language.LanguageManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Clase donde se ejecuta la aplicación principal
@@ -20,9 +22,10 @@ public class BibliotecaApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(BibliotecaApplication.class.getResource("fxml/Main.fxml"));
+        ResourceBundle bundle = LanguageManager.getInstance().getBundle();
+        FXMLLoader fxmlLoader = new FXMLLoader(BibliotecaApplication.class.getResource("fxml/Main.fxml"), bundle);
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Biblioteca");
+        stage.setTitle(bundle.getString("app.name"));
         stage.setScene(scene);
         stage.show();
     }
