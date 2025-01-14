@@ -32,6 +32,16 @@ public class Alumno {
     public Alumno() {}
 
     /**
+     * ToString de alumno
+     *
+     * @return string con información de alumno
+     */
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+    /**
      * Getter para el dni
      *
      * @return dni

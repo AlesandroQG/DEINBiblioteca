@@ -26,16 +26,23 @@
         <menus>
           <Menu mnemonicParsing="false" text="%menu.file">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrar" text="Cerrar" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="%menu.edit">
-            <items>
-                  <MenuItem mnemonicParsing="false" onAction="#aniadir" text="%menu.edit.add">
+                  <MenuItem mnemonicParsing="false" onAction="#aniadir" text="%menu.file.add">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
                   </MenuItem>
+                  <Menu mnemonicParsing="false" text="%menu.file.report">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#informeLibros" text="%menu.file.report.books" />
+                        <MenuItem mnemonicParsing="false" onAction="#informeAlumnos" text="%menu.file.report.students" />
+                        <MenuItem mnemonicParsing="false" onAction="#informeGraficos" text="%menu.file.report.graphs" />
+                    </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#cerrar" text="%menu.file.close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="%menu.edit">
+            <items>
                   <MenuItem fx:id="btnEditar" disable="true" mnemonicParsing="false" onAction="#editar" text="%menu.edit.edit">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
@@ -48,8 +55,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="%menu.help">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaHTML" text="Ayuda HTML" />
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaPDF" text="Ayuda PDF" />
+                  <MenuItem mnemonicParsing="false" onAction="#ayudaHTML" text="%menu.help.html" />
+                  <MenuItem mnemonicParsing="false" onAction="#ayudaPDF" text="%menu.help.pdf" />
                   <Menu mnemonicParsing="false" text="%menu.help.language">
                     <items>
                         <RadioMenuItem fx:id="langES" mnemonicParsing="false" text="Español">
@@ -111,6 +118,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
+                  <ComboBox fx:id="cbFiltro" prefWidth="150.0" />
                   <TextField fx:id="filtroNombre">
                      <HBox.margin>
                         <Insets left="5.0" />

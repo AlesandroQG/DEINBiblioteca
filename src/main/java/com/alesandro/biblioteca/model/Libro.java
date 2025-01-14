@@ -42,6 +42,16 @@ public class Libro {
     public Libro() {}
 
     /**
+     * ToString de libro
+     *
+     * @return string con información de libro
+     */
+    @Override
+    public String toString() {
+        return titulo;
+    }
+
+    /**
      * Getter para el código
      *
      * @return código
