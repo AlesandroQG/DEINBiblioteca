@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -136,6 +137,12 @@ public class MainController implements Initializable {
                 }
             });
             return row;
+        });
+        // Doble-click para editar
+        tabla.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                editar(null);
+            }
         });
         // Carga inicial
         cargarAlumnos();
