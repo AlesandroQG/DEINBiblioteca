@@ -209,8 +209,8 @@ public class AlumnoController implements Initializable {
         tablaPrestamos.getColumns().addAll(colId,colLibro,colFechaPrestamo);
         // Rellenar tabla
         if (alumno != null) {
-        ObservableList<Prestamo> prestamos = DaoPrestamo.prestamosDeAlumno(alumno);
-        tablaPrestamos.setItems(prestamos);
+            ObservableList<Prestamo> prestamos = DaoPrestamo.prestamosDeAlumno(alumno);
+            tablaPrestamos.setItems(prestamos);
         }
     }
 
