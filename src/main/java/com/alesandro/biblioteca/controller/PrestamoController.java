@@ -1,6 +1,6 @@
 package com.alesandro.biblioteca.controller;
 
-import com.alesandro.biblioteca.model.Libro;
+import com.alesandro.biblioteca.model.Prestamo;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
@@ -8,13 +8,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora de la ventana libro
+ * Clase controladora de la ventana préstamo
  */
-public class LibroController implements Initializable {
+public class PrestamoController implements Initializable {
     /**
-     * Parámetro libro
+     * Parámetro préstamo
      */
-    private Libro libro;
+    private Prestamo prestamo;
 
     /**
      * Recursos de la aplicación (strings del multiidioma)
@@ -22,19 +22,19 @@ public class LibroController implements Initializable {
     private ResourceBundle resources;
 
     /**
-     * Constructor con parámetros para la consulta o edición de un libro
+     * Constructor con parámetros para la consulta o edición de un préstamo
      *
-     * @param libro a consultar o editar
+     * @param prestamo a consultar o editar
      */
-    public LibroController(Libro libro) {
-        this.libro = libro;
+    public PrestamoController(Prestamo prestamo) {
+        this.prestamo = prestamo;
     }
 
     /**
-     * Constructor vacío para la creación de un libro
+     * Constructor vacío para la creación de un préstamo
      */
-    public LibroController() {
-        this.libro = null;
+    public PrestamoController() {
+        this.prestamo = null;
     }
 
     /**

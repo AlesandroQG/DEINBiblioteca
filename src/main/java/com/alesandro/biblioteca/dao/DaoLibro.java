@@ -36,8 +36,8 @@ public class DaoLibro {
             if (rs.next()) {
                 int codigo_db = rs.getInt("codigo");
                 String titulo = rs.getString("titulo");
-                String autor = rs.getString("apellido1");
-                String editorial = rs.getString("apellido2");
+                String autor = rs.getString("autor");
+                String editorial = rs.getString("editorial");
                 String estado = rs.getString("estado");
                 int baja = rs.getInt("baja");
                 Blob portada = rs.getBlob("portada");
@@ -67,8 +67,8 @@ public class DaoLibro {
             while (rs.next()) {
                 int codigo_db = rs.getInt("codigo");
                 String titulo = rs.getString("titulo");
-                String autor = rs.getString("apellido1");
-                String editorial = rs.getString("apellido2");
+                String autor = rs.getString("autor");
+                String editorial = rs.getString("editorial");
                 String estado = rs.getString("estado");
                 int baja = rs.getInt("baja");
                 Blob portada = rs.getBlob("portada");

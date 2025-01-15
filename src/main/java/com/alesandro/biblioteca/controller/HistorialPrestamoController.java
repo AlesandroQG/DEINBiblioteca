@@ -1,6 +1,6 @@
 package com.alesandro.biblioteca.controller;
 
-import com.alesandro.biblioteca.model.Libro;
+import com.alesandro.biblioteca.model.HistorialPrestamo;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
@@ -8,13 +8,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora de la ventana libro
+ * Clase controladora de la ventana historial préstamo
  */
-public class LibroController implements Initializable {
+public class HistorialPrestamoController implements Initializable {
     /**
-     * Parámetro libro
+     * Parámetro historial préstamo
      */
-    private Libro libro;
+    private HistorialPrestamo historialPrestamo;
 
     /**
      * Recursos de la aplicación (strings del multiidioma)
@@ -22,19 +22,19 @@ public class LibroController implements Initializable {
     private ResourceBundle resources;
 
     /**
-     * Constructor con parámetros para la consulta o edición de un libro
+     * Constructor con parámetros para la consulta o edición de un historial préstamo
      *
-     * @param libro a consultar o editar
+     * @param historialPrestamo a consultar o editar
      */
-    public LibroController(Libro libro) {
-        this.libro = libro;
+    public HistorialPrestamoController(HistorialPrestamo historialPrestamo) {
+        this.historialPrestamo = historialPrestamo;
     }
 
     /**
-     * Constructor vacío para la creación de un libro
+     * Constructor vacío para la creación de un historial préstamo
      */
-    public LibroController() {
-        this.libro = null;
+    public HistorialPrestamoController() {
+        this.historialPrestamo = null;
     }
 
     /**

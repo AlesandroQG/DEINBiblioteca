@@ -1,6 +1,5 @@
 package com.alesandro.biblioteca.controller;
 
-import com.alesandro.biblioteca.model.Libro;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
@@ -8,34 +7,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora de la ventana libro
+ * Clase controladora de la ventana ayuda HTML
  */
-public class LibroController implements Initializable {
-    /**
-     * Parámetro libro
-     */
-    private Libro libro;
-
+public class AyudaHTMLController implements Initializable {
     /**
      * Recursos de la aplicación (strings del multiidioma)
      */
     private ResourceBundle resources;
-
-    /**
-     * Constructor con parámetros para la consulta o edición de un libro
-     *
-     * @param libro a consultar o editar
-     */
-    public LibroController(Libro libro) {
-        this.libro = libro;
-    }
-
-    /**
-     * Constructor vacío para la creación de un libro
-     */
-    public LibroController() {
-        this.libro = null;
-    }
 
     /**
      * Función que se ejecuta cuando se inicia la ventana
