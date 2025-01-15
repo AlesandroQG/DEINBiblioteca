@@ -13,7 +13,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -25,9 +27,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -38,6 +50,8 @@ import java.util.ResourceBundle;
  * Clase controladora de la vista principal de la aplicación
  */
 public class MainController implements Initializable {
+    @FXML // fx:id="miAniadir"
+    private MenuItem miAniadir; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnEditar"
     private MenuItem btnEditar; // Value injected by FXMLLoader
@@ -155,7 +169,22 @@ public class MainController implements Initializable {
      */
     @FXML
     void ayudaHTML(ActionEvent event) {
-        //
+        try {
+            Window ventana = tabla.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/AyudaHTML.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+            stage.setTitle(resources.getString("window.help"));
+            stage.setResizable(false);
+            stage.initOwner(ventana);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta("Error abriendo ventana, por favor inténtelo de nuevo");
+        }
     }
 
     /**
@@ -175,7 +204,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void aniadir(ActionEvent event) {
-        //
+        String item = cbTabla.getSelectionModel().getSelectedItem();
     }
 
     /**
@@ -185,7 +214,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void editar(ActionEvent event) {
-        //
+        String item = cbTabla.getSelectionModel().getSelectedItem();
     }
 
     /**
@@ -195,11 +224,24 @@ public class MainController implements Initializable {
      */
     @FXML
     void eliminar(ActionEvent event) {
-        //
+        String item = cbTabla.getSelectionModel().getSelectedItem();
     }
 
-    private static void mostrarInforme(String informe) {
-        //
+    private void mostrarInforme(String informe) {
+        DBConnect connection;
+        try {
+            connection = new DBConnect(); // Instanciar la conexión con la base de datos
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/" + informe + ".jasper")); // Obtener el fichero del informe
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, connection.getConnection()); // Cargar el informe con las personas
+            JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
+            viewer.setVisible(true); // Mostrar el informe al usuario
+        } catch (JRException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta("Ha ocurrido un error cargando el informe");
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta("Ha ocurrido un erros cargando los países de la base de datos");
+        }
     }
 
     /**
@@ -209,7 +251,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void informeAlumnos(ActionEvent event) {
-        //
+        mostrarInforme("InformeAlumnos");
     }
 
     /**
@@ -219,7 +261,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void informeGraficos(ActionEvent event) {
-        //
+        mostrarInforme("InformeGraficos");
     }
 
     /**
@@ -229,7 +271,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void informeLibros(ActionEvent event) {
-        //
+        mostrarInforme("InformeLibros");
     }
 
     /**
@@ -253,6 +295,17 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Función que cambia los textos de los items de edición del menú
+     *
+     * @param text texto a cambiar
+     */
+    private void editarMenuItemText(String text) {
+        miAniadir.setText(resources.getString("menu.file.add") + " " + text.toLowerCase());
+        btnEditar.setText(resources.getString("menu.edit.edit") + " " + text.toLowerCase() + "...");
+        btnEliminar.setText(resources.getString("menu.edit.delete") + " " + text.toLowerCase() + "...");
+    }
+
+    /**
      * Función que carga en la tabla las columnas de alumnos y los alumnos
      */
     public void cargarAlumnos() {
@@ -264,6 +317,7 @@ public class MainController implements Initializable {
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
+        editarMenuItemText(resources.getString("string.student"));
         // Cargar filas
         TableColumn<Alumno, String> colDni = new TableColumn<>("DNI");
         colDni.setCellValueFactory(new PropertyValueFactory("dni"));
@@ -292,6 +346,7 @@ public class MainController implements Initializable {
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
+        editarMenuItemText(resources.getString("string.book"));
         // Cargar filas
         TableColumn<Libro, Integer> colCodigo = new TableColumn<>(resources.getString("table.book.code"));
         colCodigo.setCellValueFactory(new PropertyValueFactory("codigo"));
@@ -324,6 +379,7 @@ public class MainController implements Initializable {
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
+        editarMenuItemText(resources.getString("string.loan"));
         // Cargar filas
         TableColumn<Prestamo, Integer> colId = new TableColumn<>("ID");
         colId.setCellValueFactory(new PropertyValueFactory("id_prestamo"));

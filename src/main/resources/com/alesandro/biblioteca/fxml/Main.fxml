@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
@@ -26,7 +27,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="%menu.file">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#aniadir" text="%menu.file.add">
+                  <MenuItem fx:id="miAniadir" mnemonicParsing="false" onAction="#aniadir" text="%menu.file.add">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator>
@@ -73,7 +74,10 @@
       </MenuBar>
       <FlowPane alignment="CENTER" hgap="25.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Biblioteca.png" />
+               </image></ImageView>
             <Label alignment="CENTER" text="%main.title">
                <font>
                   <Font size="24.0" />
