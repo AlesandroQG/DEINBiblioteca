@@ -53,6 +53,40 @@ public class DaoHistorialPrestamo {
     /**
      * Metodo que carga los datos de la tabla HistorialPrestamos y los devuelve para usarlos en un listado de prestamos
      *
+     * @param alumno a obtener el listado
+     * @return listado de prestamos para cargar en un tableview
+     */
+    public static ObservableList<HistorialPrestamo> historialDeAlumno(Alumno alumno) {
+        DBConnect connection;
+        ObservableList<HistorialPrestamo> prestamos = FXCollections.observableArrayList();
+        try{
+            connection = new DBConnect();
+            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historico_prestamo WHERE dni_alumno = ?";
+            PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
+            ps.setString(1, alumno.getDni());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id_prestamo_db = rs.getInt("id_prestamo");
+                String dni_alumno = rs.getString("dni_alumno");
+                Alumno alumno_db = DaoAlumno.getAlumno(dni_alumno);
+                int codigo_libro = rs.getInt("codigo_libro");
+                Libro libro = DaoLibro.getLibro(codigo_libro);
+                LocalDateTime fecha_prestamo = rs.getTimestamp("fecha_prestamo").toLocalDateTime();
+                LocalDateTime fecha_devolucion = rs.getTimestamp("fecha_devolucion").toLocalDateTime();
+                HistorialPrestamo prestamo = new HistorialPrestamo(id_prestamo_db, alumno_db, libro, fecha_prestamo, fecha_devolucion);
+                prestamos.add(prestamo);
+            }
+            rs.close();
+            connection.closeConnection();
+        }catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return prestamos;
+    }
+
+    /**
+     * Metodo que carga los datos de la tabla HistorialPrestamos y los devuelve para usarlos en un listado de prestamos
+     *
      * @return listado de prestamos para cargar en un tableview
      */
     public static ObservableList<HistorialPrestamo> cargarListado() {

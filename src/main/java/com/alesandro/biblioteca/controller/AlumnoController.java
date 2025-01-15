@@ -99,6 +99,11 @@ public class AlumnoController implements Initializable {
             tabPane.setDisable(true);
         } else {
             // Editar
+            txtDni.setText(alumno.getDni());
+            txtDni.setDisable(true);
+            txtNombre.setText(alumno.getNombre());
+            txtApellido1.setText(alumno.getApellido1());
+            txtApellido2.setText(alumno.getApellido2());
         }
         // Cargar las tablas
         cargarPrestamos();
@@ -204,7 +209,7 @@ public class AlumnoController implements Initializable {
         tablaPrestamos.getColumns().addAll(colId,colLibro,colFechaPrestamo);
         // Rellenar tabla
         if (alumno != null) {
-        ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
+        ObservableList<Prestamo> prestamos = DaoPrestamo.prestamosDeAlumno(alumno);
         tablaPrestamos.setItems(prestamos);
         }
     }
@@ -229,7 +234,7 @@ public class AlumnoController implements Initializable {
         tablaHistorial.getColumns().addAll(colId,colLibro,colFechaPrestamo,colFechaDevolucion);
         // Rellenar tabla
         if (alumno != null) {
-            ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.cargarListado();
+            ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.historialDeAlumno(alumno);
             tablaHistorial.setItems(historialPrestamos);
         }
     }
