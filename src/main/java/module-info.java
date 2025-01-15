@@ -11,4 +11,5 @@ module com.alesandro.biblioteca {
     exports com.alesandro.biblioteca;
     exports com.alesandro.biblioteca.controller;
     opens com.alesandro.biblioteca.controller to javafx.fxml;
+    opens com.alesandro.biblioteca.model to javafx.base;
 }

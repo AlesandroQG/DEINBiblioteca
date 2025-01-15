@@ -65,7 +65,7 @@ public class LanguageManager {
      * Función que carga el bundle
      */
     private void loadResourceBundle() {
-        bundle = ResourceBundle.getBundle("languages/lang", locale);
+        bundle = ResourceBundle.getBundle("com/alesandro/biblioteca/languages/lang", locale);
     }
 
     /**

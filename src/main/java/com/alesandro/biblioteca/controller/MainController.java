@@ -1,7 +1,13 @@
 package com.alesandro.biblioteca.controller;
 
+import com.alesandro.biblioteca.dao.DaoAlumno;
+import com.alesandro.biblioteca.dao.DaoLibro;
+import com.alesandro.biblioteca.dao.DaoPrestamo;
 import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.language.LanguageSwitcher;
+import com.alesandro.biblioteca.model.Alumno;
+import com.alesandro.biblioteca.model.Libro;
+import com.alesandro.biblioteca.model.Prestamo;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,14 +19,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -95,6 +104,22 @@ public class MainController implements Initializable {
             }
             new LanguageSwitcher((Stage) tabla.getScene().getWindow()).switchLanguage(locale);
         });
+        // Event Listener para ComboBox
+        cbTabla.getItems().addAll(resources.getString("cb.students"),resources.getString("cb.books"),resources.getString("cb.loans"));
+        cbTabla.setValue(resources.getString("cb.students"));
+        cbTabla.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.equals(resources.getString("cb.students"))) {
+                cargarAlumnos();
+            } else if (newValue.equals(resources.getString("cb.books"))) {
+                cargarLibros();
+            } else {
+                cargarPrestamos();
+            }
+        });
+        // Event Listener para celdas de la tabla
+        tabla.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            deshabilitarMenus(newValue == null);
+        });
         // Context Menu
         ContextMenu contextMenu = new ContextMenu();
         MenuItem editarItem = new MenuItem(resources.getString("contextmenu.edit"));
@@ -112,6 +137,8 @@ public class MainController implements Initializable {
             });
             return row;
         });
+        // Carga inicial
+        cargarAlumnos();
     }
 
     /**
@@ -216,6 +243,94 @@ public class MainController implements Initializable {
     private void deshabilitarMenus(boolean deshabilitado) {
         btnEditar.setDisable(deshabilitado);
         btnEliminar.setDisable(deshabilitado);
+    }
+
+    /**
+     * Función que carga en la tabla las columnas de alumnos y los alumnos
+     */
+    public void cargarAlumnos() {
+        // Vaciar tabla
+        tabla.getSelectionModel().clearSelection();
+        filtroNombre.setText(null);
+        filtroNombre.setDisable(false);
+        masterData.clear();
+        filteredData.clear();
+        tabla.getItems().clear();
+        tabla.getColumns().clear();
+        // Cargar filas
+        TableColumn<Alumno, String> colDni = new TableColumn<>("DNI");
+        colDni.setCellValueFactory(new PropertyValueFactory("dni"));
+        TableColumn<Alumno, String> colNombre = new TableColumn<>(resources.getString("table.student.name"));
+        colNombre.setCellValueFactory(new PropertyValueFactory("nombre"));
+        TableColumn<Alumno, String> colApellido1 = new TableColumn<>(resources.getString("table.student.surname1"));
+        colApellido1.setCellValueFactory(new PropertyValueFactory("apellido1"));
+        TableColumn<Alumno, String> colApellido2 = new TableColumn<>(resources.getString("table.student.surname2"));
+        colApellido2.setCellValueFactory(new PropertyValueFactory("apellido2"));
+        tabla.getColumns().addAll(colDni,colNombre,colApellido1,colApellido2);
+        // Rellenar tabla
+        ObservableList<Alumno> alumnos = DaoAlumno.cargarListado();
+        masterData.setAll(alumnos);
+        tabla.setItems(alumnos);
+    }
+
+    /**
+     * Función que carga en la tabla las columnas de libros y los libros
+     */
+    public void cargarLibros() {
+        // Vaciar tabla
+        tabla.getSelectionModel().clearSelection();
+        filtroNombre.setText(null);
+        filtroNombre.setDisable(false);
+        masterData.clear();
+        filteredData.clear();
+        tabla.getItems().clear();
+        tabla.getColumns().clear();
+        // Cargar filas
+        TableColumn<Libro, Integer> colCodigo = new TableColumn<>(resources.getString("table.book.code"));
+        colCodigo.setCellValueFactory(new PropertyValueFactory("codigo"));
+        TableColumn<Libro, String> colTitulo = new TableColumn<>(resources.getString("table.book.title"));
+        colTitulo.setCellValueFactory(new PropertyValueFactory("titulo"));
+        TableColumn<Libro, String> colAutor = new TableColumn<>(resources.getString("table.book.author"));
+        colAutor.setCellValueFactory(new PropertyValueFactory("autor"));
+        TableColumn<Libro, String> colEditorial = new TableColumn<>(resources.getString("table.book.publisher"));
+        colEditorial.setCellValueFactory(new PropertyValueFactory("editorial"));
+        TableColumn<Libro, String> colEstado = new TableColumn<>(resources.getString("table.book.status"));
+        colEstado.setCellValueFactory(new PropertyValueFactory("estado"));
+        TableColumn<Libro, String> colBaja = new TableColumn<>(resources.getString("table.book.leave"));
+        colBaja.setCellValueFactory(new PropertyValueFactory("baja"));
+        tabla.getColumns().addAll(colCodigo,colTitulo,colAutor,colEditorial,colEstado,colBaja);
+        // Rellenar tabla
+        ObservableList<Libro> libros = DaoLibro.cargarListado();
+        masterData.setAll(libros);
+        tabla.setItems(libros);
+    }
+
+    /**
+     * Función que carga en la tabla las columnas de préstamos y los préstamos
+     */
+    public void cargarPrestamos() {
+        // Vaciar tabla
+        tabla.getSelectionModel().clearSelection();
+        filtroNombre.setText(null);
+        filtroNombre.setDisable(false);
+        masterData.clear();
+        filteredData.clear();
+        tabla.getItems().clear();
+        tabla.getColumns().clear();
+        // Cargar filas
+        TableColumn<Prestamo, Integer> colId = new TableColumn<>("ID");
+        colId.setCellValueFactory(new PropertyValueFactory("id_prestamo"));
+        TableColumn<Prestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
+        colAlumno.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getAlumno().getNombre()));
+        TableColumn<Prestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
+        colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<Prestamo, LocalDateTime> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
+        colFechaPrestamo.setCellValueFactory(new PropertyValueFactory("fecha_prestamo"));
+        tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo);
+        // Rellenar tabla
+        ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
+        masterData.setAll(prestamos);
+        tabla.setItems(prestamos);
     }
 
     /**

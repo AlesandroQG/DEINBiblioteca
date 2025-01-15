@@ -29,7 +29,7 @@ public class DaoLibro {
         Libro libro = null;
         try {
             connection = new DBConnect();
-            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libros WHERE codigo = ?";
+            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libro WHERE codigo = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, codigo);
             ResultSet rs = ps.executeQuery();
@@ -61,7 +61,7 @@ public class DaoLibro {
         ObservableList<Libro> libros = FXCollections.observableArrayList();
         try{
             connection = new DBConnect();
-            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libros";
+            String consulta = "SELECT codigo,titulo,autor,editorial,estado,baja,portada FROM Libro";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -168,7 +168,7 @@ public class DaoLibro {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "UPDATE Libros SET titulo = ?,autor = ?,editorial = ?,estado = ?,baja = ?,portada = ? WHERE codigo = ?";
+            String consulta = "UPDATE Libro SET titulo = ?,autor = ?,editorial = ?,estado = ?,baja = ?,portada = ? WHERE codigo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, libro.getTitulo());
             ps.setString(2, libro.getAutor());
@@ -199,7 +199,7 @@ public class DaoLibro {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "INSERT INTO Libros (titulo,autor,editorial,estado,baja,portada) VALUES (?,?,?,?,?,?) ";
+            String consulta = "INSERT INTO Libro (titulo,autor,editorial,estado,baja,portada) VALUES (?,?,?,?,?,?) ";
             ps = connection.getConnection().prepareStatement(consulta, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, libro.getTitulo());
             ps.setString(2, libro.getAutor());
@@ -238,7 +238,7 @@ public class DaoLibro {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "DELETE FROM Libros WHERE codigo = ?";
+            String consulta = "DELETE FROM Libro WHERE codigo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, libro.getCodigo());
             int filasAfectadas = ps.executeUpdate();

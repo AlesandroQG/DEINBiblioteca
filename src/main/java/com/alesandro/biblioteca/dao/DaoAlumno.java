@@ -24,7 +24,7 @@ public class DaoAlumno {
         Alumno alumno = null;
         try {
             connection = new DBConnect();
-            String consulta = "SELECT dni,nombre,apellido1,apellido2 FROM Alumnos WHERE dni = ?";
+            String consulta = "SELECT dni,nombre,apellido1,apellido2 FROM Alumno WHERE dni = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, dni);
             ResultSet rs = ps.executeQuery();
@@ -53,7 +53,7 @@ public class DaoAlumno {
         ObservableList<Alumno> alumnos = FXCollections.observableArrayList();
         try{
             connection = new DBConnect();
-            String consulta = "SELECT dni,nombre,apellido1,apellido2 FROM Alumnos";
+            String consulta = "SELECT dni,nombre,apellido1,apellido2 FROM Alumno";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -127,7 +127,7 @@ public class DaoAlumno {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "UPDATE Alumnos SET nombre = ?,apellido1 = ?,apellido2 = ? WHERE dni = ?";
+            String consulta = "UPDATE Alumno SET nombre = ?,apellido1 = ?,apellido2 = ? WHERE dni = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, alumno.getNombre());
             ps.setString(2, alumno.getApellido1());
@@ -155,7 +155,7 @@ public class DaoAlumno {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "INSERT INTO Alumnos (dni,nombre,apellido1,apellido2) VALUES (?,?,?,?) ";
+            String consulta = "INSERT INTO Alumno (dni,nombre,apellido1,apellido2) VALUES (?,?,?,?) ";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, alumno.getDni());
             ps.setString(2, alumno.getNombre());
@@ -182,7 +182,7 @@ public class DaoAlumno {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "DELETE FROM Alumnos WHERE dni = ?";
+            String consulta = "DELETE FROM Alumno WHERE dni = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, alumno.getDni());
             int filasAfectadas = ps.executeUpdate();

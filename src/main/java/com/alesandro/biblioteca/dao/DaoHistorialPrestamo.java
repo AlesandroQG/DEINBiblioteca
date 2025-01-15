@@ -28,7 +28,7 @@ public class DaoHistorialPrestamo {
         HistorialPrestamo prestamo = null;
         try {
             connection = new DBConnect();
-            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historial_prestamos WHERE id_prestamo = ?";
+            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historico_prestamo WHERE id_prestamo = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, id_prestamo);
             ResultSet rs = ps.executeQuery();
@@ -60,7 +60,7 @@ public class DaoHistorialPrestamo {
         ObservableList<HistorialPrestamo> prestamos = FXCollections.observableArrayList();
         try{
             connection = new DBConnect();
-            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historial_prestamos";
+            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion FROM Historico_prestamo";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -93,7 +93,7 @@ public class DaoHistorialPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "UPDATE Historial_prestamos SET dni_alumno = ?,codigo_libro = ?,fecha_prestamo = ?,fecha_devolucion = ? WHERE id_prestamo = ?";
+            String consulta = "UPDATE Historico_prestamo SET dni_alumno = ?,codigo_libro = ?,fecha_prestamo = ?,fecha_devolucion = ? WHERE id_prestamo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, prestamo.getAlumno().getDni());
             ps.setInt(2, prestamo.getLibro().getCodigo());
@@ -122,7 +122,7 @@ public class DaoHistorialPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "INSERT INTO Historial_prestamos (id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion) VALUES (?,?,?,?,?) ";
+            String consulta = "INSERT INTO Historico_prestamo (id_prestamo,dni_alumno,codigo_libro,fecha_prestamo,fecha_devolucion) VALUES (?,?,?,?,?) ";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, prestamo.getId_prestamo());
             ps.setString(2, prestamo.getAlumno().getDni());
@@ -151,7 +151,7 @@ public class DaoHistorialPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "DELETE FROM Historial_prestamos WHERE id_prestamo = ?";
+            String consulta = "DELETE FROM Historico_prestamo WHERE id_prestamo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, prestamo.getId_prestamo());
             int filasAfectadas = ps.executeUpdate();

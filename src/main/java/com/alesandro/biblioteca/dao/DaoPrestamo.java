@@ -28,7 +28,7 @@ public class DaoPrestamo {
         Prestamo prestamo = null;
         try {
             connection = new DBConnect();
-            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo FROM Prestamos WHERE id_prestamo = ?";
+            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo FROM Prestamo WHERE id_prestamo = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, id_prestamo);
             ResultSet rs = ps.executeQuery();
@@ -59,7 +59,7 @@ public class DaoPrestamo {
         ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
         try{
             connection = new DBConnect();
-            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo FROM Prestamos";
+            String consulta = "SELECT id_prestamo,dni_alumno,codigo_libro,fecha_prestamo FROM Prestamo";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -91,7 +91,7 @@ public class DaoPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "UPDATE Prestamos SET dni_alumno = ?,codigo_libro = ?,fecha_prestamo = ? WHERE id_prestamo = ?";
+            String consulta = "UPDATE Prestamo SET dni_alumno = ?,codigo_libro = ?,fecha_prestamo = ? WHERE id_prestamo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, prestamo.getAlumno().getDni());
             ps.setInt(2, prestamo.getLibro().getCodigo());
@@ -119,7 +119,7 @@ public class DaoPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "INSERT INTO Prestamos (dni_alumno,codigo_libro,fecha_prestamo) VALUES (?,?,?) ";
+            String consulta = "INSERT INTO Prestamo (dni_alumno,codigo_libro,fecha_prestamo) VALUES (?,?,?) ";
             ps = connection.getConnection().prepareStatement(consulta, PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, prestamo.getAlumno().getDni());
             ps.setInt(2, prestamo.getLibro().getCodigo());
@@ -155,7 +155,7 @@ public class DaoPrestamo {
         PreparedStatement ps;
         try {
             connection = new DBConnect();
-            String consulta = "DELETE FROM Prestamos WHERE id_prestamo = ?";
+            String consulta = "DELETE FROM Prestamo WHERE id_prestamo = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, prestamo.getId_prestamo());
             int filasAfectadas = ps.executeUpdate();
