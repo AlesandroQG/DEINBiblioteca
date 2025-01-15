@@ -643,7 +643,7 @@ public class MainController implements Initializable {
         TableColumn<Prestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
         colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
         TableColumn<Prestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatear(cellData.getValue().getFecha_prestamo())));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
         tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo);
         // Rellenar tabla
         ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
