@@ -22,10 +22,10 @@ public class FechaFormatter {
     /**
      * Función que formatea el string pasado como parámetro a LocalDateTime
      *
-     * @param str a formatear
+     * @param string a formatear
      * @return fecha en formato LocalDateTime
      */
-    public static LocalDateTime formatearFecha(String str) {
-        return LocalDateTime.parse(str, FORMATTER);
+    public static LocalDateTime formatearFecha(String string) {
+        return LocalDateTime.parse(string, FORMATTER);
     }
 }
