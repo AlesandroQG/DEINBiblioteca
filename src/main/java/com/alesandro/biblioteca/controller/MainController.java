@@ -264,7 +264,8 @@ public class MainController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setResizable(false);
+                stage.setMinWidth(600);
+                stage.setMinHeight(450);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.student") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);

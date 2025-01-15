@@ -28,6 +28,8 @@ public class BibliotecaApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle(bundle.getString("app.name"));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("images/Biblioteca.png")));
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
         stage.setScene(scene);
         stage.show();
     }

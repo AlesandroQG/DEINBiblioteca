@@ -109,7 +109,7 @@
             </HBox>
          </left>
          <center>
-            <Button mnemonicParsing="false" onAction="#aniadir" styleClass="btnAccion" text="%main.button.add" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#aniadir" styleClass="btnAccion" text="%btn.add" BorderPane.alignment="CENTER">
                <tooltip>
                   <Tooltip text="%main.button.add.tooltip" />
                </tooltip></Button>
