@@ -2,9 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -94,17 +95,12 @@
                         <Insets top="5.0" />
                      </VBox.margin>
                   </Label>
-                  <TextField fx:id="txtEstado" />
-                  <Label text="%book.leave">
+                  <ComboBox fx:id="cbEstado" />
+                  <CheckBox fx:id="cbBaja" mnemonicParsing="false" text="%book.leave">
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" />
                      </VBox.margin>
-                  </Label>
-                  <TextField fx:id="txtBaja">
-                     <tooltip>
-                        <Tooltip text="%book.leave.tooltip" />
-                     </tooltip>
-                  </TextField>
+                  </CheckBox>
                </children>
                <HBox.margin>
                   <Insets left="5.0" />

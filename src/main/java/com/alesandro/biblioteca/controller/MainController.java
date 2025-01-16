@@ -224,10 +224,16 @@ public class MainController implements Initializable {
                             if (nombre.contains(valor)) {
                                 filteredData.add(prestamo);
                             }
-                        } else {
-                            // Libro
+                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.book_title")) {
+                            // Título de libro
                             String titulo = prestamo.getLibro().getTitulo().toLowerCase();
                             if (titulo.contains(valor)) {
+                                filteredData.add(prestamo);
+                            }
+                        } else {
+                            // Autor de libro
+                            String autor = prestamo.getLibro().getAutor().toLowerCase();
+                            if (autor.contains(valor)) {
                                 filteredData.add(prestamo);
                             }
                         }
@@ -248,10 +254,16 @@ public class MainController implements Initializable {
                             if (nombre.contains(valor)) {
                                 filteredData.add(historialPrestamo);
                             }
-                        } else {
-                            // Libro
+                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.book_title")) {
+                            // Título de libro
                             String titulo = historialPrestamo.getLibro().getTitulo().toLowerCase();
                             if (titulo.contains(valor)) {
+                                filteredData.add(historialPrestamo);
+                            }
+                        } else {
+                            // Autor de libro
+                            String autor = historialPrestamo.getLibro().getAutor().toLowerCase();
+                            if (autor.contains(valor)) {
                                 filteredData.add(historialPrestamo);
                             }
                         }
@@ -723,9 +735,9 @@ public class MainController implements Initializable {
         TableColumn<Libro, String> colEditorial = new TableColumn<>(resources.getString("table.book.publisher"));
         colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
         TableColumn<Libro, String> colEstado = new TableColumn<>(resources.getString("table.book.status"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        TableColumn<Libro, Integer> colBaja = new TableColumn<>(resources.getString("table.book.leave"));
-        colBaja.setCellValueFactory(new PropertyValueFactory<>("baja"));
+        colEstado.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getEstado().equals("disponible") ? resources.getString("book.status.available") : resources.getString("book.status.loaned")));
+        TableColumn<Libro, String> colBaja = new TableColumn<>(resources.getString("table.book.leave"));
+        colBaja.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getBaja() == 1 ? resources.getString("book.leave.yes") : resources.getString("book.leave.no")));
         tabla.getColumns().addAll(colCodigo,colTitulo,colAutor,colEditorial,colEstado,colBaja);
         // Rellenar tabla
         ObservableList<Libro> libros = DaoLibro.cargarListado();
@@ -741,7 +753,7 @@ public class MainController implements Initializable {
         tabla.getSelectionModel().clearSelection();
         txtFiltro.setText(null);
         cbFiltro.getItems().clear();
-        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book"));
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book_title"),resources.getString("main.label.filter.book_author"));
         cbFiltro.getSelectionModel().select(0);
         masterData.clear();
         filteredData.clear();
@@ -753,11 +765,13 @@ public class MainController implements Initializable {
         colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
         TableColumn<Prestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
         colAlumno.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getAlumno().getNombre()));
-        TableColumn<Prestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
-        colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<Prestamo, String> colLibroTitulo = new TableColumn<>(resources.getString("table.loan.book_title"));
+        colLibroTitulo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<Prestamo, String> colLibroAutor = new TableColumn<>(resources.getString("table.loan.book_author"));
+        colLibroAutor.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getAutor()));
         TableColumn<Prestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
         colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
-        tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo);
+        tabla.getColumns().addAll(colId,colAlumno,colLibroTitulo,colLibroAutor,colFechaPrestamo);
         // Rellenar tabla
         ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
         masterData.setAll(prestamos);
@@ -771,7 +785,7 @@ public class MainController implements Initializable {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
         cbFiltro.getItems().clear();
-        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book"));
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book_title"),resources.getString("main.label.filter.book_author"));
         cbFiltro.getSelectionModel().select(0);
         masterData.clear();
         filteredData.clear();
@@ -783,13 +797,15 @@ public class MainController implements Initializable {
         colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
         TableColumn<HistorialPrestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
         colAlumno.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getAlumno().getNombre()));
-        TableColumn<HistorialPrestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
-        colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<HistorialPrestamo, String> colLibroTitulo = new TableColumn<>(resources.getString("table.loan.book_title"));
+        colLibroTitulo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<HistorialPrestamo, String> colLibroAutor = new TableColumn<>(resources.getString("table.loan.book_author"));
+        colLibroAutor.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getAutor()));
         TableColumn<HistorialPrestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
         colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
         TableColumn<HistorialPrestamo, String> colFechaDevolucion = new TableColumn<>(resources.getString("table.history.return_date"));
         colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
-        tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo,colFechaDevolucion);
+        tabla.getColumns().addAll(colId,colAlumno,colLibroTitulo,colLibroAutor,colFechaPrestamo,colFechaDevolucion);
         // Rellenar tabla
        ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.cargarListado();
        masterData.setAll(historialPrestamos);

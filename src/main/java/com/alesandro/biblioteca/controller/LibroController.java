@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -40,23 +42,23 @@ public class LibroController implements Initializable {
     @FXML // fx:id="btnFotoBorrar"
     private Button btnFotoBorrar; // Value injected by FXMLLoader
 
+    @FXML // fx:id="cbBaja"
+    private CheckBox cbBaja; // Value injected by FXMLLoader
+
+    @FXML // fx:id="cbEstado"
+    private ComboBox<String> cbEstado; // Value injected by FXMLLoader
+
     @FXML // fx:id="foto"
     private ImageView foto; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtAutor"
     private TextField txtAutor; // Value injected by FXMLLoader
 
-    @FXML // fx:id="txtBaja"
-    private TextField txtBaja; // Value injected by FXMLLoader
-
     @FXML // fx:id="lblCodigo"
     private Label lblCodigo; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtEditorial"
     private TextField txtEditorial; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtEstado"
-    private TextField txtEstado; // Value injected by FXMLLoader
 
     @FXML // fx:id="txtTitulo"
     private TextField txtTitulo; // Value injected by FXMLLoader
@@ -91,13 +93,21 @@ public class LibroController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.resources = resourceBundle;
+        cbEstado.getItems().addAll(resources.getString("book.status.available"),resources.getString("book.status.loaned"));
+        cbEstado.getSelectionModel().select(0);
         if (libro != null) {
             lblCodigo.setText(libro.getCodigo() + "");
             txtTitulo.setText(libro.getTitulo());
             txtAutor.setText(libro.getAutor());
             txtEditorial.setText(libro.getEditorial());
-            txtEstado.setText(libro.getEstado());
-            txtBaja.setText(libro.getBaja() + "");
+            if (libro.getEstado().equals("disponible")) {
+                cbEstado.getSelectionModel().select(resources.getString("book.status.available"));
+            } else {
+                cbEstado.getSelectionModel().select(resources.getString("book.status.loaned"));
+            }
+            if (libro.getBaja() == 1) {
+                cbBaja.setSelected(true);
+            }
             if (libro.getPortada() != null) {
                 portada = libro.getPortada();
                 try {
@@ -153,8 +163,12 @@ public class LibroController implements Initializable {
                 libro1.setTitulo(txtTitulo.getText());
                 libro1.setAutor(txtAutor.getText());
                 libro1.setEditorial(txtEditorial.getText());
-                libro1.setEstado(txtEstado.getText());
-                libro1.setBaja(Integer.parseInt(txtBaja.getText()));
+                if (cbEstado.getSelectionModel().getSelectedItem().equals(resources.getString("book.status.available"))) {
+                    libro1.setEstado("disponible");
+                } else {
+                    libro1.setEstado("prestado");
+                }
+                libro1.setBaja(cbBaja.isSelected() ? 1 : 0);
                 libro1.setPortada(portada);
                 if (DaoLibro.insertar(libro1) != -1) {
                     mostrarConfirmacion(resources.getString("save.book"));
@@ -169,8 +183,12 @@ public class LibroController implements Initializable {
                 libro1.setTitulo(txtTitulo.getText());
                 libro1.setAutor(txtAutor.getText());
                 libro1.setEditorial(txtEditorial.getText());
-                libro1.setEstado(txtEstado.getText());
-                libro1.setBaja(Integer.parseInt(txtBaja.getText()));
+                if (cbEstado.getSelectionModel().getSelectedItem().equals(resources.getString("book.status.available"))) {
+                    libro1.setEstado("disponible");
+                } else {
+                    libro1.setEstado("prestado");
+                }
+                libro1.setBaja(cbBaja.isSelected() ? 1 : 0);
                 libro1.setPortada(portada);
                 if (DaoLibro.modificar(libro1)) {
                     mostrarConfirmacion(resources.getString("update.book"));
@@ -197,18 +215,6 @@ public class LibroController implements Initializable {
         }
         if (txtEditorial.getText().isEmpty()) {
             error += resources.getString("validate.book.publisher") + "\n";
-        }
-        if (txtEstado.getText().isEmpty()) {
-            error += resources.getString("validate.book.status") + "\n";
-        }
-        if (txtBaja.getText().isEmpty()) {
-            error += resources.getString("validate.book.leave") + "\n";
-        } else {
-            try {
-                Integer.parseInt(txtBaja.getText());
-            } catch (NumberFormatException e) {
-                error += resources.getString("validate.book.leave.num") + "\n";
-            }
         }
         return error;
     }
