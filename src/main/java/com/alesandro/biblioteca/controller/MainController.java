@@ -1,11 +1,13 @@
 package com.alesandro.biblioteca.controller;
 
 import com.alesandro.biblioteca.dao.DaoAlumno;
+import com.alesandro.biblioteca.dao.DaoHistorialPrestamo;
 import com.alesandro.biblioteca.dao.DaoLibro;
 import com.alesandro.biblioteca.dao.DaoPrestamo;
 import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.language.LanguageSwitcher;
 import com.alesandro.biblioteca.model.Alumno;
+import com.alesandro.biblioteca.model.HistorialPrestamo;
 import com.alesandro.biblioteca.model.Libro;
 import com.alesandro.biblioteca.model.Prestamo;
 import com.alesandro.biblioteca.utils.FechaFormatter;
@@ -65,6 +67,9 @@ public class MainController implements Initializable {
     @FXML // fx:id="cbTabla"
     private ComboBox<String> cbTabla; // Value injected by FXMLLoader
 
+    @FXML // fx:id="cbFiltro"
+    private ComboBox<String> cbFiltro; // Value injected by FXMLLoader
+
     @FXML // fx:id="lblFiltro"
     private Label lblFiltro; // Value injected by FXMLLoader
 
@@ -123,15 +128,17 @@ public class MainController implements Initializable {
             new LanguageSwitcher((Stage) tabla.getScene().getWindow()).switchLanguage(locale);
         });
         // Event Listener para ComboBox
-        cbTabla.getItems().addAll(resources.getString("cb.students"),resources.getString("cb.books"),resources.getString("cb.loans"));
+        cbTabla.getItems().addAll(resources.getString("cb.students"),resources.getString("cb.books"),resources.getString("cb.loans"),resources.getString("cb.history"));
         cbTabla.setValue(resources.getString("cb.students"));
         cbTabla.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue.equals(resources.getString("cb.students"))) {
                 cargarAlumnos();
             } else if (newValue.equals(resources.getString("cb.books"))) {
                 cargarLibros();
-            } else {
+            } else if (newValue.equals(resources.getString("cb.loans"))) {
                 cargarPrestamos();
+            } else {
+                cargarHistorialPrestamos();
             }
         });
         // Event Listener para celdas de la tabla
@@ -565,8 +572,12 @@ public class MainController implements Initializable {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
         filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter") + " " + resources.getString("main.label.filter.name") + ":");
+        lblFiltro.setText(resources.getString("main.label.filter"));
         filtroNombre.setDisable(false);
+        cbFiltro.setDisable(false);
+        cbFiltro.getItems().clear();
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.name"));
+        cbFiltro.getSelectionModel().select(0);
         masterData.clear();
         filteredData.clear();
         tabla.getItems().clear();
@@ -595,8 +606,12 @@ public class MainController implements Initializable {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
         filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter") + " " + resources.getString("main.label.filter.title") + ":");
+        lblFiltro.setText(resources.getString("main.label.filter"));
         filtroNombre.setDisable(false);
+        cbFiltro.setDisable(false);
+        cbFiltro.getItems().clear();
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.title"));
+        cbFiltro.getSelectionModel().select(0);
         masterData.clear();
         filteredData.clear();
         tabla.getItems().clear();
@@ -632,10 +647,11 @@ public class MainController implements Initializable {
         lblFiltro.setText(resources.getString("main.label.filter.unavailable"));
         filtroNombre.setDisable(true);
         masterData.clear();
+        cbFiltro.setDisable(true);
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
-        editarMenuItemText(resources.getString("string.loan"));
+        editarMenuItemText(resources.getString("string.history"));
         // Cargar filas
         TableColumn<Prestamo, Integer> colId = new TableColumn<>("ID");
         colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
@@ -650,6 +666,42 @@ public class MainController implements Initializable {
         ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
         masterData.setAll(prestamos);
         tabla.setItems(prestamos);
+    }
+
+    /**
+     * Función que carga en la tabla las columnas de préstamos y los préstamos
+     */
+    public void cargarHistorialPrestamos() {
+        // Vaciar tabla
+        tabla.getSelectionModel().clearSelection();
+        filtroNombre.setText(null);
+        lblFiltro.setText(resources.getString("main.label.filter"));
+        filtroNombre.setDisable(false);
+        masterData.clear();
+        cbFiltro.setDisable(false);
+        cbFiltro.getItems().clear();
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.name"));
+        cbFiltro.getSelectionModel().select(0);
+        filteredData.clear();
+        tabla.getItems().clear();
+        tabla.getColumns().clear();
+        editarMenuItemText(resources.getString("string.loan"));
+        // Cargar filas
+        TableColumn<HistorialPrestamo, Integer> colId = new TableColumn<>("ID");
+        colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
+        TableColumn<Prestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
+        colAlumno.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getAlumno().getNombre()));
+        TableColumn<HistorialPrestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
+        colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
+        TableColumn<HistorialPrestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
+        TableColumn<HistorialPrestamo, String> colFechaDevolucion = new TableColumn<>(resources.getString("table.history.return_date"));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
+        tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo,colFechaDevolucion);
+        // Rellenar tabla
+       ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.cargarListado();
+       masterData.setAll(historialPrestamos);
+       tabla.setItems(historialPrestamos);
     }
 
     /**
