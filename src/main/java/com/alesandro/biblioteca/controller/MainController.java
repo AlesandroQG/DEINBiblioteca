@@ -286,7 +286,8 @@ public class MainController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setResizable(false);
+                stage.setMinWidth(400);
+                stage.setMinHeight(425);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
@@ -307,7 +308,6 @@ public class MainController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setResizable(false);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
@@ -342,7 +342,8 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);
-                    stage.setResizable(false);
+                    stage.setMinWidth(600);
+                    stage.setMinHeight(450);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                     stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.student") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
@@ -351,7 +352,7 @@ public class MainController implements Initializable {
                     cargarAlumnos();
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
-                    mostrarInforme(resources.getString("message.window_open"));
+                    mostrarAlerta(resources.getString("message.window_open"));
                 }
             } else if (item.equals(resources.getString("cb.books"))) {
                 // Libro
@@ -364,7 +365,8 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);
-                    stage.setResizable(false);
+                    stage.setMinWidth(400);
+                    stage.setMinHeight(425);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                     stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
@@ -373,7 +375,7 @@ public class MainController implements Initializable {
                     cargarLibros();
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
-                    mostrarInforme(resources.getString("message.window_open"));
+                    mostrarAlerta(resources.getString("message.window_open"));
                 }
             } else {
                 // Préstamo
@@ -386,7 +388,6 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);
-                    stage.setResizable(false);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                     stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
@@ -395,7 +396,7 @@ public class MainController implements Initializable {
                     cargarPrestamos();
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
-                    mostrarInforme(resources.getString("message.window_open"));
+                    mostrarAlerta(resources.getString("message.window_open"));
                 }
             }
         }
@@ -444,7 +445,7 @@ public class MainController implements Initializable {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
                         if (DaoLibro.eliminar(libro)) {
-                            cargarAlumnos();
+                            cargarLibros();
                             mostrarConfirmacion(resources.getString("delete.book.success"));
                         } else {
                             mostrarAlerta(resources.getString("delete.book.fail"));
@@ -464,7 +465,7 @@ public class MainController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     if (DaoPrestamo.eliminar(prestamo)) {
-                        cargarAlumnos();
+                        cargarPrestamos();
                         mostrarConfirmacion(resources.getString("delete.loan.success"));
                     } else {
                         mostrarAlerta(resources.getString("delete.loan.fail"));

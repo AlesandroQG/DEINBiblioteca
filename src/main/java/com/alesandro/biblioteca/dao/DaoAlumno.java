@@ -83,7 +83,7 @@ public class DaoAlumno {
         try {
             connection = new DBConnect();
             // Prestamos
-            String consulta = "SELECT count(*) as cont FROM Prestamos WHERE dni_alumno = ?";
+            String consulta = "SELECT count(*) as cont FROM Prestamo WHERE dni_alumno = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, alumno.getDni());
             ResultSet rs = ps.executeQuery();
@@ -98,7 +98,7 @@ public class DaoAlumno {
             rs.close();
             ps.close();
             // Historial_prestamos
-            consulta = "SELECT count(*) as cont FROM Historial_prestamos WHERE dni_alumno = ?";
+            consulta = "SELECT count(*) as cont FROM Historico_prestamo WHERE dni_alumno = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setString(1, alumno.getDni());
             rs = ps.executeQuery();
@@ -134,7 +134,6 @@ public class DaoAlumno {
             ps.setString(3, alumno.getApellido2());
             ps.setString(4, alumno.getDni());
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Actualizado alumno");
             ps.close();
             connection.closeConnection();
             return filasAfectadas > 0;
@@ -162,7 +161,6 @@ public class DaoAlumno {
             ps.setString(3, alumno.getApellido1());
             ps.setString(4, alumno.getApellido2());
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Nueva entrada en alumno");
             connection.closeConnection();
             return (filasAfectadas > 0);
         } catch (SQLException e) {
@@ -188,7 +186,6 @@ public class DaoAlumno {
             int filasAfectadas = ps.executeUpdate();
             ps.close();
             connection.closeConnection();
-            System.out.println("Eliminado con éxito");
             return filasAfectadas > 0;
         } catch (SQLException e) {
             System.err.println(e.getMessage());

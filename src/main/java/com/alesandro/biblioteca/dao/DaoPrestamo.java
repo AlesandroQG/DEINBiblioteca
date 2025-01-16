@@ -131,7 +131,6 @@ public class DaoPrestamo {
             ps.setTimestamp(3, Timestamp.valueOf(prestamo.getFecha_prestamo()));
             ps.setInt(4, prestamo.getId_prestamo());
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Actualizado prestamo");
             ps.close();
             connection.closeConnection();
             return filasAfectadas > 0;
@@ -158,7 +157,6 @@ public class DaoPrestamo {
             ps.setInt(2, prestamo.getLibro().getCodigo());
             ps.setTimestamp(3, Timestamp.valueOf(prestamo.getFecha_prestamo()));
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Nueva entrada en prestamo");
             if (filasAfectadas > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
@@ -194,7 +192,6 @@ public class DaoPrestamo {
             int filasAfectadas = ps.executeUpdate();
             ps.close();
             connection.closeConnection();
-            System.out.println("Eliminado con éxito");
             return filasAfectadas > 0;
         } catch (SQLException e) {
             System.err.println(e.getMessage());

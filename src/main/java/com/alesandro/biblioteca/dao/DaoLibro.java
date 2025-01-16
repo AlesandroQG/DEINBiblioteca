@@ -124,7 +124,7 @@ public class DaoLibro {
         try {
             connection = new DBConnect();
             // Prestamos
-            String consulta = "SELECT count(*) as cont FROM Prestamos WHERE codigo_libro = ?";
+            String consulta = "SELECT count(*) as cont FROM Prestamo WHERE codigo_libro = ?";
             PreparedStatement ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, libro.getCodigo());
             ResultSet rs = ps.executeQuery();
@@ -139,7 +139,7 @@ public class DaoLibro {
             rs.close();
             ps.close();
             // Historial_prestamos
-            consulta = "SELECT count(*) as cont FROM Historial_prestamos WHERE codigo_libro = ?";
+            consulta = "SELECT count(*) as cont FROM Historico_prestamo WHERE codigo_libro = ?";
             ps = connection.getConnection().prepareStatement(consulta);
             ps.setInt(1, libro.getCodigo());
             rs = ps.executeQuery();
@@ -178,7 +178,6 @@ public class DaoLibro {
             ps.setBlob(6, libro.getPortada());
             ps.setInt(7, libro.getCodigo());
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Actualizado libro");
             ps.close();
             connection.closeConnection();
             return filasAfectadas > 0;
@@ -208,7 +207,6 @@ public class DaoLibro {
             ps.setInt(5, libro.getBaja());
             ps.setBlob(6, libro.getPortada());
             int filasAfectadas = ps.executeUpdate();
-            System.out.println("Nueva entrada en libro");
             if (filasAfectadas > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
@@ -244,7 +242,6 @@ public class DaoLibro {
             int filasAfectadas = ps.executeUpdate();
             ps.close();
             connection.closeConnection();
-            System.out.println("Eliminado con éxito");
             return filasAfectadas > 0;
         } catch (SQLException e) {
             System.err.println(e.getMessage());

@@ -1,5 +1,6 @@
 package com.alesandro.biblioteca.controller;
 
+import com.alesandro.biblioteca.dao.DaoAlumno;
 import com.alesandro.biblioteca.dao.DaoHistorialPrestamo;
 import com.alesandro.biblioteca.dao.DaoPrestamo;
 import com.alesandro.biblioteca.model.Alumno;
@@ -9,17 +10,25 @@ import com.alesandro.biblioteca.utils.FechaFormatter;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -105,6 +114,13 @@ public class AlumnoController implements Initializable {
             txtApellido1.setText(alumno.getApellido1());
             txtApellido2.setText(alumno.getApellido2());
         }
+        // Event Listener para celdas de la tabla
+        tablaPrestamos.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            deshabilitarBotonesPrestamos(newValue == null);
+        });
+        tablaHistorial.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            deshabilitarBotonesHistorial(newValue == null);
+        });
         // Cargar las tablas
         cargarPrestamos();
         cargarHistorialPrestamos();
@@ -117,7 +133,25 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void aniadirPrestamo(ActionEvent event) {
-        //
+        try {
+            Window ventana = tablaHistorial.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/Prestamo.fxml"), resources);
+            PrestamoController controlador = new PrestamoController();
+            fxmlLoader.setController(controlador);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+            stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+            stage.initOwner(ventana);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            cargarPrestamos();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta(resources.getString("message.window_open"));
+        }
     }
 
     /**
@@ -138,7 +172,28 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void editarHistorial(ActionEvent event) {
-        //
+        HistorialPrestamo historialPrestamo = tablaHistorial.getSelectionModel().getSelectedItem();
+        if (historialPrestamo != null) {
+            try {
+                Window ventana = tablaHistorial.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"), resources);
+                HistorialPrestamoController controlador = new HistorialPrestamoController(historialPrestamo);
+                fxmlLoader.setController(controlador);
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+                stage.initOwner(ventana);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+                cargarHistorialPrestamos();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                mostrarAlerta(resources.getString("message.window_open"));
+            }
+        }
     }
 
     /**
@@ -148,7 +203,28 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void editarPrestamo(ActionEvent event) {
-        //
+        Prestamo prestamo = tablaPrestamos.getSelectionModel().getSelectedItem();
+        if (prestamo != null) {
+            try {
+                Window ventana = tablaHistorial.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/Prestamo.fxml"), resources);
+                PrestamoController controlador = new PrestamoController(prestamo);
+                fxmlLoader.setController(controlador);
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+                stage.initOwner(ventana);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+                cargarPrestamos();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                mostrarAlerta(resources.getString("message.window_open"));
+            }
+        }
     }
 
     /**
@@ -158,7 +234,23 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void eliminarHistorial(ActionEvent event) {
-        //
+        HistorialPrestamo historialPrestamo = tablaHistorial.getSelectionModel().getSelectedItem();
+        if (historialPrestamo != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initOwner(tablaHistorial.getScene().getWindow());
+            alert.setHeaderText(null);
+            alert.setTitle(resources.getString("window.confirm"));
+            alert.setContentText(resources.getString("delete.history.prompt"));
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                if (DaoHistorialPrestamo.eliminar(historialPrestamo)) {
+                    cargarHistorialPrestamos();
+                    mostrarConfirmacion(resources.getString("delete.history.success"));
+                } else {
+                    mostrarAlerta(resources.getString("delete.history.fail"));
+                }
+            }
+        }
     }
 
     /**
@@ -168,7 +260,23 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void eliminarPrestamo(ActionEvent event) {
-        //
+        Prestamo prestamo = tablaPrestamos.getSelectionModel().getSelectedItem();
+        if (prestamo != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initOwner(tablaPrestamos.getScene().getWindow());
+            alert.setHeaderText(null);
+            alert.setTitle(resources.getString("window.confirm"));
+            alert.setContentText(resources.getString("delete.loan.prompt"));
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                if (DaoPrestamo.eliminar(prestamo)) {
+                    cargarPrestamos();
+                    mostrarConfirmacion(resources.getString("delete.loan.success"));
+                } else {
+                    mostrarAlerta(resources.getString("delete.loan.fail"));
+                }
+            }
+        }
     }
 
     /**
@@ -178,7 +286,42 @@ public class AlumnoController implements Initializable {
      */
     @FXML
     void guardar(ActionEvent event) {
-        //
+        String error = validar();
+        if (!error.isEmpty()) {
+            mostrarAlerta(error);
+        } else {
+            if (alumno == null) {
+                // Nuevo
+                Alumno alumno1 = new Alumno();
+                alumno1.setDni(txtDni.getText());
+                alumno1.setNombre(txtNombre.getText());
+                alumno1.setApellido1(txtApellido1.getText());
+                alumno1.setApellido2(txtApellido2.getText());
+                if (DaoAlumno.getAlumno(txtDni.getText()) == null) {
+                    if (DaoAlumno.insertar(alumno1)) {
+                        mostrarConfirmacion(resources.getString("save.student"));
+                        cancelar(null);
+                    } else {
+                        mostrarAlerta(resources.getString("save.fail"));
+                    }
+                } else {
+                    mostrarAlerta(resources.getString("save.student.fail"));
+                }
+            } else {
+                // Actualizar
+                Alumno alumno1 = new Alumno();
+                alumno1.setDni(alumno.getDni());
+                alumno1.setNombre(txtNombre.getText());
+                alumno1.setApellido1(txtApellido1.getText());
+                alumno1.setApellido2(txtApellido2.getText());
+                if (DaoAlumno.modificar(alumno1)) {
+                    mostrarConfirmacion(resources.getString("update.student"));
+                    cancelar(null);
+                } else {
+                    mostrarAlerta(resources.getString("save.fail"));
+                }
+            }
+        }
     }
 
     /**
@@ -188,6 +331,18 @@ public class AlumnoController implements Initializable {
      */
     private String validar() {
         String error = "";
+        if (txtDni.getText().isEmpty()) {
+            error += resources.getString("validate.student.dni") + "\n";
+        }
+        if (txtNombre.getText().isEmpty()) {
+            error += resources.getString("validate.student.name") + "\n";
+        }
+        if (txtApellido1.getText().isEmpty()) {
+            error += resources.getString("validate.student.surname1") + "\n";
+        }
+        if (txtApellido2.getText().isEmpty()) {
+            error += resources.getString("validate.student.surname2") + "\n";
+        }
         return error;
     }
 
@@ -237,6 +392,26 @@ public class AlumnoController implements Initializable {
             ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.historialDeAlumno(alumno);
             tablaHistorial.setItems(historialPrestamos);
         }
+    }
+
+    /**
+     * Función que deshabilita o habilita los botones de edición
+     *
+     * @param deshabilitado los menus
+     */
+    private void deshabilitarBotonesPrestamos(boolean deshabilitado) {
+        btnEditarPrestamo.setDisable(deshabilitado);
+        btnEliminarPrestamo.setDisable(deshabilitado);
+    }
+
+    /**
+     * Función que deshabilita o habilita los botones de edición
+     *
+     * @param deshabilitado los menus
+     */
+    private void deshabilitarBotonesHistorial(boolean deshabilitado) {
+        btnEditarHistorial.setDisable(deshabilitado);
+        btnEliminarHistorial.setDisable(deshabilitado);
     }
 
     /**
