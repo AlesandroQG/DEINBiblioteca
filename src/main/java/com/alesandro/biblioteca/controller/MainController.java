@@ -599,10 +599,10 @@ public class MainController implements Initializable {
             viewer.setVisible(true); // Mostrar el informe al usuario
         } catch (JRException e) {
             System.err.println(e.getMessage());
-            mostrarAlerta("Ha ocurrido un error cargando el informe");
+            mostrarAlerta(resources.getString("report.load.error"));
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            mostrarAlerta("Ha ocurrido un erros cargando los países de la base de datos");
+            mostrarAlerta(resources.getString("report.load.db.error"));
         }
     }
 
