@@ -23,7 +23,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alesandro.biblioteca.controller.MainController">
    <children>
-      <MenuBar>
+      <MenuBar VBox.vgrow="ALWAYS">
         <menus>
           <Menu mnemonicParsing="false" text="%menu.file">
             <items>
@@ -81,7 +81,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <FlowPane alignment="CENTER" hgap="25.0">
+      <FlowPane alignment="CENTER" hgap="25.0" VBox.vgrow="ALWAYS">
          <children>
             <ImageView fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -97,7 +97,7 @@
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </FlowPane>
-      <BorderPane>
+      <BorderPane VBox.vgrow="ALWAYS">
          <left>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
@@ -106,7 +106,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbTabla" prefWidth="150.0">
+                  <ComboBox fx:id="cbTabla">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -131,7 +131,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="cbFiltro" prefWidth="150.0" />
+                  <ComboBox fx:id="cbFiltro" />
                   <TextField fx:id="txtFiltro">
                      <HBox.margin>
                         <Insets left="5.0" />
