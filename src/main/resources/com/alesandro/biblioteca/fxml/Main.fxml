@@ -39,7 +39,10 @@
                         <MenuItem mnemonicParsing="false" onAction="#informeGraficos" text="%menu.file.report.graphs" />
                     </items>
                   </Menu>
-                  <MenuItem mnemonicParsing="false" onAction="#cerrar" text="%menu.file.close" />
+                  <MenuItem mnemonicParsing="false" onAction="#cerrar" text="%menu.file.close">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="%menu.edit">
@@ -56,8 +59,14 @@
           </Menu>
           <Menu mnemonicParsing="false" text="%menu.help">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaHTML" text="%menu.help.html" />
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaPDF" text="%menu.help.pdf" />
+                  <MenuItem mnemonicParsing="false" onAction="#ayudaHTML" text="%menu.help.html">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#ayudaPDF" text="%menu.help.pdf">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <Menu mnemonicParsing="false" text="%menu.help.language">
                     <items>
                         <RadioMenuItem fx:id="langES" mnemonicParsing="false" text="Español">
