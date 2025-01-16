@@ -41,6 +41,7 @@ La estructura del proyecto es la siguiente:
           - `HistorialPrestamo.java`: Clase que define el objeto Historia Préstamo
           - `Libro.java`: Clase que define el objeto Libro
           - `Prestamo.java`: Clase que define el objeto Préstamo
+          - `Help.java`: Clase para uso en la ayuda HTML
         - `utils`: Paquete con utilidades de la aplicación
           - `FechaFormatter.java`: Clase para formatear fechas
     - `resources > com.alesandro.biblioteca`: Recursos de la aplicación

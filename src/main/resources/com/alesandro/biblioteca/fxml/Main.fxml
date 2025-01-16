@@ -126,13 +126,13 @@
          <right>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="lblFiltro" text="%main.label.filter">
+                  <Label text="%main.label.filter">
                      <HBox.margin>
                         <Insets right="5.0" />
                      </HBox.margin>
                   </Label>
                   <ComboBox fx:id="cbFiltro" prefWidth="150.0" />
-                  <TextField fx:id="filtroNombre">
+                  <TextField fx:id="txtFiltro">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>

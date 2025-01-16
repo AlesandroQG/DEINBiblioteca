@@ -2,7 +2,6 @@ package com.alesandro.biblioteca.controller;
 
 import com.alesandro.biblioteca.dao.DaoLibro;
 import com.alesandro.biblioteca.model.Libro;
-import com.alesandro.biblioteca.utils.ValidadorNumerico;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -204,8 +203,12 @@ public class LibroController implements Initializable {
         }
         if (txtBaja.getText().isEmpty()) {
             error += resources.getString("validate.book.leave") + "\n";
-        } else if (!ValidadorNumerico.validarInt(txtBaja.getText())) {
-            error += resources.getString("validate.book.leave.num") + "\n";
+        } else {
+            try {
+                Integer.parseInt(txtBaja.getText());
+            } catch (NumberFormatException e) {
+                error += resources.getString("validate.book.leave.num") + "\n";
+            }
         }
         return error;
     }

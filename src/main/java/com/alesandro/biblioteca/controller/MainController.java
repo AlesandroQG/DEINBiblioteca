@@ -23,7 +23,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TableColumn;
@@ -70,11 +69,8 @@ public class MainController implements Initializable {
     @FXML // fx:id="cbFiltro"
     private ComboBox<String> cbFiltro; // Value injected by FXMLLoader
 
-    @FXML // fx:id="lblFiltro"
-    private Label lblFiltro; // Value injected by FXMLLoader
-
-    @FXML // fx:id="filtroNombre"
-    private TextField filtroNombre; // Value injected by FXMLLoader
+    @FXML // fx:id="txtFiltro"
+    private TextField txtFiltro; // Value injected by FXMLLoader
 
     @FXML // fx:id="langEN"
     private RadioMenuItem langEN; // Value injected by FXMLLoader
@@ -163,7 +159,7 @@ public class MainController implements Initializable {
             return row;
         });
         // Event Listener para el filtro
-        filtroNombre.setOnKeyTyped(keyEvent -> filtrar());
+        txtFiltro.setOnKeyTyped(keyEvent -> filtrar());
         // Doble-click para editar
         tabla.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
@@ -178,7 +174,7 @@ public class MainController implements Initializable {
      * Función que filtra la tabla por nombre
      */
     public void filtrar() {
-        String valor = filtroNombre.getText();
+        String valor = txtFiltro.getText();
         if (valor != null) {
             valor = valor.toLowerCase();
             String item = cbTabla.getSelectionModel().getSelectedItem();
@@ -198,7 +194,7 @@ public class MainController implements Initializable {
                     }
                     tabla.setItems(filteredData);
                 }
-            } else {
+            } else if (item.equals(resources.getString("cb.books"))) {
                 // Libro
                 if (valor.isEmpty()) {
                     tabla.setItems(masterData);
@@ -210,6 +206,54 @@ public class MainController implements Initializable {
                         titulo = titulo.toLowerCase();
                         if (titulo.contains(valor)) {
                             filteredData.add(libro);
+                        }
+                    }
+                    tabla.setItems(filteredData);
+                }
+            } else if (item.equals(resources.getString("cb.loans"))) {
+                // Préstamos
+                if (valor.isEmpty()) {
+                    tabla.setItems(masterData);
+                } else {
+                    filteredData.clear();
+                    for (Object obj : masterData) {
+                        Prestamo prestamo = (Prestamo) obj;
+                        if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.student")) {
+                            // Alumno
+                            String nombre = prestamo.getAlumno().getNombre().toLowerCase();
+                            if (nombre.contains(valor)) {
+                                filteredData.add(prestamo);
+                            }
+                        } else {
+                            // Libro
+                            String titulo = prestamo.getLibro().getTitulo().toLowerCase();
+                            if (titulo.contains(valor)) {
+                                filteredData.add(prestamo);
+                            }
+                        }
+                    }
+                    tabla.setItems(filteredData);
+                }
+            } else {
+                // Historial
+                if (valor.isEmpty()) {
+                    tabla.setItems(masterData);
+                } else {
+                    filteredData.clear();
+                    for (Object obj : masterData) {
+                        HistorialPrestamo historialPrestamo = (HistorialPrestamo) obj;
+                        if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.student")) {
+                            // Alumno
+                            String nombre = historialPrestamo.getAlumno().getNombre().toLowerCase();
+                            if (nombre.contains(valor)) {
+                                filteredData.add(historialPrestamo);
+                            }
+                        } else {
+                            // Libro
+                            String titulo = historialPrestamo.getLibro().getTitulo().toLowerCase();
+                            if (titulo.contains(valor)) {
+                                filteredData.add(historialPrestamo);
+                            }
                         }
                     }
                     tabla.setItems(filteredData);
@@ -305,7 +349,7 @@ public class MainController implements Initializable {
                 System.err.println(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
-        } else {
+        } else if (item.equals(resources.getString("cb.loans"))) {
             // Préstamo
             try {
                 Window ventana = tabla.getScene().getWindow();
@@ -321,6 +365,26 @@ public class MainController implements Initializable {
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
                 cargarPrestamos();
+            } catch (IOException e) {
+                System.err.println(e.getMessage());
+                mostrarAlerta(resources.getString("message.window_open"));
+            }
+        } else {
+            // Historial
+            try {
+                Window ventana = tabla.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"),resources);
+                HistorialPrestamoController controlador = new HistorialPrestamoController();
+                fxmlLoader.setController(controlador);
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
+                stage.initOwner(ventana);
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+                cargarHistorialPrestamos();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
@@ -352,7 +416,7 @@ public class MainController implements Initializable {
                     stage.setMinWidth(600);
                     stage.setMinHeight(450);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                    stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.student") + " - " + resources.getString("app.name"));
+                    stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.student") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.showAndWait();
@@ -375,7 +439,7 @@ public class MainController implements Initializable {
                     stage.setMinWidth(400);
                     stage.setMinHeight(425);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                    stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+                    stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.showAndWait();
@@ -384,7 +448,7 @@ public class MainController implements Initializable {
                     System.err.println(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
                 }
-            } else {
+            } else if (item.equals(resources.getString("cb.loans"))) {
                 // Préstamo
                 Prestamo prestamo = (Prestamo) seleccion;
                 try {
@@ -396,11 +460,32 @@ public class MainController implements Initializable {
                     Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                    stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
+                    stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
                     stage.initModality(Modality.APPLICATION_MODAL);
                     stage.showAndWait();
                     cargarPrestamos();
+                } catch (IOException e) {
+                    System.err.println(e.getMessage());
+                    mostrarAlerta(resources.getString("message.window_open"));
+                }
+            } else {
+                // Historial
+                HistorialPrestamo historialPrestamo = (HistorialPrestamo) seleccion;
+                try {
+                    Window ventana = tabla.getScene().getWindow();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"),resources);
+                    HistorialPrestamoController controlador = new HistorialPrestamoController(historialPrestamo);
+                    fxmlLoader.setController(controlador);
+                    Scene scene = new Scene(fxmlLoader.load());
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+                    stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
+                    stage.initOwner(ventana);
+                    stage.initModality(Modality.APPLICATION_MODAL);
+                    stage.showAndWait();
+                    cargarHistorialPrestamos();
                 } catch (IOException e) {
                     System.err.println(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
@@ -461,7 +546,7 @@ public class MainController implements Initializable {
                 } else {
                     mostrarAlerta(resources.getString("delete.book.error"));
                 }
-            } else {
+            } else if (item.equals(resources.getString("cb.loans"))) {
                 // Préstamo
                 Prestamo prestamo = (Prestamo) seleccion;
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -476,6 +561,23 @@ public class MainController implements Initializable {
                         mostrarConfirmacion(resources.getString("delete.loan.success"));
                     } else {
                         mostrarAlerta(resources.getString("delete.loan.fail"));
+                    }
+                }
+            } else {
+                // Historial
+                HistorialPrestamo historialPrestamo = (HistorialPrestamo) seleccion;
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.initOwner(tabla.getScene().getWindow());
+                alert.setHeaderText(null);
+                alert.setTitle(resources.getString("window.confirm"));
+                alert.setContentText(resources.getString("delete.history.prompt"));
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    if (DaoHistorialPrestamo.eliminar(historialPrestamo)) {
+                        cargarHistorialPrestamos();
+                        mostrarConfirmacion(resources.getString("delete.history.success"));
+                    } else {
+                        mostrarAlerta(resources.getString("delete.history.fail"));
                     }
                 }
             }
@@ -571,10 +673,7 @@ public class MainController implements Initializable {
     public void cargarAlumnos() {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
-        filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter"));
-        filtroNombre.setDisable(false);
-        cbFiltro.setDisable(false);
+        txtFiltro.setText(null);
         cbFiltro.getItems().clear();
         cbFiltro.getItems().addAll(resources.getString("main.label.filter.name"));
         cbFiltro.getSelectionModel().select(0);
@@ -605,10 +704,7 @@ public class MainController implements Initializable {
     public void cargarLibros() {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
-        filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter"));
-        filtroNombre.setDisable(false);
-        cbFiltro.setDisable(false);
+        txtFiltro.setText(null);
         cbFiltro.getItems().clear();
         cbFiltro.getItems().addAll(resources.getString("main.label.filter.title"));
         cbFiltro.getSelectionModel().select(0);
@@ -643,15 +739,15 @@ public class MainController implements Initializable {
     public void cargarPrestamos() {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
-        filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter.unavailable"));
-        filtroNombre.setDisable(true);
+        txtFiltro.setText(null);
+        cbFiltro.getItems().clear();
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book"));
+        cbFiltro.getSelectionModel().select(0);
         masterData.clear();
-        cbFiltro.setDisable(true);
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
-        editarMenuItemText(resources.getString("string.history"));
+        editarMenuItemText(resources.getString("string.loan"));
         // Cargar filas
         TableColumn<Prestamo, Integer> colId = new TableColumn<>("ID");
         colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
@@ -674,29 +770,25 @@ public class MainController implements Initializable {
     public void cargarHistorialPrestamos() {
         // Vaciar tabla
         tabla.getSelectionModel().clearSelection();
-        filtroNombre.setText(null);
-        lblFiltro.setText(resources.getString("main.label.filter"));
-        filtroNombre.setDisable(false);
-        masterData.clear();
-        cbFiltro.setDisable(false);
         cbFiltro.getItems().clear();
-        cbFiltro.getItems().addAll(resources.getString("main.label.filter.name"));
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.student"),resources.getString("main.label.filter.book"));
         cbFiltro.getSelectionModel().select(0);
+        masterData.clear();
         filteredData.clear();
         tabla.getItems().clear();
         tabla.getColumns().clear();
-        editarMenuItemText(resources.getString("string.loan"));
+        editarMenuItemText(resources.getString("string.history"));
         // Cargar filas
         TableColumn<HistorialPrestamo, Integer> colId = new TableColumn<>("ID");
         colId.setCellValueFactory(new PropertyValueFactory<>("id_prestamo"));
-        TableColumn<Prestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
+        TableColumn<HistorialPrestamo, String> colAlumno = new TableColumn<>(resources.getString("table.loan.student"));
         colAlumno.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getAlumno().getNombre()));
         TableColumn<HistorialPrestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
         colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
         TableColumn<HistorialPrestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
         colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
         TableColumn<HistorialPrestamo, String> colFechaDevolucion = new TableColumn<>(resources.getString("table.history.return_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
+        colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
         tabla.getColumns().addAll(colId,colAlumno,colLibro,colFechaPrestamo,colFechaDevolucion);
         // Rellenar tabla
        ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.cargarListado();

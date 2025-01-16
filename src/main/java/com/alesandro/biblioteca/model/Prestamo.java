@@ -1,5 +1,7 @@
 package com.alesandro.biblioteca.model;
 
+import com.alesandro.biblioteca.utils.FechaFormatter;
+
 import java.time.LocalDateTime;
 
 /**
@@ -30,6 +32,16 @@ public class Prestamo {
      * Constructor vacío de préstamo
      */
     public Prestamo() {}
+
+    /**
+     * ToString de préstamo
+     *
+     * @return string con información de préstamo
+     */
+    @Override
+    public String toString() {
+        return id_prestamo + " - " + alumno + " - " + libro + " - " + FechaFormatter.formatearString(fecha_prestamo);
+    }
 
     /**
      * Getter para el id_prestamo
