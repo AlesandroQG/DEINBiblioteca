@@ -109,7 +109,7 @@ public class MainController implements Initializable {
             DBConnect db = new DBConnect();
             if (db.getConnection() == null) {
                 mostrarAlerta(resources.getString("db.file.error"));
-                Platform.exit();
+                Platform.exit(); // Cierra la aplicación
                 return;
             }
         } catch (SQLException e) {
