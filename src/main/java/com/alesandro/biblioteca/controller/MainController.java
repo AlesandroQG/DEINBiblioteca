@@ -576,7 +576,7 @@ public class MainController implements Initializable {
                     alert.setContentText(resources.getString("delete.book.prompt"));
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK) {
-                        if (DaoLibro.eliminar(libro)) {
+                        if (DaoLibro.darDeBaja(libro)) {
                             cargarLibros();
                             mostrarConfirmacion(resources.getString("delete.book.success"));
                         } else {
@@ -715,7 +715,11 @@ public class MainController implements Initializable {
     private void editarMenuItemText(String text) {
         miAniadir.setText(resources.getString("menu.file.add") + " " + text.toLowerCase());
         btnEditar.setText(resources.getString("menu.edit.edit") + " " + text.toLowerCase() + "...");
-        btnEliminar.setText(resources.getString("menu.edit.delete") + " " + text.toLowerCase() + "...");
+        if (text.equals(resources.getString("string.book"))) {
+            btnEliminar.setText(resources.getString("menu.edit.withdraw") + "...");
+        } else {
+            btnEliminar.setText(resources.getString("menu.edit.delete") + " " + text.toLowerCase() + "...");
+        }
     }
 
     /**

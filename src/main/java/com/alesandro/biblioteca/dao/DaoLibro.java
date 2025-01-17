@@ -188,6 +188,30 @@ public class DaoLibro {
     }
 
     /**
+     * Metodo que da de baja un libro en la BD
+     *
+     * @param libro		Instancia del libro con datos a actualizar
+     * @return			true/false
+     */
+    public static boolean darDeBaja(Libro libro) {
+        DBConnect connection;
+        PreparedStatement ps;
+        try {
+            connection = new DBConnect();
+            String consulta = "UPDATE Libro SET baja = 1 WHERE codigo = ?";
+            ps = connection.getConnection().prepareStatement(consulta);
+            ps.setInt(1, libro.getCodigo());
+            int filasAfectadas = ps.executeUpdate();
+            ps.close();
+            connection.closeConnection();
+            return filasAfectadas > 0;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Metodo que CREA un nuevo libro en la BD
      *
      * @param libro		Instancia del modelo libro con datos nuevos
