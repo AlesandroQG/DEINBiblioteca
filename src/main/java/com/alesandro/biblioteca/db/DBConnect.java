@@ -24,15 +24,16 @@ public class DBConnect {
      */
     public DBConnect() throws SQLException {
         Properties configuracion = getConfiguration();
-        // los parametros de la conexion
-        Properties connConfig = new Properties();
-        connConfig.setProperty("user", configuracion.getProperty("user"));
-        connConfig.setProperty("password", configuracion.getProperty("password"));
-        //la conexion en sí
-        connection = DriverManager.getConnection("jdbc:mariadb://" + configuracion.getProperty("address") + ":" + configuracion.getProperty("port") + "/" + configuracion.getProperty("database") + "?serverTimezone=Europe/Madrid", connConfig);
-        connection.setAutoCommit(true);
-        DatabaseMetaData databaseMetaData = connection.getMetaData();
-        //debug
+        if (configuracion != null) {
+            // los parametros de la conexion
+            Properties connConfig = new Properties();
+            connConfig.setProperty("user", configuracion.getProperty("user"));
+            connConfig.setProperty("password", configuracion.getProperty("password"));
+            //la conexion en sí
+            connection = DriverManager.getConnection("jdbc:mariadb://" + configuracion.getProperty("address") + ":" + configuracion.getProperty("port") + "/" + configuracion.getProperty("database") + "?serverTimezone=Europe/Madrid", connConfig);
+            connection.setAutoCommit(true);
+            DatabaseMetaData databaseMetaData = connection.getMetaData();
+            //debug
         /*System.out.println();
         System.out.println("--- Datos de conexión ------------------------------------------");
         System.out.printf("Base de datos: %s%n", databaseMetaData.getDatabaseProductName());
@@ -41,7 +42,10 @@ public class DBConnect {
         System.out.printf("  Versión: %s%n", databaseMetaData.getDriverVersion());
         System.out.println("----------------------------------------------------------------");
         System.out.println();*/
-        connection.setAutoCommit(true);
+            connection.setAutoCommit(true);
+        } else {
+            this.connection = null;
+        }
     }
 
     /**
@@ -64,7 +68,8 @@ public class DBConnect {
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException("configuration.properties not found at config file path " + f.getPath());
+            //throw new RuntimeException("configuration.properties not found at config file path " + f.getPath());
+            return null;
         }
         return properties;
     }

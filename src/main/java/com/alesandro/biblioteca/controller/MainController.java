@@ -101,7 +101,12 @@ public class MainController implements Initializable {
         this.resources = resources;
         // Controlar acceso a la base de datos
         try {
-            new DBConnect();
+            DBConnect db = new DBConnect();
+            if (db.getConnection() == null) {
+                mostrarAlerta(resources.getString("db.file.error"));
+                Platform.exit();
+                return;
+            }
         } catch (SQLException e) {
             mostrarAlerta(resources.getString("db.error"));
             Platform.exit(); // Cierra la aplicación

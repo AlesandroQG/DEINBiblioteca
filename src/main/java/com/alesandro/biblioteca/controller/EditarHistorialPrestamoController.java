@@ -76,16 +76,21 @@ public class EditarHistorialPrestamoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.resources = resourceBundle;
-        // Cargar los datos
-        lblId.setText(historialPrestamo.getId_prestamo() + "");
-        lblAlumno.setText(historialPrestamo.getAlumno().toString());
-        lblLibro.setText(historialPrestamo.getLibro().toString());
-        datePickerPrestamo.setValue(historialPrestamo.getFecha_prestamo().toLocalDate());
-        horaPrestamo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, historialPrestamo.getFecha_prestamo().getHour()));
-        minutoPrestamo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, historialPrestamo.getFecha_prestamo().getMinute()));
-        datePickerHistorial.setValue(historialPrestamo.getFecha_devolucion().toLocalDate());
-        horaHistorial.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, historialPrestamo.getFecha_devolucion().getHour()));
-        minutoHistorial.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, historialPrestamo.getFecha_devolucion().getMinute()));
+        if (historialPrestamo == null) {
+            mostrarAlerta(resources.getString("history.error"));
+            cancelar(null);
+        } else {
+            // Cargar los datos
+            lblId.setText(historialPrestamo.getId_prestamo() + "");
+            lblAlumno.setText(historialPrestamo.getAlumno().toString());
+            lblLibro.setText(historialPrestamo.getLibro().toString());
+            datePickerPrestamo.setValue(historialPrestamo.getFecha_prestamo().toLocalDate());
+            horaPrestamo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, historialPrestamo.getFecha_prestamo().getHour()));
+            minutoPrestamo.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, historialPrestamo.getFecha_prestamo().getMinute()));
+            datePickerHistorial.setValue(historialPrestamo.getFecha_devolucion().toLocalDate());
+            horaHistorial.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, historialPrestamo.getFecha_devolucion().getHour()));
+            minutoHistorial.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, historialPrestamo.getFecha_devolucion().getMinute()));
+        }
     }
 
     /**

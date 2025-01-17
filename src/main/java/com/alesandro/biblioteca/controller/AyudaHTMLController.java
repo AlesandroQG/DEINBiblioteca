@@ -44,7 +44,7 @@ public class AyudaHTMLController implements Initializable {
         // Cargar estructura
         TreeItem<Help> root = new TreeItem<>(new Help("Raiz", ""));
         TreeItem<Help> main = new TreeItem<>(new Help(resources.getString("help.introduction"), "index.html"));
-        TreeItem<Help> web = new TreeItem<>(new Help(resources.getString("help.web"), "https://links.maxie.gay/", false));
+        TreeItem<Help> web = new TreeItem<>(new Help(resources.getString("help.web"), "https://google.com/", false));
         root.getChildren().addAll(main,web);
         // Ajustar propiedades de la vista árbol
         arbol.setRoot(root);
