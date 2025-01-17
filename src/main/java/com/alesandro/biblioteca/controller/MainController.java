@@ -44,6 +44,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -199,8 +200,7 @@ public class MainController implements Initializable {
                     filteredData.clear();
                     for (Object obj : masterData) {
                         Alumno alumno = (Alumno) obj;
-                        String nombre = alumno.getNombre();
-                        nombre = nombre.toLowerCase();
+                        String nombre = alumno.getNombre().toLowerCase();
                         if (nombre.contains(valor)) {
                             filteredData.add(alumno);
                         }
@@ -215,10 +215,18 @@ public class MainController implements Initializable {
                     filteredData.clear();
                     for (Object obj : masterData) {
                         Libro libro = (Libro) obj;
-                        String titulo = libro.getTitulo();
-                        titulo = titulo.toLowerCase();
-                        if (titulo.contains(valor)) {
-                            filteredData.add(libro);
+                        if (cbFiltro.getSelectionModel().getSelectedItem().equals(resources.getString("main.label.filter.title"))) {
+                            // Título
+                            String titulo = libro.getTitulo().toLowerCase();
+                            if (titulo.contains(valor)) {
+                                filteredData.add(libro);
+                            }
+                        } else {
+                            // Autor
+                            String autor = libro.getAutor().toLowerCase();
+                            if (autor.contains(valor)) {
+                                filteredData.add(libro);
+                            }
                         }
                     }
                     tabla.setItems(filteredData);
@@ -231,13 +239,13 @@ public class MainController implements Initializable {
                     filteredData.clear();
                     for (Object obj : masterData) {
                         Prestamo prestamo = (Prestamo) obj;
-                        if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.student")) {
+                        if (cbFiltro.getSelectionModel().getSelectedItem().equals(resources.getString("main.label.filter.student"))) {
                             // Alumno
                             String nombre = prestamo.getAlumno().getNombre().toLowerCase();
                             if (nombre.contains(valor)) {
                                 filteredData.add(prestamo);
                             }
-                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.book_title")) {
+                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals(resources.getString("main.label.filter.book_title"))) {
                             // Título de libro
                             String titulo = prestamo.getLibro().getTitulo().toLowerCase();
                             if (titulo.contains(valor)) {
@@ -261,13 +269,13 @@ public class MainController implements Initializable {
                     filteredData.clear();
                     for (Object obj : masterData) {
                         HistorialPrestamo historialPrestamo = (HistorialPrestamo) obj;
-                        if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.student")) {
+                        if (cbFiltro.getSelectionModel().getSelectedItem().equals(resources.getString("main.label.filter.student"))) {
                             // Alumno
                             String nombre = historialPrestamo.getAlumno().getNombre().toLowerCase();
                             if (nombre.contains(valor)) {
                                 filteredData.add(historialPrestamo);
                             }
-                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals("main.label.filter.book_title")) {
+                        } else if (cbFiltro.getSelectionModel().getSelectedItem().equals(resources.getString("main.label.filter.book_title"))) {
                             // Título de libro
                             String titulo = historialPrestamo.getLibro().getTitulo().toLowerCase();
                             if (titulo.contains(valor)) {
@@ -320,7 +328,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void ayudaPDF(ActionEvent event) {
-        //
+        File pdf = new File("src/main/resources/com/alesandro/biblioteca/help/pdf/Guia.pdf");
     }
 
     /**
@@ -412,6 +420,7 @@ public class MainController implements Initializable {
                 stage.initOwner(ventana);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
+                cargarHistorialPrestamos();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
@@ -748,7 +757,7 @@ public class MainController implements Initializable {
         tabla.getSelectionModel().clearSelection();
         txtFiltro.setText(null);
         cbFiltro.getItems().clear();
-        cbFiltro.getItems().addAll(resources.getString("main.label.filter.title"));
+        cbFiltro.getItems().addAll(resources.getString("main.label.filter.title"),resources.getString("main.label.filter.author"));
         cbFiltro.getSelectionModel().select(0);
         masterData.clear();
         filteredData.clear();
@@ -766,8 +775,8 @@ public class MainController implements Initializable {
         colEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
         TableColumn<Libro, String> colEstado = new TableColumn<>(resources.getString("table.book.status"));
         colEstado.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getEstado().equals("disponible") ? resources.getString("book.status.available") : resources.getString("book.status.loaned")));
-        TableColumn<Libro, String> colBaja = new TableColumn<>(resources.getString("table.book.leave"));
-        colBaja.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getBaja() == 1 ? resources.getString("book.leave.yes") : resources.getString("book.leave.no")));
+        TableColumn<Libro, String> colBaja = new TableColumn<>(resources.getString("table.book.withdrawn"));
+        colBaja.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getBaja() == 1 ? resources.getString("book.withdrawn.yes") : resources.getString("book.withdrawn.no")));
         tabla.getColumns().addAll(colCodigo,colTitulo,colAutor,colEditorial,colEstado,colBaja);
         // Rellenar tabla
         ObservableList<Libro> libros = DaoLibro.cargarListado();

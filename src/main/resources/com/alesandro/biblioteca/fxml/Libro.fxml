@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -96,10 +97,13 @@
                      </VBox.margin>
                   </Label>
                   <ComboBox fx:id="cbEstado" />
-                  <CheckBox fx:id="cbBaja" mnemonicParsing="false" text="%book.leave">
+                  <CheckBox fx:id="cbBaja" mnemonicParsing="false" text="%book.withdrawn">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
+                     <tooltip>
+                        <Tooltip text="%book.withdrawn.tooltip" />
+                     </tooltip>
                   </CheckBox>
                </children>
                <HBox.margin>
