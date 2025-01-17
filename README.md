@@ -25,7 +25,7 @@ database=
 
 ### Diagrama de Clases
 
-![Diagrama de Clases]()
+![Diagrama de Clases](https://github.com/AlesandroQG/DEINBiblioteca/blob/main/src/main/resources/com/alesandro/biblioteca/docs/DiagramaClases.png?raw=true)
 
 #### Estructura de la aplicación
 
