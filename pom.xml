@@ -37,12 +37,6 @@
             <artifactId>jasperreports-chart-themes</artifactId>
             <version>7.0.1</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
-        <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>3.4.1</version>
-        </dependency>
 
         <dependency>
             <groupId>org.openjfx</groupId>
