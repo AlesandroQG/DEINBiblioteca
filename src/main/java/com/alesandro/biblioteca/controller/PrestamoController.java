@@ -3,7 +3,6 @@ package com.alesandro.biblioteca.controller;
 import com.alesandro.biblioteca.dao.DaoAlumno;
 import com.alesandro.biblioteca.dao.DaoLibro;
 import com.alesandro.biblioteca.dao.DaoPrestamo;
-import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.model.Alumno;
 import com.alesandro.biblioteca.model.Libro;
 import com.alesandro.biblioteca.model.Prestamo;
@@ -29,7 +28,6 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
