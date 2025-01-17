@@ -44,6 +44,15 @@ public class AyudaHTMLController implements Initializable {
         // Cargar estructura
         TreeItem<Help> root = new TreeItem<>(new Help("Raiz", ""));
         TreeItem<Help> main = new TreeItem<>(new Help(resources.getString("help.introduction"), "index.html"));
+        // Categorías del manual
+        TreeItem<Help> rMain = new TreeItem<>(new Help(resources.getString("help.main"), "main.html"));
+        TreeItem<Help> rAlumno = new TreeItem<>(new Help(resources.getString("help.student"), "alumno.html"));
+        TreeItem<Help> rLibro = new TreeItem<>(new Help(resources.getString("help.book"), "libro.html"));
+        TreeItem<Help> rPrestamo = new TreeItem<>(new Help(resources.getString("help.loan"), "prestamo.html"));
+        TreeItem<Help> rHistorialPrestamo = new TreeItem<>(new Help(resources.getString("help.history"), "historialPrestamo.html"));
+        TreeItem<Help> rConclusion = new TreeItem<>(new Help(resources.getString("help.conclusion"), "conclusion.html"));
+        main.getChildren().addAll(rMain,rAlumno,rLibro,rPrestamo,rHistorialPrestamo,rConclusion);
+        // Página web
         TreeItem<Help> web = new TreeItem<>(new Help(resources.getString("help.web"), "https://google.com/", false));
         root.getChildren().addAll(main,web);
         // Ajustar propiedades de la vista árbol
