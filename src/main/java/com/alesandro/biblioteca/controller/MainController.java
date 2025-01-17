@@ -30,6 +30,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -65,6 +66,9 @@ public class MainController implements Initializable {
 
     @FXML // fx:id="cbTabla"
     private ComboBox<String> cbTabla; // Value injected by FXMLLoader
+
+    @FXML // fx:id="filterTooltip"
+    private Tooltip filterTooltip; // Value injected by FXMLLoader
 
     @FXML // fx:id="cbFiltro"
     private ComboBox<String> cbFiltro; // Value injected by FXMLLoader
@@ -128,7 +132,7 @@ public class MainController implements Initializable {
             }
             new LanguageSwitcher((Stage) tabla.getScene().getWindow()).switchLanguage(locale);
         });
-        // Event Listener para ComboBox
+        // Event Listener para ComboBox de tabla
         cbTabla.getItems().addAll(resources.getString("cb.students"),resources.getString("cb.books"),resources.getString("cb.loans"),resources.getString("cb.history"));
         cbTabla.setValue(resources.getString("cb.students"));
         cbTabla.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -141,6 +145,10 @@ public class MainController implements Initializable {
             } else {
                 cargarHistorialPrestamos();
             }
+        });
+        // Event Listener para el ComboBox del filtro
+        cbFiltro.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            cambiarFiltroTooltip();
         });
         // Event Listener para celdas de la tabla
         tabla.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -677,6 +685,17 @@ public class MainController implements Initializable {
     private void deshabilitarMenus(boolean deshabilitado) {
         btnEditar.setDisable(deshabilitado);
         btnEliminar.setDisable(deshabilitado);
+    }
+
+    /**
+     * Función que cambia el texto del tooltip del filtro
+     */
+    private void cambiarFiltroTooltip() {
+        String object = cbTabla.getSelectionModel().getSelectedItem();
+        String filter = cbFiltro.getSelectionModel().getSelectedItem();
+        if (object != null && filter != null) {
+            filterTooltip.setText(resources.getString("main.tooltip.filter1") + " " + object.toLowerCase() + " " + resources.getString("main.tooltip.filter2") + " " + filter.toLowerCase());
+        }
     }
 
     /**

@@ -137,7 +137,7 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                      <tooltip>
-                        <Tooltip text="%main.tooltip.filter" />
+                        <Tooltip fx:id="filterTooltip" text="%main.tooltip.filter1" />
                      </tooltip>
                   </TextField>
                </children>
