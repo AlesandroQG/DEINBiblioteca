@@ -27,7 +27,7 @@ database=
 
 ![Diagrama de Clases](https://github.com/AlesandroQG/DEINBiblioteca/blob/main/src/main/resources/com/alesandro/biblioteca/docs/DiagramaClases.png?raw=true)
 
-#### Estructura de la aplicación
+### Estructura de la aplicación
 
 La estructura del proyecto es la siguiente:
 - `configuration.properties`: Fichero con las propiedades para la conexión a la base de datos
