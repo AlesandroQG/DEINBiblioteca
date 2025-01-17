@@ -73,8 +73,8 @@
       </HBox>
       <FlowPane alignment="CENTER" hgap="50.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" text="%btn.save" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="%btn.cancel" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" styleClass="btnGuardar" text="%btn.save" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="btnCerrar" text="%btn.cancel" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

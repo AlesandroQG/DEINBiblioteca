@@ -6,7 +6,7 @@ Esta es una aplicación para la gestión de una biblioteca hecha con JavaFX y Ja
 
 ### Tecnologías usadas
 
-Estas son las technologías usadas para este proyecto:
+Estas son las tecnologías usadas para este proyecto:
 - SDK: Oracle OpenJDK 23.0.1
 - Base de datos: MariaDB
 - Informes: JasperReport 7.0.1 (ejecución funciona en VSCode)

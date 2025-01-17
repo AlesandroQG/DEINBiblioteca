@@ -143,7 +143,33 @@ public class AlumnoController implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-            stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+            stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
+            stage.initOwner(ventana);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            cargarPrestamos();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta(resources.getString("message.window_open"));
+        }
+    }
+
+    /**
+     * Función que se ejecuta cuando se pulsa el botón "Añadir" de la pestaña Historial de Préstamos. Abre un menú para añadir un nuevo préstamo
+     *
+     * @param event evento del usuario
+     */
+    @FXML
+    void aniadirHistorial(ActionEvent event) {
+        try {
+            Window ventana = tablaHistorial.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/NuevoHistorialPrestamo.fxml"), resources);
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
+            stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
             stage.initOwner(ventana);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -184,7 +210,7 @@ public class AlumnoController implements Initializable {
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
@@ -215,7 +241,7 @@ public class AlumnoController implements Initializable {
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.book") + " - " + resources.getString("app.name"));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();

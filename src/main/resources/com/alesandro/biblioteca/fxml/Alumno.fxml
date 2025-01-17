@@ -64,9 +64,9 @@
                               <TableView fx:id="tablaPrestamos" prefHeight="250.0" VBox.vgrow="ALWAYS" />
                               <FlowPane alignment="CENTER" hgap="50.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#aniadirPrestamo" text="%btn.add" />
-                                    <Button fx:id="btnEditarPrestamo" disable="true" mnemonicParsing="false" onAction="#editarPrestamo" text="%btn.edit" />
-                                    <Button fx:id="btnEliminarPrestamo" disable="true" mnemonicParsing="false" onAction="#eliminarPrestamo" text="%btn.delete" />
+                                    <Button mnemonicParsing="false" onAction="#aniadirPrestamo" styleClass="btnGuardar" text="%btn.add" />
+                                    <Button fx:id="btnEditarPrestamo" disable="true" mnemonicParsing="false" onAction="#editarPrestamo" styleClass="btnAccion" text="%btn.edit" />
+                                    <Button fx:id="btnEliminarPrestamo" disable="true" mnemonicParsing="false" onAction="#eliminarPrestamo" styleClass="btnEliminar" text="%btn.delete" />
                                  </children>
                                  <padding>
                                     <Insets top="5.0" />
@@ -83,8 +83,9 @@
                               <TableView fx:id="tablaHistorial" prefHeight="250.0" VBox.vgrow="ALWAYS" />
                               <FlowPane alignment="CENTER" hgap="50.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="btnEditarHistorial" disable="true" mnemonicParsing="false" onAction="#editarHistorial" text="%btn.edit" />
-                                    <Button fx:id="btnEliminarHistorial" disable="true" mnemonicParsing="false" onAction="#eliminarHistorial" text="%btn.delete" />
+                                    <Button mnemonicParsing="false" onAction="#aniadirHistorial" styleClass="btnGuardar" text="%btn.add" />
+                                    <Button fx:id="btnEditarHistorial" disable="true" mnemonicParsing="false" onAction="#editarHistorial" styleClass="btnAccion" text="%btn.edit" />
+                                    <Button fx:id="btnEliminarHistorial" disable="true" mnemonicParsing="false" onAction="#eliminarHistorial" styleClass="btnEliminar" text="%btn.delete" />
                                  </children>
                                  <padding>
                                     <Insets top="5.0" />
@@ -103,8 +104,8 @@
       </HBox>
       <FlowPane alignment="CENTER" hgap="20.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" text="%btn.save" />
-            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" text="%btn.cancel" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" styleClass="btnGuardar" text="%btn.save" />
+            <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="btnCerrar" text="%btn.cancel" />
          </children>
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

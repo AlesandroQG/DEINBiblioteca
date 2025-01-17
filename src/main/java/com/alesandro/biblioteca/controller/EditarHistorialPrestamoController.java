@@ -14,11 +14,10 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora de la ventana historial préstamo
+ * Clase controladora de la ventana de edición de historial préstamo
  */
 public class EditarHistorialPrestamoController implements Initializable {
     /**

@@ -176,7 +176,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Función que filtra la tabla por nombre
+     * Función que filtra la tabla
      */
     public void filtrar() {
         String valor = txtFiltro.getText();
@@ -295,7 +295,7 @@ public class MainController implements Initializable {
             stage.setMinWidth(600);
             stage.setMinHeight(400);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-            stage.setTitle(resources.getString("window.help"));
+            stage.setTitle(resources.getString("window.help") + " - " + resources.getString("app.name"));
             stage.initOwner(ventana);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -400,7 +400,7 @@ public class MainController implements Initializable {
                 stage.setMinWidth(500);
                 stage.setMinHeight(350);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                stage.setTitle(resources.getString("window.help"));
+                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();

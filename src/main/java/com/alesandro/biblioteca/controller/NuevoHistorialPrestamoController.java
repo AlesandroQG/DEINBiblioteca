@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -23,7 +22,7 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora de la ventana historial préstamo
+ * Clase controladora de la ventana de creación de historial préstamo
  */
 public class NuevoHistorialPrestamoController implements Initializable {
     @FXML // fx:id="datePicker"
