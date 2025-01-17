@@ -23,6 +23,10 @@ password=
 database=
 ```
 
+### Diagrama de Clases
+
+![Diagrama de Clases]()
+
 #### Estructura de la aplicación
 
 La estructura del proyecto es la siguiente:
@@ -59,6 +63,7 @@ La estructura del proyecto es la siguiente:
         - `utils`: Paquete con utilidades de la aplicación
           - `FechaFormatter.java`: Clase para formatear fechas
     - `resources > com.alesandro.biblioteca`: Recursos de la aplicación
+        - `docs`: Carpeta con la documentación del proyecto
         - `fonts`: Carpeta que contiene las fuentes de la aplicación
         - `fxml`: Ficheros de las vistas
           - `Main.fxml`: Ventana principal de la aplicación
