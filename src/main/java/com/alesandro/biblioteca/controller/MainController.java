@@ -118,7 +118,7 @@ public class MainController implements Initializable {
             return;
         }
         // Select de idioma
-        if (resources.getLocale().equals(new Locale("es"))) {
+        if (resources.getLocale().equals(Locale.of("es"))) {
             langES.setSelected(true);
         } else {
             langEN.setSelected(true);
@@ -127,9 +127,9 @@ public class MainController implements Initializable {
         tgIdioma.selectedToggleProperty().addListener((observableValue, oldToggle, newToggle) -> {
             Locale locale;
             if (langES.isSelected()) {
-                locale = new Locale("es");
+                locale = Locale.of("es");
             } else {
-                locale = new Locale("en");
+                locale = Locale.of("en");
             }
             new LanguageSwitcher((Stage) tabla.getScene().getWindow()).switchLanguage(locale);
         });
