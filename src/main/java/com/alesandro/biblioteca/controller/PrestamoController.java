@@ -3,6 +3,7 @@ package com.alesandro.biblioteca.controller;
 import com.alesandro.biblioteca.dao.DaoAlumno;
 import com.alesandro.biblioteca.dao.DaoLibro;
 import com.alesandro.biblioteca.dao.DaoPrestamo;
+import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.model.Alumno;
 import com.alesandro.biblioteca.model.Libro;
 import com.alesandro.biblioteca.model.Prestamo;
@@ -17,11 +18,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 /**
@@ -114,6 +123,30 @@ public class PrestamoController implements Initializable {
     void cancelar(ActionEvent event) {
         Stage stage = (Stage) cbAlumno.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Función que se ejecuta cuando se pulsa el botón "Generar Informe". Valida y guarda los datos del formulario
+     *
+     * @param event evento del usuario
+     */
+    @FXML
+    void generarInforme(ActionEvent event) {
+        DBConnect connection;
+        HashMap<String, Object> parameters = new HashMap<>();
+        try {
+            connection = new DBConnect(); // Instanciar la conexión con la base de datos
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeAltaPrestamo.jasper")); // Obtener el fichero del informe
+            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, connection.getConnection()); // Cargar el informe
+            JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
+            viewer.setVisible(true); // Mostrar el informe al usuario
+        } catch (JRException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta(resources.getString("report.load.error"));
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta(resources.getString("report.load.db.error"));
+        }
     }
 
     /**

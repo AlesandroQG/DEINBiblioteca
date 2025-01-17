@@ -630,11 +630,12 @@ public class MainController implements Initializable {
      * @param informe a mostrar
      */
     private void mostrarInforme(String informe) {
+        System.out.println(getClass().getResource("/com/alesandro/biblioteca/reports/" + informe + ".jasper"));
         DBConnect connection;
         try {
             connection = new DBConnect(); // Instanciar la conexión con la base de datos
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/" + informe + ".jasper")); // Obtener el fichero del informe
-            JasperPrint jprint = JasperFillManager.fillReport(report, null, connection.getConnection()); // Cargar el informe con las personas
+            JasperPrint jprint = JasperFillManager.fillReport(report, null, connection.getConnection()); // Cargar el informe
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
             viewer.setVisible(true); // Mostrar el informe al usuario
         } catch (JRException e) {
