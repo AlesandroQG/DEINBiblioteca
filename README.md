@@ -11,6 +11,18 @@ Estas son las technologías usadas para este proyecto:
 - Base de datos: MariaDB
 - Informes: JasperReport 7.0.1 (ejecución funciona en VSCode)
 
+### Configuración
+
+Para la conexión a la base de datos, hay que editar el fichero `configuration.properties` localizado en la ruta base.
+La plantilla es la siguiente:
+```
+address=
+port=
+user=
+password=
+database=
+```
+
 #### Estructura de la aplicación
 
 La estructura del proyecto es la siguiente:
@@ -27,6 +39,7 @@ La estructura del proyecto es la siguiente:
           - `NuevoHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para añadir un historial préstamo
           - `EditarHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para editar un historial préstamo
           - `AyudaHTMLController.java`: Clase que controla los eventos de la ventana ayuda HTML
+          - `LanguageSelectorController.java`: Clase que controla los eventos de la ventana de cambio de idioma
         - `dao`: Clases que los modelos usan para las consultas con la base de datos
           - `DaoAlumno.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
           - `DaoHistorialPrestamo.java`: Clase que realiza las operaciones con la base de datos del modelo Historial Préstamo
@@ -55,6 +68,7 @@ La estructura del proyecto es la siguiente:
           - `NuevoHistorialPrestamo.fxml`: Ventana para añadir un historial de préstamos
           - `EditarHistorialPrestamo.fxml`: Ventana para consulta y edición del historial de préstamos
           - `AyudaHTML.fxml`: Ventana para consulta de la guía de usuario en formato HTML
+          - `LanguageSelector.fxml`: Ventana para la selección del idioma al iniciar la aplicación
         - `help`: Directorio conteniendo la ayuda de la aplicación
           - `html`: Directorio con los ficheros html para la ayuda de la aplicación
           - `pdf`: Directorio con los ficheros pdf para la ayuda de la aplicación

@@ -44,13 +44,15 @@ public class AyudaHTMLController implements Initializable {
         // Cargar estructura
         TreeItem<Help> root = new TreeItem<>(new Help("Raiz", ""));
         TreeItem<Help> main = new TreeItem<>(new Help(resources.getString("help.introduction"), "index.html"));
-        root.getChildren().add(main);
+        TreeItem<Help> web = new TreeItem<>(new Help(resources.getString("help.web"), "https://links.maxie.gay/", false));
+        root.getChildren().addAll(main,web);
         // Ajustar propiedades de la vista árbol
         arbol.setRoot(root);
         main.setExpanded(true);
         arbol.getSelectionModel().select(main);
+        arbol.setShowRoot(false);
         webEngine = visor.getEngine();
-        webEngine.load(getClass().getResource("/help/html/index.html").toExternalForm());
+        webEngine.load(getClass().getResource("/com/alesandro/biblioteca/help/html/index.html").toExternalForm());
         // Añadimos un evento para cambiar de html al pinchar en el árbol
         arbol.setOnMouseClicked(e -> {
             if (arbol.getSelectionModel().getSelectedItem() != null) {

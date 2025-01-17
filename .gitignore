@@ -37,3 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 /test_imgs/
+/lang.properties
+/configuration.properties

@@ -30,6 +30,7 @@ public class LanguageSwitcher {
     public void switchLanguage(Locale locale) {
         // Update the locale in the LanguageManager
         LanguageManager.getInstance().setLocale(locale);
+        LanguageManager.setLanguage(locale.getLanguage());
         // Get the updated ResourceBundle
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
         try {

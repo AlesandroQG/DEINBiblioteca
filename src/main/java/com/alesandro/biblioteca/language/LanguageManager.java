@@ -3,6 +3,7 @@ package com.alesandro.biblioteca.language;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -23,7 +24,6 @@ public class LanguageManager {
      * @return String con el idioma del fichero
      */
     public static String getLanguage() {
-        HashMap<String,String> map = new HashMap<String,String>();
         File f = new File("lang.properties");
         Properties properties;
         try {
@@ -37,9 +37,55 @@ public class LanguageManager {
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException("lang.properties not found at config file path " + f.getPath());
+            //throw new RuntimeException("lang.properties not found at config file path " + f.getPath());
+            return null;
         }
         return properties.getProperty("language");
+    }
+
+    /**
+     * Función que crea el fichero lang.properties si este no existe
+     */
+    public static void createFile(String language) {
+        File f = new File("lang.properties");
+        try {
+            Properties properties = new Properties();
+
+            // Modify the properties
+            properties.setProperty("language", language);
+
+            // Save the properties file
+            FileOutputStream output = new FileOutputStream(f);
+            properties.store(output, "Updated properties");
+            output.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * Función que cambia el idioma para la aplicación
+     *
+     * @param language string con el idioma del fichero
+     */
+    public static void setLanguage(String language) {
+        File f = new File("lang.properties");
+        try {
+            Properties properties = new Properties();
+            FileInputStream input = new FileInputStream(f);
+            properties.load(input);
+            input.close();
+
+            // Modify the properties
+            properties.setProperty("language", language);
+
+            // Save the properties file
+            FileOutputStream output = new FileOutputStream(f);
+            properties.store(output, "Updated properties");
+            output.close();
+        } catch (IOException e) {
+            System.err.println(e);
+        }
     }
 
     /**
