@@ -2,20 +2,11 @@
 
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TreeView?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.web.WebView?>
 
 <SplitPane dividerPositions="0.25" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.alesandro.biblioteca.controller.AyudaHTMLController">
   <items>
-      <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
-         <children>
-            <TreeView fx:id="arbol" prefWidth="200.0" />
-         </children>
-      </FlowPane>
-      <FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" SplitPane.resizableWithParent="false">
-         <children>
-            <WebView fx:id="visor" minHeight="-1.0" minWidth="-1.0" prefHeight="400.0" prefWidth="600.0" />
-         </children>
-      </FlowPane>
+      <TreeView fx:id="arbol" prefWidth="200.0" />
+      <WebView fx:id="visor" minHeight="-1.0" minWidth="-1.0" prefHeight="400.0" prefWidth="600.0" />
   </items>
 </SplitPane>
