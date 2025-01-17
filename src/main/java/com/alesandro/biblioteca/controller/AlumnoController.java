@@ -141,7 +141,8 @@ public class AlumnoController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setMinWidth(350);
+            stage.setMinHeight(350);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
             stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
             stage.initOwner(ventana);
@@ -167,7 +168,8 @@ public class AlumnoController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setMinWidth(500);
+            stage.setMinHeight(350);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
             stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
             stage.initOwner(ventana);
@@ -208,7 +210,8 @@ public class AlumnoController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setResizable(false);
+                stage.setMinWidth(400);
+                stage.setMinHeight(400);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
@@ -239,7 +242,8 @@ public class AlumnoController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
-                stage.setResizable(false);
+                stage.setMinWidth(350);
+                stage.setMinHeight(350);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
