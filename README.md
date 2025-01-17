@@ -25,7 +25,13 @@ database=
 
 ### Diagrama de Clases
 
+Este es el diagrama de clases de la aplicación:
 ![Diagrama de Clases](https://github.com/AlesandroQG/DEINBiblioteca/blob/main/src/main/resources/com/alesandro/biblioteca/docs/DiagramaClases.png?raw=true)
+
+### Diagrama de Casos
+
+Este es el diagrama de casos de la aplicación:
+![Diagrama de Casos](https://github.com/AlesandroQG/DEINBiblioteca/blob/main/src/main/resources/com/alesandro/biblioteca/docs/DiagramaCasos.png?raw=true)
 
 ### Estructura de la aplicación
 
