@@ -7,17 +7,20 @@ import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.model.Alumno;
 import com.alesandro.biblioteca.model.Libro;
 import com.alesandro.biblioteca.model.Prestamo;
+import com.alesandro.biblioteca.utils.FechaFormatter;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -53,6 +56,9 @@ public class PrestamoController implements Initializable {
 
     @FXML // fx:id="lblId"
     private Label lblId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="btnInforme"
+    private Button btnInforme; // Value injected by FXMLLoader
 
     @FXML // fx:id="hora"
     private Spinner<Integer> hora; // Value injected by FXMLLoader
@@ -107,6 +113,7 @@ public class PrestamoController implements Initializable {
             datePicker.setValue(prestamo.getFecha_prestamo().toLocalDate());
             hora.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, prestamo.getFecha_prestamo().getHour()));
             minuto.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, prestamo.getFecha_prestamo().getMinute()));
+            btnInforme.setDisable(false);
         } else {
             datePicker.setValue(LocalDate.now());
             hora.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 23, LocalTime.now().getHour()));
@@ -132,20 +139,20 @@ public class PrestamoController implements Initializable {
      */
     @FXML
     void generarInforme(ActionEvent event) {
-        DBConnect connection;
         HashMap<String, Object> parameters = new HashMap<>();
+        parameters.put("id", prestamo.getId_prestamo());
+        parameters.put("alumno", prestamo.getAlumno().getNombre());
+        parameters.put("dni", prestamo.getAlumno().getDni());
+        parameters.put("libro", prestamo.getLibro().getTitulo());
+        parameters.put("fecha", FechaFormatter.formatearString(prestamo.getFecha_prestamo()));
         try {
-            connection = new DBConnect(); // Instanciar la conexión con la base de datos
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeAltaPrestamo.jasper")); // Obtener el fichero del informe
-            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, connection.getConnection()); // Cargar el informe
+            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource()); // Cargar el informe
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
             viewer.setVisible(true); // Mostrar el informe al usuario
         } catch (JRException e) {
             System.err.println(e.getMessage());
             mostrarAlerta(resources.getString("report.load.error"));
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            mostrarAlerta(resources.getString("report.load.db.error"));
         }
     }
 

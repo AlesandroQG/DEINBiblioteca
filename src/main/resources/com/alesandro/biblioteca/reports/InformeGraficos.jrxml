@@ -1,0 +1,154 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="InformeLibros" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB Contra Docker en Local"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#F0EFEF">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="prestamosActivos" uuid="b5076637-23d0-479f-a678-da32fb3a62b2">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="bGlicm9zLmBQcmVzdGFtb2AgLDIwLDIwLDZjMjc5ZTJkLTA4YjYtNGExYy04Y2Y5LTE4ZGE0NTNl&#xa;NmQ0YTtsaWJyb3MuYEFsdW1ub2AgLDE4NSwyMCwzZjYzZjk2OC1iZGRhLTQ5MTYtYTE1ZS1kYTk1&#xa;NDE5N2EyNTQ7"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB Contra Docker en Local"/>
+		<query language="SQL"><![CDATA[SELECT count( id_prestamo) AS prestamos,
+	a.nombre
+FROM libros.`Prestamo` p,
+	libros.`Alumno` a
+WHERE 
+	 a.dni = p.dni_alumno]]></query>
+		<field name="prestamos" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="prestamos"/>
+			<property name="com.jaspersoft.studio.field.label" value="prestamos"/>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+		</field>
+	</dataset>
+	<dataset name="prestamosHistoricos" uuid="ce9970a3-e927-4a7a-8031-d866074792f6">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="bGlicm9zLmBBbHVtbm9gICwxNSwyOCxjNTI2ODY0MS1kNDFmLTQ2NTgtYTc1MC1mMzExMjQwNDgw&#xa;Nzg7bGlicm9zLmBIaXN0b3JpY29fcHJlc3RhbW9gICwxMzcsMTUsZDdlZjlhNmYtYmI1YS00NGYw&#xa;LWE5OTItNmYzYjY1YTAzMzQ2Ow=="/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB Contra Docker en Local"/>
+		<query language="SQL"><![CDATA[SELECT count( id_prestamo) AS prestamos,
+	libros.`Alumno`.nombre
+FROM libros.`Alumno`,
+	libros.`Historico_prestamo`
+WHERE 
+	 libros.`Historico_prestamo`.dni_alumno = libros.`Alumno`.dni]]></query>
+		<field name="prestamos" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="prestamos"/>
+			<property name="com.jaspersoft.studio.field.label" value="prestamos"/>
+		</field>
+		<field name="nombre" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+		</field>
+	</dataset>
+	<query language="SQL"><![CDATA[SELECT *
+FROM libros.Alumno]]></query>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="132" splitType="Stretch">
+		<element kind="image" uuid="97705585-a0b5-4ec7-86f3-ae10c220e6af" x="420" y="0" width="135" height="132">
+			<expression><![CDATA["src/main/resources/com/alesandro/biblioteca/images/Biblioteca.png"]]></expression>
+		</element>
+		<element kind="frame" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a" mode="Opaque" x="0" y="0" width="410" height="95" backcolor="#000000">
+			<element kind="staticText" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21" x="0" y="0" width="370" height="66" bold="false" style="Title">
+				<text><![CDATA[Gráficos]]></text>
+			</element>
+			<element kind="staticText" uuid="8978eac3-c578-41c9-837e-48d2b0184642" x="157" y="66" width="249" height="29" fontSize="22.0" bold="false" style="SubTitle">
+				<text><![CDATA[Biblioteca]]></text>
+			</element>
+		</element>
+		<element kind="frame" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4" mode="Opaque" x="0" y="100" width="410" height="32" forecolor="#000000" backcolor="#2FB151">
+			<element kind="textField" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8" x="266" y="10" width="144" height="20" forecolor="#FFFFFF" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" hTextAlign="Right">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="26" splitType="Stretch"/>
+	<columnFooter height="4" splitType="Stretch">
+		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="25" splitType="Stretch">
+		<element kind="frame" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000">
+			<element kind="textField" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></expression>
+			</element>
+			<element kind="textField" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary height="250" splitType="Stretch">
+		<element kind="chart" chartType="bar" uuid="bb1435e4-db5d-411a-bee3-407b071ba74d" x="0" y="50" width="260" height="200" evaluationTime="Report">
+			<dataset kind="category" resetType="Report">
+				<datasetRun uuid="f7e7f68f-b027-468a-a3c2-a454ef06e9c5" subDataset="prestamosActivos">
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				</datasetRun>
+				<series>
+					<seriesExpression><![CDATA[$F{nombre}]]></seriesExpression>
+					<categoryExpression><![CDATA[0]]></categoryExpression>
+					<valueExpression><![CDATA[$F{prestamos}]]></valueExpression>
+					<labelExpression><![CDATA[$F{nombre}]]></labelExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="staticText" uuid="f773db76-9088-4ce2-a349-1d2813014bf6" mode="Opaque" x="2" y="20" width="258" height="30" forecolor="#FFFFFF" backcolor="#00B441" fontSize="13.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Préstamos Activos]]></text>
+		</element>
+		<element kind="staticText" uuid="9f622ce9-4e09-443c-b656-8079648dd36d" mode="Opaque" x="300" y="20" width="255" height="30" forecolor="#FFFFFF" backcolor="#00B442" fontSize="13.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Préstamos Historicos]]></text>
+		</element>
+		<element kind="chart" chartType="bar" uuid="79ef5edb-77a5-46e0-852c-0836d1176176" x="300" y="50" width="255" height="200" evaluationTime="Report">
+			<dataset kind="category" resetType="Report">
+				<datasetRun uuid="3313e610-0cd0-4888-8420-078333f2b405" subDataset="prestamosHistoricos">
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				</datasetRun>
+				<series>
+					<seriesExpression><![CDATA[$F{nombre}]]></seriesExpression>
+					<categoryExpression><![CDATA[0]]></categoryExpression>
+					<valueExpression><![CDATA[$F{prestamos}]]></valueExpression>
+					<labelExpression><![CDATA[$F{nombre}]]></labelExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</summary>
+</jasperReport>

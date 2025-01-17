@@ -67,7 +67,7 @@
          <children>
             <Button defaultButton="true" mnemonicParsing="false" onAction="#guardar" styleClass="btnGuardar" text="%btn.save" />
             <Button cancelButton="true" mnemonicParsing="false" onAction="#cancelar" styleClass="btnCerrar" text="%btn.cancel" />
-            <Button mnemonicParsing="false" onAction="#generarInforme" styleClass="btnAccion" text="%btn.report" />
+            <Button fx:id="btnInforme" disable="true" mnemonicParsing="false" onAction="#generarInforme" styleClass="btnAccion" text="%btn.report" />
          </children>
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

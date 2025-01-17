@@ -630,7 +630,6 @@ public class MainController implements Initializable {
      * @param informe a mostrar
      */
     private void mostrarInforme(String informe) {
-        System.out.println(getClass().getResource("/com/alesandro/biblioteca/reports/" + informe + ".jasper"));
         DBConnect connection;
         try {
             connection = new DBConnect(); // Instanciar la conexión con la base de datos
