@@ -283,19 +283,20 @@ public class MainController implements Initializable {
     void ayudaHTML(ActionEvent event) {
         try {
             Window ventana = tabla.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/AyudaHTML.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/AyudaHTML.fxml"),resources);
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
             stage.setTitle(resources.getString("window.help"));
-            stage.setResizable(false);
             stage.initOwner(ventana);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {
             System.err.println(e.getMessage());
-            mostrarAlerta("Error abriendo ventana, por favor inténtelo de nuevo");
+            mostrarAlerta(resources.getString("message.window_open"));
         }
     }
 
@@ -371,6 +372,8 @@ public class MainController implements Initializable {
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setMinWidth(350);
+                stage.setMinHeight(350);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                 stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                 stage.initOwner(ventana);
@@ -385,18 +388,17 @@ public class MainController implements Initializable {
             // Historial
             try {
                 Window ventana = tabla.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"),resources);
-                HistorialPrestamoController controlador = new HistorialPrestamoController();
-                fxmlLoader.setController(controlador);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/NuevoHistorialPrestamo.fxml"),resources);
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);
+                stage.setMinWidth(500);
+                stage.setMinHeight(350);
                 stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
-                stage.setTitle(resources.getString("window.add") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
+                stage.setTitle(resources.getString("window.help"));
                 stage.initOwner(ventana);
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.showAndWait();
-                cargarHistorialPrestamos();
             } catch (IOException e) {
                 System.err.println(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
@@ -471,6 +473,8 @@ public class MainController implements Initializable {
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);
+                    stage.setMinWidth(350);
+                    stage.setMinHeight(350);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                     stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.loan") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);
@@ -486,12 +490,14 @@ public class MainController implements Initializable {
                 HistorialPrestamo historialPrestamo = (HistorialPrestamo) seleccion;
                 try {
                     Window ventana = tabla.getScene().getWindow();
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"),resources);
-                    HistorialPrestamoController controlador = new HistorialPrestamoController(historialPrestamo);
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/EditarHistorialPrestamo.fxml"),resources);
+                    EditarHistorialPrestamoController controlador = new EditarHistorialPrestamoController(historialPrestamo);
                     fxmlLoader.setController(controlador);
                     Scene scene = new Scene(fxmlLoader.load());
                     Stage stage = new Stage();
                     stage.setScene(scene);
+                    stage.setMinWidth(400);
+                    stage.setMinHeight(400);
                     stage.getIcons().add(new Image(getClass().getResourceAsStream("/com/alesandro/biblioteca/images/Biblioteca.png")));
                     stage.setTitle(resources.getString("window.edit") + " " + resources.getString("window.history") + " - " + resources.getString("app.name"));
                     stage.initOwner(ventana);

@@ -24,7 +24,8 @@ La estructura del proyecto es la siguiente:
           - `LibroController.java`: Clase que controla los eventos de la ventana libro
           - `AlumnoController.java`: Clase que controla los eventos de la ventana alumno
           - `PrestamoController.java`: Clase que controla los eventos de la ventana préstamo
-          - `HistorialPrestamoController.java`: Clase que controla los eventos de la ventana historial préstamo
+          - `NuevoHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para añadir un historial préstamo
+          - `EditarHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para editar un historial préstamo
           - `AyudaHTMLController.java`: Clase que controla los eventos de la ventana ayuda HTML
         - `dao`: Clases que los modelos usan para las consultas con la base de datos
           - `DaoAlumno.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
@@ -51,7 +52,8 @@ La estructura del proyecto es la siguiente:
           - `Libro.fxml`: Ventana para consulta y edición de libros
           - `Alumno.fxml`: Ventana para consulta y edición de libros
           - `Prestamo.fxml`: Ventana para consulta y edición de libros
-          - `HistorialPrestao.fxml`: Ventana para consulta y edición del historial de préstamos
+          - `NuevoHistorialPrestamo.fxml`: Ventana para añadir un historial de préstamos
+          - `EditarHistorialPrestamo.fxml`: Ventana para consulta y edición del historial de préstamos
           - `AyudaHTML.fxml`: Ventana para consulta de la guía de usuario en formato HTML
         - `help`: Directorio conteniendo la ayuda de la aplicación
           - `html`: Directorio con los ficheros html para la ayuda de la aplicación

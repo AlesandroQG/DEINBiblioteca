@@ -176,8 +176,8 @@ public class AlumnoController implements Initializable {
         if (historialPrestamo != null) {
             try {
                 Window ventana = tablaHistorial.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/HistorialPrestamo.fxml"), resources);
-                HistorialPrestamoController controlador = new HistorialPrestamoController(historialPrestamo);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/EditarNuevoHistorialPrestamo.fxml"), resources);
+                EditarHistorialPrestamoController controlador = new EditarHistorialPrestamoController(historialPrestamo);
                 fxmlLoader.setController(controlador);
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
