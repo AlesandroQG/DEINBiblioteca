@@ -142,7 +142,7 @@ public class PrestamoController implements Initializable {
         parameters.put("alumno", prestamo.getAlumno().getNombre());
         parameters.put("dni", prestamo.getAlumno().getDni());
         parameters.put("libro", prestamo.getLibro().getTitulo());
-        parameters.put("fecha", FechaFormatter.formatearString(prestamo.getFecha_prestamo()));
+        parameters.put("fecha", FechaFormatter.formatearFecha(prestamo.getFecha_prestamo()));
         try {
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeAltaPrestamo.jasper")); // Obtener el fichero del informe
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource()); // Cargar el informe

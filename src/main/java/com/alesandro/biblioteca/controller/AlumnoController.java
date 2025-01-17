@@ -386,7 +386,7 @@ public class AlumnoController implements Initializable {
         TableColumn<Prestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
         colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
         TableColumn<Prestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_prestamo())));
         tablaPrestamos.getColumns().addAll(colId,colLibro,colFechaPrestamo);
         // Rellenar tabla
         if (alumno != null) {
@@ -409,9 +409,9 @@ public class AlumnoController implements Initializable {
         TableColumn<HistorialPrestamo, String> colLibro = new TableColumn<>(resources.getString("table.loan.book"));
         colLibro.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getTitulo()));
         TableColumn<HistorialPrestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_prestamo())));
         TableColumn<HistorialPrestamo, String> colFechaDevolucion = new TableColumn<>(resources.getString("table.history.return_date"));
-        colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
+        colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_devolucion())));
         tablaHistorial.getColumns().addAll(colId,colLibro,colFechaPrestamo,colFechaDevolucion);
         // Rellenar tabla
         if (alumno != null) {

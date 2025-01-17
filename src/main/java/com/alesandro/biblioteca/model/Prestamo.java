@@ -40,7 +40,7 @@ public class Prestamo {
      */
     @Override
     public String toString() {
-        return id_prestamo + " - " + alumno + " - " + libro + " - " + FechaFormatter.formatearString(fecha_prestamo);
+        return id_prestamo + " - " + alumno + " - " + libro + " - " + FechaFormatter.formatearFecha(fecha_prestamo);
     }
 
     /**

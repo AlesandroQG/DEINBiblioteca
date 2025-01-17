@@ -809,7 +809,7 @@ public class MainController implements Initializable {
         TableColumn<Prestamo, String> colLibroAutor = new TableColumn<>(resources.getString("table.loan.book_author"));
         colLibroAutor.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getAutor()));
         TableColumn<Prestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_prestamo())));
         tabla.getColumns().addAll(colId,colAlumno,colLibroTitulo,colLibroAutor,colFechaPrestamo);
         // Rellenar tabla
         ObservableList<Prestamo> prestamos = DaoPrestamo.cargarListado();
@@ -841,9 +841,9 @@ public class MainController implements Initializable {
         TableColumn<HistorialPrestamo, String> colLibroAutor = new TableColumn<>(resources.getString("table.loan.book_author"));
         colLibroAutor.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> cellData.getValue().getLibro().getAutor()));
         TableColumn<HistorialPrestamo, String> colFechaPrestamo = new TableColumn<>(resources.getString("table.loan.loan_date"));
-        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_prestamo())));
+        colFechaPrestamo.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_prestamo())));
         TableColumn<HistorialPrestamo, String> colFechaDevolucion = new TableColumn<>(resources.getString("table.history.return_date"));
-        colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearString(cellData.getValue().getFecha_devolucion())));
+        colFechaDevolucion.setCellValueFactory(cellData -> javafx.beans.binding.Bindings.createObjectBinding(() -> FechaFormatter.formatearFecha(cellData.getValue().getFecha_devolucion())));
         tabla.getColumns().addAll(colId,colAlumno,colLibroTitulo,colLibroAutor,colFechaPrestamo,colFechaDevolucion);
         // Rellenar tabla
        ObservableList<HistorialPrestamo> historialPrestamos = DaoHistorialPrestamo.cargarListado();
