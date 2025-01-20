@@ -72,7 +72,7 @@ La estructura del proyecto es la siguiente:
         - `docs`: Carpeta con la documentación del proyecto
         - `fonts`: Carpeta que contiene las fuentes de la aplicación
         - `fxml`: Ficheros de las vistas
-          - `Main.fxml`: Ventana principal de la aplicación
+          - `com.alesandro.biblioteca.Main.fxml`: Ventana principal de la aplicación
           - `Libro.fxml`: Ventana para consulta y edición de libros
           - `Alumno.fxml`: Ventana para consulta y edición de libros
           - `Prestamo.fxml`: Ventana para consulta y edición de libros
