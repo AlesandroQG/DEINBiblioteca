@@ -328,7 +328,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void ayudaPDF(ActionEvent event) {
-        File pdf = new File("src/main/resources/com/alesandro/biblioteca/help/pdf/Guia.pdf");
+        File pdf = new File("src/main/resources/com/alesandro/biblioteca/help/pdf/GuiaUsuario.pdf");
     }
 
     /**
