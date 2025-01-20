@@ -3,6 +3,7 @@ package com.alesandro.biblioteca.db;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -56,6 +57,9 @@ public class DBConnect {
     public static Properties getConfiguration() {
         HashMap<String,String> map = new HashMap<String,String>();
         File f = new File("configuration.properties");
+        if (!f.exists()) {
+            createConfiguration();
+        }
         Properties properties;
         try {
             FileInputStream configFileReader=new FileInputStream(f);
@@ -72,6 +76,26 @@ public class DBConnect {
             return null;
         }
         return properties;
+    }
+
+    /**
+     * Función que crea el fichero configuration.properties si este no existe con valores predeterminados
+     */
+    public static void createConfiguration() {
+        File f = new File("configuration.properties");
+        Properties properties = new Properties();
+        properties.setProperty("address", "127.0.0.1");
+        properties.setProperty("port", "33066");
+        properties.setProperty("user", "admin");
+        properties.setProperty("password", "mypass");
+        properties.setProperty("database", "admin");
+        try {
+            FileOutputStream fos = new FileOutputStream(f);
+            properties.store(fos, "");
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

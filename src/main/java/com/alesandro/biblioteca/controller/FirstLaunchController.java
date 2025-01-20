@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Clase controladora para la selección de un idioma
  */
-public class LanguageSelectorController implements Initializable {
+public class FirstLaunchController implements Initializable {
     @FXML // fx:id="cbIdioma"
     private ComboBox<String> cbIdioma; // Value injected by FXMLLoader
 

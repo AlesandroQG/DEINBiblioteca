@@ -26,7 +26,7 @@ public class BibliotecaApplication extends Application {
     public void start(Stage stage) throws IOException {
         File f = new File("lang.properties");
         if (!f.exists()) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/LanguageSelector.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/FirstLaunch.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage1 = new Stage();
             stage1.setTitle("Welcome!");

@@ -5,7 +5,6 @@ module com.alesandro.biblioteca {
     requires javafx.swing;
     requires net.sf.jasperreports.core;
     requires java.sql;
-    requires org.checkerframework.checker.qual;
 
 
     opens com.alesandro.biblioteca to javafx.fxml;

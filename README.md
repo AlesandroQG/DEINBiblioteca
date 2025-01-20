@@ -49,7 +49,7 @@ La estructura del proyecto es la siguiente:
           - `NuevoHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para añadir un historial préstamo
           - `EditarHistorialPrestamoController.java`: Clase que controla los eventos de la ventana para editar un historial préstamo
           - `AyudaHTMLController.java`: Clase que controla los eventos de la ventana ayuda HTML
-          - `LanguageSelectorController.java`: Clase que controla los eventos de la ventana de cambio de idioma
+          - `FirstLaunchController.java`: Clase que controla los eventos de la ventana de 
         - `dao`: Clases que los modelos usan para las consultas con la base de datos
           - `DaoAlumno.java`: Clase que realiza las operaciones con la base de datos del modelo Producto
           - `DaoHistorialPrestamo.java`: Clase que realiza las operaciones con la base de datos del modelo Historial Préstamo
@@ -79,7 +79,7 @@ La estructura del proyecto es la siguiente:
           - `NuevoHistorialPrestamo.fxml`: Ventana para añadir un historial de préstamos
           - `EditarHistorialPrestamo.fxml`: Ventana para consulta y edición del historial de préstamos
           - `AyudaHTML.fxml`: Ventana para consulta de la guía de usuario en formato HTML
-          - `LanguageSelector.fxml`: Ventana para la selección del idioma al iniciar la aplicación
+          - `FirstLaunch.fxml`: Ventana para la configuración inicial de la aplicación
         - `help`: Directorio conteniendo la ayuda de la aplicación
           - `html`: Directorio con los ficheros html para la ayuda de la aplicación
           - `pdf`: Directorio con los ficheros pdf para la ayuda de la aplicación
