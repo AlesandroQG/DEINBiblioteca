@@ -30,6 +30,10 @@
                     <groupId>com.lowagie</groupId>
                     <artifactId>itext</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -44,6 +48,11 @@
             <version>7.0.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>21.0.4</version>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -98,7 +107,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.alesandro.biblioteca.BibliotecaApplication</mainClass>
+                            <mainClass>com.alesandro.biblioteca/com.alesandro.biblioteca.BibliotecaApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
@@ -120,11 +129,30 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.alesandro.biblioteca.BibliotecaApplication</mainClass>
+                                    <mainClass>com.alesandro.biblioteca/com.alesandro.biblioteca.BibliotecaApplication</mainClass>
                                 </transformer>
                             </transformers>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/**</exclude>
+                                        <exclude>module-info.class</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>net.sf.jasperreports:*</artifact>
+                                    <excludes>
+                                        <exclude>jasperreports_extension.properties</exclude>
+                                        <exclude>metadata_messages-defaults.properties</exclude>
+                                        <exclude>properties-metadata.json</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
                         </configuration>
                     </execution>
                 </executions>
