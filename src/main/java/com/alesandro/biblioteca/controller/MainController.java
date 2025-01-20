@@ -44,7 +44,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -319,16 +318,6 @@ public class MainController implements Initializable {
             System.err.println(e.getMessage());
             mostrarAlerta(resources.getString("message.window_open"));
         }
-    }
-
-    /**
-     * Función que se ejecuta cuando se pulsa el menu item "Ayuda PDF". Abre la guía de usuario en formato PDF
-     *
-     * @param event evento del usuario
-     */
-    @FXML
-    void ayudaPDF(ActionEvent event) {
-        File pdf = new File("src/main/resources/com/alesandro/biblioteca/help/pdf/GuiaUsuario.pdf");
     }
 
     /**

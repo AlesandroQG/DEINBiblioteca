@@ -63,10 +63,6 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaPDF" text="%menu.help.pdf">
-                     <accelerator>
-                        <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
-                     </accelerator></MenuItem>
                   <Menu mnemonicParsing="false" text="%menu.help.language">
                     <items>
                         <RadioMenuItem fx:id="langES" mnemonicParsing="false" text="Español">
