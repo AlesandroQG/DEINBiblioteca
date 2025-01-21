@@ -51,7 +51,7 @@ public class DaoPrestamo {
             rs.close();
             connection.closeConnection();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return prestamo;
     }
@@ -84,7 +84,7 @@ public class DaoPrestamo {
             rs.close();
             connection.closeConnection();
         }catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return prestamos;
     }
@@ -115,7 +115,7 @@ public class DaoPrestamo {
             rs.close();
             connection.closeConnection();
         }catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return prestamos;
     }
@@ -142,7 +142,7 @@ public class DaoPrestamo {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -177,7 +177,7 @@ public class DaoPrestamo {
             connection.closeConnection();
             return -1;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return -1;
         }
     }
@@ -201,7 +201,7 @@ public class DaoPrestamo {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }

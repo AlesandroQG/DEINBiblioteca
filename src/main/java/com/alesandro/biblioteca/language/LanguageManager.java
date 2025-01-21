@@ -40,10 +40,10 @@ public class LanguageManager {
                 properties.load(configFileReader);
                 configFileReader.close();
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                logger.error(e.getMessage());
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             //throw new RuntimeException("lang.properties not found at config file path " + f.getPath());
             return null;
         }
@@ -66,7 +66,7 @@ public class LanguageManager {
             properties.store(output, "Updated properties");
             output.close();
         } catch (IOException e) {
-            System.err.println(e);
+            logger.error(e.getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ public class LanguageManager {
             properties.store(output, "Updated properties");
             output.close();
         } catch (IOException e) {
-            System.err.println(e);
+            logger.error(e.getMessage());
         }
     }
 

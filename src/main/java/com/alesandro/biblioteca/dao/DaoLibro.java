@@ -53,7 +53,7 @@ public class DaoLibro {
             rs.close();
             connection.closeConnection();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return libro;
     }
@@ -85,7 +85,7 @@ public class DaoLibro {
             rs.close();
             connection.closeConnection();
         }catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return libros;
     }
@@ -115,7 +115,7 @@ public class DaoLibro {
                 return blob;
             }
         } catch (SQLException | IOException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -159,7 +159,7 @@ public class DaoLibro {
             rs.close();
             connection.closeConnection();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return false;
     }
@@ -189,7 +189,7 @@ public class DaoLibro {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -213,7 +213,7 @@ public class DaoLibro {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -251,7 +251,7 @@ public class DaoLibro {
             connection.closeConnection();
             return -1;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return -1;
         }
     }
@@ -275,7 +275,7 @@ public class DaoLibro {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }

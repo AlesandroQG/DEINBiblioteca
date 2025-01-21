@@ -46,7 +46,7 @@ public class DaoAlumno {
             rs.close();
             connection.closeConnection();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return alumno;
     }
@@ -75,7 +75,7 @@ public class DaoAlumno {
             rs.close();
             connection.closeConnection();
         }catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return alumnos;
     }
@@ -119,7 +119,7 @@ public class DaoAlumno {
             rs.close();
             connection.closeConnection();
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
         }
         return false;
     }
@@ -146,7 +146,7 @@ public class DaoAlumno {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -172,7 +172,7 @@ public class DaoAlumno {
             connection.closeConnection();
             return (filasAfectadas > 0);
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }
@@ -196,7 +196,7 @@ public class DaoAlumno {
             connection.closeConnection();
             return filasAfectadas > 0;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             return false;
         }
     }

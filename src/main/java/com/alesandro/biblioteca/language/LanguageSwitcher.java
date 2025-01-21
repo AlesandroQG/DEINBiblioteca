@@ -48,7 +48,7 @@ public class LanguageSwitcher {
             // Update the scene with the new root (new language)
             stage.getScene().setRoot(root);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 }

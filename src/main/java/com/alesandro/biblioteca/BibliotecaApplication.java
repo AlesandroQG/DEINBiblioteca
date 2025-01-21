@@ -43,7 +43,7 @@ public class BibliotecaApplication extends Application {
             stage1.showAndWait();
         }
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/com.alesandro.biblioteca.Main.fxml"), bundle);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"), bundle);
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle(bundle.getString("app.name"));
         stage.getIcons().add(new Image(getClass().getResourceAsStream("images/Biblioteca.png")));

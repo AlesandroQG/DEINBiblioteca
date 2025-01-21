@@ -76,10 +76,10 @@ public class DBConnect {
                 properties.load(configFileReader);
                 configFileReader.close();
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                logger.error(e.getMessage());
             }
         } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage());
             //throw new RuntimeException("configuration.properties not found at config file path " + f.getPath());
             return null;
         }
@@ -102,7 +102,7 @@ public class DBConnect {
             properties.store(fos, "");
             fos.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
     }
 
