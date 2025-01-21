@@ -59,7 +59,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="%menu.help">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#ayudaHTML" text="%menu.help.html">
+                  <MenuItem mnemonicParsing="false" onAction="#ayuda" text="%menu.help.html">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>

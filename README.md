@@ -109,3 +109,5 @@ La estructura del proyecto es la siguiente:
         - `sql`: Directorio conteniendo los archivos sql para la creación local de la base de datos
           - `libros_con_imagen.sql`: Fichero para la creación de la base de datos
         - `style`: Carpeta que contiene los estilos de la aplicación
+          - `guia.css`: Fichero de estilo para la guía de usuario de la aplicación
+          - `style.css`: Fichero de estilo de la aplicación

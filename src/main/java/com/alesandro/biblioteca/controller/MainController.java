@@ -307,7 +307,7 @@ public class MainController implements Initializable {
      * @param event evento del usuario
      */
     @FXML
-    void ayudaHTML(ActionEvent event) {
+    void ayuda(ActionEvent event) {
         try {
             Window ventana = tabla.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/alesandro/biblioteca/fxml/AyudaHTML.fxml"),resources);
