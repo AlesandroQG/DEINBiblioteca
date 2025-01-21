@@ -43,14 +43,12 @@ public class DBConnect {
             connection.setAutoCommit(true);
             DatabaseMetaData databaseMetaData = connection.getMetaData();
             //debug
-        /*System.out.println();
-        System.out.println("--- Datos de conexión ------------------------------------------");
-        System.out.printf("Base de datos: %s%n", databaseMetaData.getDatabaseProductName());
-        System.out.printf("  Versión: %s%n", databaseMetaData.getDatabaseProductVersion());
-        System.out.printf("Driver: %s%n", databaseMetaData.getDriverName());
-        System.out.printf("  Versión: %s%n", databaseMetaData.getDriverVersion());
-        System.out.println("----------------------------------------------------------------");
-        System.out.println();*/
+            logger.debug("--- Datos de conexión ------------------------------------------");
+            logger.debug("Base de datos: {}", databaseMetaData.getDatabaseProductName());
+            logger.debug("Versión: {}", databaseMetaData.getDatabaseProductVersion());
+            logger.debug("Driver: {}", databaseMetaData.getDriverName());
+            logger.debug("Versión driver: {}", databaseMetaData.getDriverVersion());
+            logger.debug("----------------------------------------------------------------");
             connection.setAutoCommit(true);
         } else {
             this.connection = null;
