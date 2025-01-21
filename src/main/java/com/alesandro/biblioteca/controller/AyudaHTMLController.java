@@ -50,22 +50,22 @@ public class AyudaHTMLController implements Initializable {
         this.resources = resourceBundle;
         // Cargar estructura
         TreeItem<Help> root = new TreeItem<>(new Help("Raiz", ""));
-        TreeItem<Help> main = new TreeItem<>(new Help(resources.getString("help.introduction"), "index.html"));
         // Categorías del manual
+        TreeItem<Help> rIntroduction = new TreeItem<>(new Help(resources.getString("help.introduction"), "index.html"));
         TreeItem<Help> rMain = new TreeItem<>(new Help(resources.getString("help.main"), "main.html"));
         TreeItem<Help> rAlumno = new TreeItem<>(new Help(resources.getString("help.student"), "alumno.html"));
         TreeItem<Help> rLibro = new TreeItem<>(new Help(resources.getString("help.book"), "libro.html"));
         TreeItem<Help> rPrestamo = new TreeItem<>(new Help(resources.getString("help.loan"), "prestamo.html"));
         TreeItem<Help> rHistorialPrestamo = new TreeItem<>(new Help(resources.getString("help.history"), "historialPrestamo.html"));
+        TreeItem<Help> rNuevoHistorialPrestamo = new TreeItem<>(new Help(resources.getString("help.history.add"), "nuevoHistorialPrestamo.html"));
+        TreeItem<Help> rEditarHistorialPrestamo = new TreeItem<>(new Help(resources.getString("help.history.edit"), "editarHistorialPrestamo.html"));
+        rHistorialPrestamo.getChildren().addAll(rNuevoHistorialPrestamo, rEditarHistorialPrestamo);
         TreeItem<Help> rConclusion = new TreeItem<>(new Help(resources.getString("help.conclusion"), "conclusion.html"));
-        main.getChildren().addAll(rMain,rAlumno,rLibro,rPrestamo,rHistorialPrestamo,rConclusion);
-        // Página web
-        TreeItem<Help> web = new TreeItem<>(new Help(resources.getString("help.web"), "https://google.com/", false));
-        root.getChildren().addAll(main,web);
+        root.getChildren().addAll(rIntroduction,rMain,rAlumno,rLibro,rPrestamo,rHistorialPrestamo,rConclusion);
         // Ajustar propiedades de la vista árbol
         arbol.setRoot(root);
-        main.setExpanded(true);
-        arbol.getSelectionModel().select(main);
+        arbol.getSelectionModel().select(rIntroduction);
+        rHistorialPrestamo.setExpanded(true);
         arbol.setShowRoot(false);
         webEngine = visor.getEngine();
         webEngine.load(getClass().getResource("/com/alesandro/biblioteca/help/html/index.html").toExternalForm());
