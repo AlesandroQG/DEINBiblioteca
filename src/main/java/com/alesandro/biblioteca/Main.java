@@ -11,6 +11,7 @@ public class Main {
      * Logger a usar
      */
     private static final Logger logger = LoggerFactory.getLogger(Main.class.getName());
+
     /**
      * Función main donde se lanza la aplicación
      *

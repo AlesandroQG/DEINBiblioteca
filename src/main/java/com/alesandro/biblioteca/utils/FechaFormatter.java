@@ -1,5 +1,8 @@
 package com.alesandro.biblioteca.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +10,11 @@ import java.time.format.DateTimeFormatter;
  * Clase para formatear fechas
  */
 public class FechaFormatter {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(FechaFormatter.class.getName());
+
     /**
      * Formateo de fechas
      */
