@@ -23,6 +23,18 @@ password=
 database=
 ```
 
+Para compilar la aplicación, en la terminal hay que ejecutar este comando dentro de la carpeta base:
+
+```bash
+mvn clean package
+```
+
+Esto generará un fichero .jar, y este se puede ejecutar usando:
+
+```bash
+java -jar ./target/Biblioteca-1.0-jar-with-dependencies.jar
+```
+
 ### Diagrama de Clases
 
 Este es el diagrama de clases de la aplicación:
