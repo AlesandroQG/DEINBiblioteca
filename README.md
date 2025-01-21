@@ -23,6 +23,8 @@ password=
 database=
 ```
 
+### Compilación y ejecución
+
 Para compilar la aplicación, en la terminal hay que ejecutar este comando dentro de la carpeta base:
 
 ```bash
