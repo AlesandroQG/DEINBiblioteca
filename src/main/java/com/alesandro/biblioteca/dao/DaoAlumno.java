@@ -1,9 +1,12 @@
 package com.alesandro.biblioteca.dao;
 
+import com.alesandro.biblioteca.Main;
 import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.model.Alumno;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +16,11 @@ import java.sql.SQLException;
  * Clase donde se ejecuta las consultas para la tabla Alumno
  */
 public class DaoAlumno {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(DaoAlumno.class.getName());
+
     /**
      * Metodo que busca un alumno por medio de su id
      *

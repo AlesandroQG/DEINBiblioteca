@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -20,6 +22,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana de edición de historial préstamo
  */
 public class EditarHistorialPrestamoController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(EditarHistorialPrestamoController.class.getName());
+
     /**
      * Parámetro historial préstamo
      */

@@ -7,6 +7,9 @@ import java.time.format.DateTimeFormatter;
  * Clase para formatear fechas
  */
 public class FechaFormatter {
+    /**
+     * Formateo de fechas
+     */
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
 
     /**

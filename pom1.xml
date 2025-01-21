@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.israeldelamo</groupId>
+    <artifactId>transportes</artifactId>
+    <version>1.beta</version>
+    <packaging>jar</packaging>
+    <name>transportes</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.0</junit.version>
+
+
+    </properties>
+    <repositories>
+        <repository>
+            <id>blas-irakasle</id>
+            <url>https://dev.azure.com/blas-irakasle/_git/TrasportesFeli</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <url>https://blas-irakasle@dev.azure.com/blas-irakasle/TrasportesFeli/_git/TrasportesFeli</url>
+    <distributionManagement>
+    <repository>
+        <id>blas-irakasle</id>
+        <url>https://pkgs.dev.azure.com/blas-irakasle/_packaging/blas-irakasle/maven/v1</url>
+        <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+    </distributionManagement>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>23-ea+22</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-commons</artifactId>
+            <version> 1.10.2 </version>
+        </dependency>
+        <dependency>
+            <groupId>org.kordamp.ikonli</groupId>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>12.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->       
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.fusesource.hawtbuf</groupId>
+            <artifactId>hawtbuf</artifactId>
+            <version>1.9</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.kordamp.bootstrapfx/bootstrapfx-core -->
+        <dependency>
+            <groupId>org.kordamp.bootstrapfx</groupId>
+            <artifactId>bootstrapfx-core</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
+        <!-- con esta linea ya no da error de noclass found, pero da error de illegal cacces -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.13</version>
+        </dependency>
+        <!-- Dependencia de Logback (backend para SLF4J) -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.6</version> <!-- Usa la última versión disponible -->
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.5.6</version> <!-- Usa la última versión disponible -->
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.3.0</version> <!-- or your desired version -->
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
+        <dependency>
+            <groupId>jakarta.mail</groupId>
+            <artifactId>jakarta.mail-api</artifactId>
+            <version>2.1.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.eclipse.angus</groupId>
+            <artifactId>angus-mail</artifactId>
+            <version>2.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-fonts</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-charts -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-charts</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-metadata -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-metadata</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>7.0.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-metadata Exporta a PDF-->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-pdf</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-excel-poi -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports-excel-poi</artifactId>
+            <version>7.0.1</version>
+        </dependency>
+
+
+
+           </dependencies>
+<profiles>
+    <profile>
+        <id>windows</id>
+        <activation>
+            <os>
+                <family>
+                    Windows
+                </family>
+            </os>
+        </activation>
+        <dependencies>
+
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version> 22.0.2</version>
+                <classifier>win</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-web</artifactId>
+                <version> 22.0.2</version>                <classifier>win</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-graphics</artifactId>
+                <version> 22.0.2</version>                <classifier>win</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-swing</artifactId>
+                <version> 22.0.2</version>                <classifier>win</classifier>
+            </dependency>
+        </dependencies>
+    </profile>
+
+
+    <profile>
+        <id>linux</id>
+        <activation>
+            <os>
+                <family>
+                    Linux
+                </family>
+            </os>
+        </activation>
+        <dependencies>
+
+
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version> 22.0.2</version>
+                <classifier>linux</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-web</artifactId>
+                <version> 22.0.2</version>
+                <classifier>linux</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-graphics</artifactId>
+                <version> 22.0.2</version>
+                <classifier>linux</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-swing</artifactId>
+                <version> 22.0.2</version>
+                <classifier>linux</classifier>
+            </dependency>
+        </dependencies>
+    </profile>
+
+
+</profiles>
+    <build>
+       <plugins>
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-jar-plugin</artifactId>
+               <version> 3.3.0</version>
+               <configuration>
+                   <archive>
+                       <manifest>
+                           <addClasspath>true</addClasspath>
+                           <classpathPrefix>libs/</classpathPrefix>
+                           <mainClass>es.israeldelamo.transportes.Lanzador</mainClass> <!-- Reemplaza con la ruta de tu clase principal -->
+                       </manifest>
+                   </archive>
+               </configuration>
+           </plugin>
+
+
+
+
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-project-info-reports-plugin</artifactId>
+               <version>3.4.5</version>
+           </plugin>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-site-plugin</artifactId>
+               <version>4.0.0-M3</version>
+           </plugin>
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-clean-plugin</artifactId>
+               <version>2.5</version>
+               <configuration>
+                   <filesets>
+                       <fileset>
+                           <directory>src/main/generated-groovy-stubs</directory>
+                       </fileset>
+                   </filesets>
+               </configuration>
+           </plugin>
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-javadoc-plugin</artifactId>
+               <version>3.6.2</version>
+               <configuration>
+                   <show>private</show>
+                   <nohelp>true</nohelp>
+               </configuration>
+               <executions>
+                   <execution>
+                       <id>attach-javadocs</id>
+                       <goals>
+                           <goal>jar</goal>
+                       </goals>
+                   </execution>
+               </executions>
+           </plugin>
+
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>3.13.0</version>
+               <configuration>
+                   <source>21</source>
+                   <target>21</target>
+               </configuration>
+           </plugin>
+           <plugin>
+               <groupId>org.openjfx</groupId>
+               <artifactId>javafx-maven-plugin</artifactId>
+               <version>0.0.8</version>
+               <executions>
+                   <execution>
+                       <!-- Default configuration for running with: mvn clean javafx:run -->
+                       <id>default-cli</id>
+                       <configuration>
+                           <mainClass>es.israeldelamo.transportes.Lanzador</mainClass>
+                           <launcher>app</launcher>
+                           <jlinkZipName>app</jlinkZipName>
+                           <jlinkImageName>app</jlinkImageName>
+                           <noManPages>true</noManPages>
+                           <stripDebug>true</stripDebug>
+                           <noHeaderFiles>true</noHeaderFiles>
+                           <version>0.1</version>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+
+
+
+           <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <executions>
+                   <execution>
+                       <id>copy-dependencies</id>
+                       <phase>prepare-package</phase>
+                       <goals>
+                           <goal>copy-dependencies</goal>
+                       </goals>
+                       <configuration>
+                           <outputDirectory>
+                               ${project.build.directory}/libs
+                           </outputDirectory>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+
+       </plugins>
+
+
+
+           </build>
+    <description>Un proyecto de desarrollo conjunto en Ciudad Jardín. Programador Israel de Lamo Blas.
+Idea original y diseño Feli Díaz de Alda.
+</description>
+    <organization>
+    	<name>CiudadJardin</name>
+        <url>https://ciudadjardin.hezkuntza.net/eu/home</url>
+    </organization>
+
+</project>

@@ -14,6 +14,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -25,6 +27,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana de creación de historial préstamo
  */
 public class NuevoHistorialPrestamoController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(NuevoHistorialPrestamoController.class.getName());
+
     @FXML // fx:id="datePicker"
     private DatePicker datePicker; // Value injected by FXMLLoader
 

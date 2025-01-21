@@ -43,6 +43,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +57,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la vista principal de la aplicación
  */
 public class MainController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class.getName());
+
     @FXML // fx:id="miAniadir"
     private MenuItem miAniadir; // Value injected by FXMLLoader
 

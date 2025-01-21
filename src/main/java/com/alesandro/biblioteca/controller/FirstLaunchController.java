@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.Locale;
@@ -15,6 +17,11 @@ import java.util.ResourceBundle;
  * Clase controladora para la selección de un idioma
  */
 public class FirstLaunchController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(FirstLaunchController.class.getName());
+
     @FXML // fx:id="cbIdioma"
     private ComboBox<String> cbIdioma; // Value injected by FXMLLoader
 

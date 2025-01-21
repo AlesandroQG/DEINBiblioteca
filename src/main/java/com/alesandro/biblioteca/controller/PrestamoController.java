@@ -26,6 +26,8 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -38,6 +40,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana préstamo
  */
 public class PrestamoController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(PrestamoController.class.getName());
+
     /**
      * Parámetro préstamo
      */

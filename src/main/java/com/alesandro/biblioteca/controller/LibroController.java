@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +31,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana libro
  */
 public class LibroController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(LibroController.class.getName());
+
     /**
      * Parámetro libro
      */

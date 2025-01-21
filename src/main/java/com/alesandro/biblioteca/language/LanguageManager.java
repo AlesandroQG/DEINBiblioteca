@@ -1,5 +1,8 @@
 package com.alesandro.biblioteca.language;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +16,11 @@ import java.util.ResourceBundle;
  * Clase que se encarga de manejar los idiomas
  */
 public class LanguageManager {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(LanguageManager.class.getName());
+
     private static LanguageManager instance;
     private Locale locale = new Locale.Builder().setLanguage(LanguageManager.getLanguage()).build();
     private ResourceBundle bundle;

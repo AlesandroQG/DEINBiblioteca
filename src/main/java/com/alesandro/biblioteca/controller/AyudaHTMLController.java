@@ -8,6 +8,8 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +18,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana ayuda HTML
  */
 public class AyudaHTMLController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(AyudaHTMLController.class.getName());
+
     /**
      * Parámetro WebEngine
      */

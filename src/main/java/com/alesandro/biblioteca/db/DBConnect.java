@@ -1,5 +1,8 @@
 package com.alesandro.biblioteca.db;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,6 +19,11 @@ import java.util.Properties;
  * Clase de conexión a la base de datos
  */
 public class DBConnect {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(DBConnect.class.getName());
+
     private final Connection connection;
 
     /**

@@ -25,6 +25,8 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,6 +37,11 @@ import java.util.ResourceBundle;
  * Clase controladora de la ventana alumno
  */
 public class AlumnoController implements Initializable {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class.getName());
+
     /**
      * Parámetro alumno
      */

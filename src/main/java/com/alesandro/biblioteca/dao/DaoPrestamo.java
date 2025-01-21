@@ -6,6 +6,8 @@ import com.alesandro.biblioteca.model.Libro;
 import com.alesandro.biblioteca.model.Prestamo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +19,11 @@ import java.time.LocalDateTime;
  * Clase donde se ejecuta las consultas para la tabla Prestamo
  */
 public class DaoPrestamo {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(DaoPrestamo.class.getName());
+
     /**
      * Metodo que busca un prestamo por medio de su id
      *

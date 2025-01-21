@@ -4,6 +4,8 @@ import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.model.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,6 +20,11 @@ import java.sql.SQLException;
  * Clase donde se ejecuta las consultas para la tabla Libro
  */
 public class DaoLibro {
+    /**
+     * Logger a usar
+     */
+    private static final Logger logger = LoggerFactory.getLogger(DaoLibro.class.getName());
+
     /**
      * Metodo que busca un libro por medio de su id
      *
