@@ -156,7 +156,7 @@ public class PrestamoController implements Initializable {
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
             viewer.setVisible(true); // Mostrar el informe al usuario
         } catch (JRException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("report.load.error"));
         }
     }

@@ -157,7 +157,7 @@ public class AlumnoController implements Initializable {
             stage.showAndWait();
             cargarPrestamos();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("message.window_open"));
         }
     }
@@ -184,7 +184,7 @@ public class AlumnoController implements Initializable {
             stage.showAndWait();
             cargarPrestamos();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("message.window_open"));
         }
     }
@@ -226,7 +226,7 @@ public class AlumnoController implements Initializable {
                 stage.showAndWait();
                 cargarHistorialPrestamos();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         }
@@ -258,7 +258,7 @@ public class AlumnoController implements Initializable {
                 stage.showAndWait();
                 cargarPrestamos();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         }

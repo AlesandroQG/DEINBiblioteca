@@ -322,7 +322,7 @@ public class MainController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("message.window_open"));
         }
     }
@@ -354,7 +354,7 @@ public class MainController implements Initializable {
                 stage.showAndWait();
                 cargarAlumnos();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         } else if (item.equals(resources.getString("cb.books"))) {
@@ -376,7 +376,7 @@ public class MainController implements Initializable {
                 stage.showAndWait();
                 cargarLibros();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         } else if (item.equals(resources.getString("cb.loans"))) {
@@ -398,7 +398,7 @@ public class MainController implements Initializable {
                 stage.showAndWait();
                 cargarPrestamos();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         } else {
@@ -418,7 +418,7 @@ public class MainController implements Initializable {
                 stage.showAndWait();
                 cargarHistorialPrestamos();
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                logger.error(e.getMessage());
                 mostrarAlerta(resources.getString("message.window_open"));
             }
         }
@@ -454,7 +454,7 @@ public class MainController implements Initializable {
                     stage.showAndWait();
                     cargarAlumnos();
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    logger.error(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
                 }
             } else if (item.equals(resources.getString("cb.books"))) {
@@ -477,7 +477,7 @@ public class MainController implements Initializable {
                     stage.showAndWait();
                     cargarLibros();
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    logger.error(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
                 }
             } else if (item.equals(resources.getString("cb.loans"))) {
@@ -500,7 +500,7 @@ public class MainController implements Initializable {
                     stage.showAndWait();
                     cargarPrestamos();
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    logger.error(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
                 }
             } else {
@@ -523,7 +523,7 @@ public class MainController implements Initializable {
                     stage.showAndWait();
                     cargarHistorialPrestamos();
                 } catch (IOException e) {
-                    System.err.println(e.getMessage());
+                    logger.error(e.getMessage());
                     mostrarAlerta(resources.getString("message.window_open"));
                 }
             }
@@ -634,10 +634,10 @@ public class MainController implements Initializable {
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
             viewer.setVisible(true); // Mostrar el informe al usuario
         } catch (JRException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("report.load.error"));
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            logger.error(e.getMessage());
             mostrarAlerta(resources.getString("report.load.db.error"));
         }
     }
