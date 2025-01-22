@@ -3,7 +3,6 @@ package com.alesandro.biblioteca.controller;
 import com.alesandro.biblioteca.db.DBConnect;
 import com.alesandro.biblioteca.language.LanguageManager;
 import com.alesandro.biblioteca.utils.ValidadorNumero;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +21,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 /**
- * Clase controladora para la selección de un idioma
+ * Clase controladora de la ventana para la configuración inicial
  */
 public class FirstLaunchController implements Initializable {
     /**

@@ -46,6 +46,7 @@ import net.sf.jasperreports.view.JasperViewer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -302,7 +303,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Función que se ejecuta cuando se pulsa el menu item "Ayuda HTML". Abre la guía de usuario en formato HTML
+     * Función que se ejecuta cuando se pulsa el menu item "Ayuda". Abre la guía de usuario
      *
      * @param event evento del usuario
      */
@@ -680,6 +681,35 @@ public class MainController implements Initializable {
     @FXML
     void cerrar(ActionEvent event) {
         Platform.exit();
+    }
+
+    /**
+     * Función que se ejecuta cuando se pulsa el menu item "Resetear aplicación". Resetea la aplciación
+     *
+     * @param event evento del usuario
+     */
+    @FXML
+    void resetear(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(tabla.getScene().getWindow());
+        alert.setHeaderText(null);
+        alert.setTitle(resources.getString("window.confirm"));
+        alert.setContentText(resources.getString("app.reset.prompt"));
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            File f1 = new File("lang.properties");
+            File f2 = new File("configuration.properties");
+            if (f1.exists() && f2.exists()) {
+                if (f1.delete() && f2.delete()) {
+                    mostrarConfirmacion(resources.getString("app.reset.success"));
+                    cerrar(null);
+                } else {
+                    mostrarAlerta(resources.getString("app.reset.error"));
+                }
+            } else {
+                mostrarAlerta(resources.getString("app.reset.error"));
+            }
+        }
     }
 
     /**

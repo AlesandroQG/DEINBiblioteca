@@ -31,23 +31,26 @@ public class BibliotecaApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        // Comprobar si los ficheros de configuración requeridos existen
         File f1 = new File("lang.properties");
         File f2 = new File("configuration.properties");
         if (!f1.exists() || !f2.exists()) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/FirstLaunch.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage1 = new Stage();
-            stage1.setTitle("Welcome!");
+            stage1.setTitle("Welcome/Bienvenido");
             stage1.getIcons().add(new Image(getClass().getResourceAsStream("images/Biblioteca.png")));
             stage1.setResizable(false);
             stage1.setScene(scene);
             stage1.showAndWait();
         }
+        // Vuelve a comprobar por si el usuario cierra la ventana
         f1 = new File("lang.properties");
         f2 = new File("configuration.properties");
         if (!f1.exists() || !f2.exists()) {
             return;
         }
+        // Abrir la aplicación
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"), bundle);
         Scene scene = new Scene(fxmlLoader.load());

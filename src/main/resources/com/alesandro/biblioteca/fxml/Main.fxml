@@ -73,6 +73,7 @@
                         <RadioMenuItem fx:id="langEN" mnemonicParsing="false" text="English" toggleGroup="$tgIdioma" />
                     </items>
                   </Menu>
+                  <MenuItem mnemonicParsing="false" onAction="#resetear" text="%menu.help.reset" />
             </items>
           </Menu>
         </menus>

@@ -18,7 +18,7 @@
     <children>
       <FlowPane alignment="CENTER">
          <children>
-            <Label text="Welcome/Bienvenido">
+            <Label text="Library/Biblioteca">
                <font>
                   <Font size="24.0" />
                </font>
