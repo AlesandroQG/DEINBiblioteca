@@ -35,6 +35,7 @@ public class BibliotecaApplication extends Application {
         File f1 = new File("lang.properties");
         File f2 = new File("configuration.properties");
         if (!f1.exists() || !f2.exists()) {
+            logger.info("Starting initial configuration window");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/FirstLaunch.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage1 = new Stage();
@@ -48,9 +49,11 @@ public class BibliotecaApplication extends Application {
         f1 = new File("lang.properties");
         f2 = new File("configuration.properties");
         if (!f1.exists() || !f2.exists()) {
+            logger.info("No configuration found, closing app");
             return;
         }
         // Abrir la aplicación
+        logger.info("Starting main window");
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"), bundle);
         Scene scene = new Scene(fxmlLoader.load());
