@@ -684,7 +684,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Función que se ejecuta cuando se pulsa el menu item "Resetear aplicación". Resetea la aplciación
+     * Función que se ejecuta cuando se pulsa el menu item "Resetear aplicación". Resetea la aplicación
      *
      * @param event evento del usuario
      */
