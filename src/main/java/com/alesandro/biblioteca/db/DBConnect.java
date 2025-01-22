@@ -56,6 +56,33 @@ public class DBConnect {
     }
 
     /**
+     * Función que testea la conexión a una base de datos
+     *
+     * @param address
+     * @param port
+     * @param user
+     * @param password
+     * @param database
+     * @return true/false
+     */
+    public static boolean testConnection(String address, int port, String user, String password, String database) {
+        try {
+            Properties authentication = new Properties();
+            authentication.setProperty("user", user);
+            authentication.setProperty("password", password);
+            Connection connection1 = DriverManager.getConnection("jdbc:mariadb://" + address + ":" + port + "/" + database + "?serverTimezone=Europe/Madrid", authentication);
+            if (connection1.isValid(10)) {
+                connection1.close();
+                return true;
+            }
+            connection1.close();
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+        return false;
+    }
+
+    /**
      * Función que obtiene la configuración para la conexión a la base de datos
      *
      * @return objeto Properties con los datos de conexión a la base de datos
@@ -63,9 +90,6 @@ public class DBConnect {
     public static Properties getConfiguration() {
         HashMap<String,String> map = new HashMap<String,String>();
         File f = new File("configuration.properties");
-        if (!f.exists()) {
-            createConfiguration();
-        }
         Properties properties;
         try {
             FileInputStream configFileReader=new FileInputStream(f);
@@ -86,18 +110,14 @@ public class DBConnect {
 
     /**
      * Función que crea el fichero configuration.properties si este no existe con valores predeterminados
+     *
+     * @param db propiedades de la base de datos
      */
-    public static void createConfiguration() {
+    public static void createConfiguration(Properties db) {
         File f = new File("configuration.properties");
-        Properties properties = new Properties();
-        properties.setProperty("address", "127.0.0.1");
-        properties.setProperty("port", "33066");
-        properties.setProperty("user", "admin");
-        properties.setProperty("password", "mypass");
-        properties.setProperty("database", "admin");
         try {
             FileOutputStream fos = new FileOutputStream(f);
-            properties.store(fos, "");
+            db.store(fos, "");
             fos.close();
         } catch (IOException e) {
             logger.error(e.getMessage());

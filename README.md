@@ -80,6 +80,7 @@ La estructura del proyecto es la siguiente:
           - `Help.java`: Clase para uso en la ayuda HTML
         - `utils`: Paquete con utilidades de la aplicación
           - `FechaFormatter.java`: Clase para formatear fechas
+          - `ValidadorNumero.java`: Clase para validar números
     - `resources > com.alesandro.biblioteca`: Recursos de la aplicación
         - `docs`: Carpeta con la documentación del proyecto
         - `fonts`: Carpeta que contiene las fuentes de la aplicación

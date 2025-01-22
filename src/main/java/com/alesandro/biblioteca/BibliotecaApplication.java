@@ -31,8 +31,9 @@ public class BibliotecaApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        File f = new File("lang.properties");
-        if (!f.exists()) {
+        File f1 = new File("lang.properties");
+        File f2 = new File("configuration.properties");
+        if (!f1.exists() || !f2.exists()) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/FirstLaunch.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage1 = new Stage();
@@ -41,6 +42,11 @@ public class BibliotecaApplication extends Application {
             stage1.setResizable(false);
             stage1.setScene(scene);
             stage1.showAndWait();
+        }
+        f1 = new File("lang.properties");
+        f2 = new File("configuration.properties");
+        if (!f1.exists() || !f2.exists()) {
+            return;
         }
         ResourceBundle bundle = LanguageManager.getInstance().getBundle();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"), bundle);
