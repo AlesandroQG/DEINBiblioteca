@@ -63,9 +63,9 @@ public class DBConnect {
      * @param user
      * @param password
      * @param database
-     * @return true/false
+     * @return 1/error
      */
-    public static boolean testConnection(String address, int port, String user, String password, String database) {
+    public static String testConnection(String address, int port, String user, String password, String database) {
         try {
             Properties authentication = new Properties();
             authentication.setProperty("user", user);
@@ -73,13 +73,14 @@ public class DBConnect {
             Connection connection1 = DriverManager.getConnection("jdbc:mariadb://" + address + ":" + port + "/" + database + "?serverTimezone=Europe/Madrid", authentication);
             if (connection1.isValid(10)) {
                 connection1.close();
-                return true;
+                return "1";
             }
             connection1.close();
         } catch (SQLException e) {
             logger.error(e.getMessage());
+            return e.getMessage();
         }
-        return false;
+        return null;
     }
 
     /**

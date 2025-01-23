@@ -77,19 +77,23 @@ public class FirstLaunchController implements Initializable {
             btnConfirmar.setDisable(true);
             mostrarAlerta(error);
         } else {
-            boolean valido = DBConnect.testConnection(txtDireccion.getText(), Integer.parseInt(txtPuerto.getText()), txtUsuario.getText(), txtContrasenia.getText(), txtBD.getText());
-            if (valido) {
+            String valido = DBConnect.testConnection(txtDireccion.getText(), Integer.parseInt(txtPuerto.getText()), txtUsuario.getText(), txtContrasenia.getText(), txtBD.getText());
+            if (valido != null && valido.equals("1")) {
                 mostrarConfirmacion("Connection valid / Conexión valida");
                 btnConfirmar.setDisable(false);
             } else {
                 btnConfirmar.setDisable(true);
-                mostrarAlerta("Connection invalid, please try again / Conexión invalida, vuelva a intentarlo");
+                if (valido == null) {
+                    mostrarAlerta("Connection invalid, please try again / Conexión invalida, vuelva a intentarlo");
+                } else {
+                    mostrarAlerta("Connection invalid, please try again / Conexión invalida, vuelva a intentarlo (Error: " + valido + ")");
+                }
             }
         }
     }
 
     /**
-     * Función que valida el formulario y devuelve los posibles errores
+     * Función que valida el formulario y devuelve los posibles er◊rores
      *
      * @return string con posibles errores
      */
