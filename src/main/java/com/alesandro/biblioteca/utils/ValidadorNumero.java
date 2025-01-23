@@ -16,7 +16,7 @@ public class ValidadorNumero {
      * Función que valida un string para ver si se puede pasar a int
      *
      * @param numero a validar
-     * @return true/fasle
+     * @return true/false
      */
     public static boolean validarInt(String numero) {
         try {

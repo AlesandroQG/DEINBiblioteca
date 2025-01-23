@@ -48,7 +48,7 @@ Este es el diagrama de casos de la aplicación:
 ### Estructura de la aplicación
 
 La estructura del proyecto es la siguiente:
-- `configuration.properties`: Fichero con las propiedades para la conexión a la base de datos (haga clic [aquí](#Configuración) para ver la configuración de este archivo)
+- `configuration.properties`: Fichero con las propiedades para la conexión a la base de datos (creada al lanzar la aplicación)
 - `lang.properties`: Fichero con la propiedad de idioma (creada al lanzar la aplicación)
 - `src > main`:
     - `java > com.alesandro.biblioteca`: Código fuente de la aplicación
