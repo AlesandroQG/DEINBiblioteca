@@ -63,7 +63,7 @@ public class DBConnect {
      * @param user
      * @param password
      * @param database
-     * @return 1/error
+     * @return 1/error/null
      */
     public static String testConnection(String address, int port, String user, String password, String database) {
         try {
