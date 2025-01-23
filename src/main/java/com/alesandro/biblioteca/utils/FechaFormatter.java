@@ -27,7 +27,9 @@ public class FechaFormatter {
      * @return string de la fecha
      */
     public static String formatearFecha(LocalDateTime fecha) {
-        return FORMATTER.format(fecha);
+        String string = FORMATTER.format(fecha);
+        logger.info("Fecha formateada a string: {}", string);
+        return string;
     }
 
     /**
@@ -37,6 +39,8 @@ public class FechaFormatter {
      * @return fecha en formato LocalDateTime
      */
     public static LocalDateTime formatearString(String string) {
-        return LocalDateTime.parse(string, FORMATTER);
+        LocalDateTime fecha = LocalDateTime.parse(string, FORMATTER);
+        logger.info("String formateada a fecha: {}", fecha.toString());
+        return fecha;
     }
 }

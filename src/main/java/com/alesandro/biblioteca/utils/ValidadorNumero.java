@@ -21,8 +21,10 @@ public class ValidadorNumero {
     public static boolean validarInt(String numero) {
         try {
             Integer.parseInt(numero);
+            logger.info("String {} pasada a integer", numero);
             return true;
         } catch (NumberFormatException e) {
+            logger.info("String {} no se puede pasar a integer", numero);
             return false;
         }
     }
