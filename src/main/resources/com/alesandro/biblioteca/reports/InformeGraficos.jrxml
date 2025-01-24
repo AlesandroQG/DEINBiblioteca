@@ -49,6 +49,30 @@ WHERE
 			<property name="com.jaspersoft.studio.field.tree.path" value="Alumno"/>
 		</field>
 	</dataset>
+	<dataset name="librosPrestados" uuid="44e73985-b3cd-427a-96fd-ff2ec164fd48">
+		<property name="com.jaspersoft.studio.data.sql.tables" value="bGlicm9zLmBIaXN0b3JpY29fcHJlc3RhbW9gICwxNDIsNDIsNzZhZDA4MjEtOGYwMS00Y2NmLWJi&#xa;NGUtYmZiNGY5ZjExMWFjO2xpYnJvcy5gUHJlc3RhbW9gICwzMTUsNTUsNTg2NTFjYTctNTgzMC00&#xa;MmU3LTg3NDYtOWQyNDU4Y2E4NDJiO2xpYnJvcy5gTGlicm9gICwxNSwxNSw4MDU4YTg5YS02YmQy&#xa;LTRkZTItYmQ5Zi0wOGQ2YjE1NzYxYTk7"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB Contra Docker en Local"/>
+		<query language="SQL"><![CDATA[SELECT COUNT(combined.id_prestamo) AS cont, 
+       l.titulo
+FROM libros.Libro l
+LEFT JOIN (
+    SELECT h.id_prestamo, h.codigo_libro
+    FROM libros.Historico_prestamo h
+    UNION ALL
+    SELECT p.id_prestamo, p.codigo_libro
+    FROM libros.Prestamo p
+) combined ON combined.codigo_libro = l.codigo
+GROUP BY l.titulo]]></query>
+		<field name="cont" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="cont"/>
+			<property name="com.jaspersoft.studio.field.label" value="cont"/>
+		</field>
+		<field name="titulo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+			<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="Libro"/>
+		</field>
+	</dataset>
 	<query language="SQL"><![CDATA[SELECT *
 FROM libros.Alumno]]></query>
 	<field name="dni" class="java.lang.String">
@@ -110,7 +134,7 @@ FROM libros.Alumno]]></query>
 			</element>
 		</element>
 	</pageFooter>
-	<summary height="250" splitType="Stretch">
+	<summary height="520" splitType="Stretch">
 		<element kind="chart" chartType="bar" uuid="bb1435e4-db5d-411a-bee3-407b071ba74d" x="0" y="50" width="260" height="200" evaluationTime="Report">
 			<dataset kind="category" resetType="Report">
 				<datasetRun uuid="f7e7f68f-b027-468a-a3c2-a454ef06e9c5" subDataset="prestamosActivos">
@@ -143,6 +167,25 @@ FROM libros.Alumno]]></query>
 					<categoryExpression><![CDATA[0]]></categoryExpression>
 					<valueExpression><![CDATA[$F{prestamos}]]></valueExpression>
 					<labelExpression><![CDATA[$F{nombre}]]></labelExpression>
+				</series>
+			</dataset>
+			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+				<itemLabel/>
+			</plot>
+		</element>
+		<element kind="staticText" uuid="d1300e4d-053b-4dab-82ed-b93c71765f12" mode="Opaque" x="2" y="270" width="553" height="30" forecolor="#FFFFFF" backcolor="#00B441" fontSize="13.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Préstamos Totales por Libro]]></text>
+		</element>
+		<element kind="chart" chartType="bar" uuid="edb18bd8-6d31-4e9f-8999-0e66d79e6646" x="0" y="300" width="555" height="220" evaluationTime="Report">
+			<dataset kind="category" resetType="Report">
+				<datasetRun uuid="11799bb7-e03f-4a0f-895e-76daf53b3f08" subDataset="librosPrestados">
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				</datasetRun>
+				<series>
+					<seriesExpression><![CDATA[$F{titulo}]]></seriesExpression>
+					<categoryExpression><![CDATA[0]]></categoryExpression>
+					<valueExpression><![CDATA[$F{cont}]]></valueExpression>
+					<labelExpression><![CDATA[$F{titulo}]]></labelExpression>
 				</series>
 			</dataset>
 			<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">

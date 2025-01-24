@@ -11,6 +11,7 @@
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 		</conditionalStyle>
 	</style>
+	<parameter name="informePrestamos" forPrompting="false" class="net.sf.jasperreports.engine.JasperReport"/>
 	<query language="SQL"><![CDATA[SELECT *
 FROM libros.`Libro`]]></query>
 	<field name="codigo" class="java.lang.Integer">
@@ -50,9 +51,6 @@ FROM libros.`Libro`]]></query>
 	</field>
 	<background splitType="Stretch"/>
 	<title height="132" splitType="Stretch">
-		<element kind="image" uuid="97705585-a0b5-4ec7-86f3-ae10c220e6af" x="420" y="0" width="135" height="132">
-			<expression><![CDATA["src/main/resources/com/alesandro/biblioteca/images/Biblioteca.png"]]></expression>
-		</element>
 		<element kind="frame" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a" mode="Opaque" x="0" y="0" width="410" height="95" backcolor="#000000">
 			<element kind="staticText" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21" x="0" y="0" width="370" height="66" bold="false" style="Title">
 				<text><![CDATA[Libros]]></text>
@@ -66,11 +64,14 @@ FROM libros.`Libro`]]></query>
 				<expression><![CDATA[new java.util.Date()]]></expression>
 			</element>
 		</element>
+		<element kind="image" uuid="be2d092c-3cab-42e6-aa9a-9c80bbb7cbab" x="420" y="0" width="135" height="132">
+			<expression><![CDATA["src/main/resources/com/alesandro/biblioteca/images/Biblioteca.png"]]></expression>
+		</element>
 	</title>
 	<pageHeader splitType="Stretch"/>
 	<columnHeader height="26" splitType="Stretch"/>
 	<detail>
-		<band height="178" splitType="Stretch">
+		<band height="430" splitType="Stretch">
 			<element kind="staticText" uuid="11149c24-8878-41a1-86ec-0a086b887cc1" mode="Opaque" x="0" y="36" width="79" height="18" forecolor="#FFFFFF" backcolor="#00B441" bold="true" hTextAlign="Right" style="Column header">
 				<text><![CDATA[Título]]></text>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="077f0d04-37b6-4b58-835f-6d1fdf40b6bd"/>
@@ -121,6 +122,17 @@ FROM libros.`Libro`]]></query>
 			</element>
 			<element kind="image" uuid="188a6bdf-38ad-42f0-a098-a5fe0f212309" x="433" y="0" width="120" height="178" onErrorType="Blank">
 				<expression><![CDATA[$F{portada}]]></expression>
+			</element>
+			<element kind="staticText" uuid="2b1f9565-184f-4db2-a158-05ed1828e74d" mode="Opaque" x="0" y="190" width="553" height="18" forecolor="#FFFFFF" backcolor="#030303" fontSize="14.0" bold="true" hTextAlign="Center" style="Column header">
+				<text><![CDATA[Préstamos]]></text>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="139ac3bf-00ad-4ac1-9334-3f3881e0bdd7"/>
+			</element>
+			<element kind="subreport" uuid="b05f047e-489c-46f8-bf7d-e23004f85461" x="2" y="210" width="550" height="220">
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<expression><![CDATA[$P{informePrestamos}]]></expression>
+				<parameter name="codigo">
+					<expression><![CDATA[$F{codigo}]]></expression>
+				</parameter>
 			</element>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</band>

@@ -146,10 +146,16 @@ public class PrestamoController implements Initializable {
     void generarInforme(ActionEvent event) {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("id", prestamo.getId_prestamo());
-        parameters.put("alumno", prestamo.getAlumno().getNombre());
+        parameters.put("nombre", prestamo.getAlumno().getNombre());
+        parameters.put("apellidos", prestamo.getAlumno().getApellido1() + " " + prestamo.getAlumno().getApellido2());
         parameters.put("dni", prestamo.getAlumno().getDni());
-        parameters.put("libro", prestamo.getLibro().getTitulo());
+        parameters.put("titulo", prestamo.getLibro().getTitulo());
+        parameters.put("codigo", prestamo.getLibro().getCodigo());
+        parameters.put("autor", prestamo.getLibro().getAutor());
+        parameters.put("editorial", prestamo.getLibro().getEditorial());
+        parameters.put("estado", prestamo.getLibro().getEstado());
         parameters.put("fecha", FechaFormatter.formatearFecha(prestamo.getFecha_prestamo()));
+        parameters.put("fecha_limite", FechaFormatter.formatearFecha(prestamo.getFecha_prestamo().plusDays(15)));
         try {
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeAltaPrestamo.jasper")); // Obtener el fichero del informe
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters, new JREmptyDataSource()); // Cargar el informe

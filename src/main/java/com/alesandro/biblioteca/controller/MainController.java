@@ -38,6 +38,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -50,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -644,6 +646,22 @@ public class MainController implements Initializable {
     }
 
     /**
+     * Función que compila un subinforme para su uso en un informe
+     *
+     * @param informe a compilar
+     * @return informe compilado
+     */
+    public JasperReport compilar(String informe) {
+        try {
+            return JasperCompileManager.compileReport(getClass().getResourceAsStream("/com/alesandro/biblioteca/reports/" + informe)); // Compilar el informe
+        } catch (JRException e) {
+            System.err.println(e.getMessage());
+            mostrarAlerta(resources.getString("report.load.error"));
+            return null;
+        }
+    }
+
+    /**
      * Función que se ejecuta cuando se pulsa el menu item "Informe Alumnos". Abre el informe de alumnos
      *
      * @param event evento del usuario
@@ -670,7 +688,19 @@ public class MainController implements Initializable {
      */
     @FXML
     void informeLibros(ActionEvent event) {
-        mostrarInforme("InformeLibros");
+        DBConnect connection;
+        try {
+            connection = new DBConnect();
+            HashMap<String, Object> parameters = new HashMap<String, Object>();
+            parameters.put("informePrestamos", compilar("SubinformePrestamos.jrxml"));
+            JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeLibros.jasper")); // Obtener el fichero del informe
+            JasperPrint jprint = JasperFillManager.fillReport(report, parameters, connection.getConnection()); // Cargar el informe
+            JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
+            viewer.setVisible(true); // Mostrar el informe al usuario
+        } catch (JRException | SQLException e) {
+            logger.error(e.getMessage());
+            mostrarAlerta(resources.getString("report.load.error"));
+        }
     }
 
     /**

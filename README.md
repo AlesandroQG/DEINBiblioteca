@@ -82,6 +82,7 @@ La estructura del proyecto es la siguiente:
           - `FechaFormatter.java`: Clase para formatear fechas
           - `ValidadorNumero.java`: Clase para validar números
     - `resources > com.alesandro.biblioteca`: Recursos de la aplicación
+        - `logback.xml`: Fichero para el almacenamiento local de los ficheros log
         - `docs`: Carpeta con la documentación del proyecto
         - `fonts`: Carpeta que contiene las fuentes de la aplicación
         - `fxml`: Ficheros de las vistas
@@ -98,9 +99,11 @@ La estructura del proyecto es la siguiente:
           - `pdf`: Directorio con los ficheros pdf para la ayuda de la aplicación
         - `images`: Carpeta que contiene las imágenes de la aplicación
         - `languages`: Carpeta que contiene los idiomas de la aplicación
+        - `logs`: Carpeta con los ficheros de log
         - `reports`: Directorio con los informes de la aplicación
           - `InformeLibros.jasper`: Fichero del informe de JasperReport de libros
           - `InformeLibros.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de libros
+          - `SubinformePrestamos.jrxml`: Fichero para la edición del subinforme de JasperReport en JasperStudio de préstamos para su uso en el informe de libros
           - `InformeAlumnos.jasper`: Fichero del informe de JasperReport de alumnos
           - `InformeAlumnos.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de alumnos
           - `InformeGraficos.jasper`: Fichero del informe de JasperReport de gráficos
