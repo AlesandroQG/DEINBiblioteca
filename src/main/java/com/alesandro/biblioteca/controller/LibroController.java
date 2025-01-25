@@ -34,7 +34,7 @@ public class LibroController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(LibroController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(LibroController.class);
 
     /**
      * Parámetro libro

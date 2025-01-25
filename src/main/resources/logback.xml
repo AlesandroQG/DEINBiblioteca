@@ -1,26 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Define the rolling file appender -->
-    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- File where logs will be saved -->
-        <file>logs/app.log</file>
-        <!-- Define the rolling policy -->
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>logs/app.%i.log</fileNamePattern>
-            <!-- Number of rolled files to keep -->
-            <minIndex>1</minIndex>
-            <maxIndex>21</maxIndex>
-        </rollingPolicy>
-        <!-- Size triggering policy -->
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>10MB</maxFileSize>
-        </triggeringPolicy>
-        <!-- Format of the log messages -->
+    <!-- Configuración del appender para la consola -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+            <pattern>AVISO CONSOLA --> %d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
         </encoder>
     </appender>
-    <!-- Set the root logger to use the rolling appender -->
-    <root level="debug">
-        <appender-ref ref="ROLLING" />
-    </root>
+    <!-- Configuración del appender de tipo RollingFileAppender -->
+    <appender name="FILE_ROLLER" class="ch.qos.logback.core.FileAppender">
+        <file>logs/registroDeApp10MB.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedRollingPolicy">
+            <maxFileSize>10MB</maxFileSize>
+            <fileNamePattern>registroDeApp10MB.%i.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Configuración del appender para el archivo -->
+    <appender name="FILE_GIGANTE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/registroDeApp.log</file>  <!-- Ruta del archivo de log -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Configuración del logger -->
+    <logger name="com.alesandro.biblioteca" level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_GIGANTE"/>
+        <appender-ref ref="FILE_ROLLER"/>
+    </logger>
+    <!-- Configuración del root logger
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_GIGANTE"/>
+        <appender-ref ref="FILE_ROLLER"/>
+    </root>-->
 </configuration>

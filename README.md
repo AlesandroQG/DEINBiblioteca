@@ -50,6 +50,7 @@ Este es el diagrama de casos de la aplicación:
 La estructura del proyecto es la siguiente:
 - `configuration.properties`: Fichero con las propiedades para la conexión a la base de datos (creada al lanzar la aplicación)
 - `lang.properties`: Fichero con la propiedad de idioma (creada al lanzar la aplicación)
+- `logs`: Carpeta con los ficheros de log
 - `src > main`:
     - `java > com.alesandro.biblioteca`: Código fuente de la aplicación
         - `BibliotecaApplicacion.java`: Clase que lanza la aplicación
@@ -99,7 +100,6 @@ La estructura del proyecto es la siguiente:
           - `pdf`: Directorio con los ficheros pdf para la ayuda de la aplicación
         - `images`: Carpeta que contiene las imágenes de la aplicación
         - `languages`: Carpeta que contiene los idiomas de la aplicación
-        - `logs`: Carpeta con los ficheros de log
         - `reports`: Directorio con los informes de la aplicación
           - `InformeLibros.jasper`: Fichero del informe de JasperReport de libros
           - `InformeLibros.jrxml`: Fichero para la edición del informe de JasperReport en JasperStudio de libros

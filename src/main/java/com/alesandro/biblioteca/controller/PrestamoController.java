@@ -43,7 +43,7 @@ public class PrestamoController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(PrestamoController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(PrestamoController.class);
 
     /**
      * Parámetro préstamo

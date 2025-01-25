@@ -10,7 +10,7 @@ public class ValidadorNumero {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(ValidadorNumero.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(ValidadorNumero.class);
 
     /**
      * Función que valida un string para ver si se puede pasar a int

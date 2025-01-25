@@ -16,7 +16,7 @@ public class LanguageSwitcher {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(LanguageSwitcher.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(LanguageSwitcher.class);
 
     private Stage stage;
 

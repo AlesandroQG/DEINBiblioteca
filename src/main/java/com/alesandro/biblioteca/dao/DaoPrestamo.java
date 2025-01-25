@@ -22,7 +22,7 @@ public class DaoPrestamo {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(DaoPrestamo.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DaoPrestamo.class);
 
     /**
      * Metodo que busca un prestamo por medio de su id

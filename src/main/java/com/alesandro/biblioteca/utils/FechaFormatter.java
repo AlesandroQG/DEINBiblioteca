@@ -13,7 +13,7 @@ public class FechaFormatter {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(FechaFormatter.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(FechaFormatter.class);
 
     /**
      * Formateo de fechas

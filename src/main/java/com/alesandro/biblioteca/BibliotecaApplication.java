@@ -22,7 +22,7 @@ public class BibliotecaApplication extends Application {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(BibliotecaApplication.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(BibliotecaApplication.class);
 
     /**
      * Función donde se carga y se muestra la ventana de la aplicación

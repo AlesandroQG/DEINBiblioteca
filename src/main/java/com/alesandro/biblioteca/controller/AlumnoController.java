@@ -40,7 +40,7 @@ public class AlumnoController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
 
     /**
      * Parámetro alumno

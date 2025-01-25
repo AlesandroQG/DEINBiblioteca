@@ -19,7 +19,7 @@ public class DaoAlumno {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(DaoAlumno.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DaoAlumno.class);
 
     /**
      * Metodo que busca un alumno por medio de su id

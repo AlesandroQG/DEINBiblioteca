@@ -22,7 +22,7 @@ public class DBConnect {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(DBConnect.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DBConnect.class);
 
     private final Connection connection;
 

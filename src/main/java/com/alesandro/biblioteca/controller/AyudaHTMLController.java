@@ -21,7 +21,7 @@ public class AyudaHTMLController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(AyudaHTMLController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(AyudaHTMLController.class);
 
     /**
      * Parámetro WebEngine

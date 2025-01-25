@@ -30,7 +30,7 @@ public class NuevoHistorialPrestamoController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(NuevoHistorialPrestamoController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(NuevoHistorialPrestamoController.class);
 
     @FXML // fx:id="datePicker"
     private DatePicker datePicker; // Value injected by FXMLLoader

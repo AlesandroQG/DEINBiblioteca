@@ -27,7 +27,7 @@ public class FirstLaunchController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(FirstLaunchController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(FirstLaunchController.class);
 
     @FXML // fx:id="btnConfirmar"
     private Button btnConfirmar; // Value injected by FXMLLoader

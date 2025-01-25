@@ -63,7 +63,7 @@ public class MainController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(MainController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
     @FXML // fx:id="miAniadir"
     private MenuItem miAniadir; // Value injected by FXMLLoader

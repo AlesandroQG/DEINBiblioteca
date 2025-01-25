@@ -25,7 +25,7 @@ public class EditarHistorialPrestamoController implements Initializable {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(EditarHistorialPrestamoController.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(EditarHistorialPrestamoController.class);
 
     /**
      * Parámetro historial préstamo

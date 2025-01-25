@@ -19,7 +19,7 @@ public class LanguageManager {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(LanguageManager.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(LanguageManager.class);
 
     private static LanguageManager instance;
     private Locale locale = new Locale.Builder().setLanguage(LanguageManager.getLanguage()).build();

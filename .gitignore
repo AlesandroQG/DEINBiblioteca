@@ -39,5 +39,4 @@ build/
 /test_imgs/
 lang.properties
 configuration.properties
-/src/main/resources/com/alesandro/biblioteca/logs/
-logs/app.log
+logs/*

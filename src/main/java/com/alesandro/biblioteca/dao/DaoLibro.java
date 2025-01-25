@@ -23,7 +23,7 @@ public class DaoLibro {
     /**
      * Logger a usar
      */
-    private static final Logger logger = LoggerFactory.getLogger(DaoLibro.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(DaoLibro.class);
 
     /**
      * Metodo que busca un libro por medio de su id
