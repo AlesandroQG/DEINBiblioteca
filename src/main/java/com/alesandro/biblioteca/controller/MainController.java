@@ -676,7 +676,7 @@ public class MainController implements Initializable {
         try {
             connection = new DBConnect();
             HashMap<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("informePrestamos", JasperCompileManager.compileReport(getClass().getResourceAsStream("/com/alesandro/biblioteca/reports/SubinformePrestamos.jrxml")));
+            parameters.put("informePrestamos", JasperCompileManager.compileReport(getClass().getResourceAsStream("/com/alesandro/biblioteca/reports/SubinformePrestamos.jrxml"))); // Compilar el subinforme
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeLibros.jasper")); // Obtener el fichero del informe
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters, connection.getConnection()); // Cargar el informe
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe
