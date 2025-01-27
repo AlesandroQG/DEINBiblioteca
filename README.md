@@ -11,18 +11,6 @@ Estas son las tecnologías usadas para este proyecto:
 - Base de datos: MariaDB
 - Informes: JasperReport 7.0.1 (ejecución funciona en VSCode)
 
-### Configuración
-
-Para la conexión a la base de datos, hay que editar el fichero `configuration.properties` localizado en la ruta base.
-La plantilla es la siguiente:
-```
-address=
-port=
-user=
-password=
-database=
-```
-
 ### Compilación y ejecución
 
 Para compilar la aplicación, en la terminal hay que ejecutar este comando dentro de la carpeta base:

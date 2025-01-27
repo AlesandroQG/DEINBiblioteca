@@ -646,22 +646,6 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Función que compila un subinforme para su uso en un informe
-     *
-     * @param informe a compilar
-     * @return informe compilado
-     */
-    public JasperReport compilar(String informe) {
-        try {
-            return JasperCompileManager.compileReport(getClass().getResourceAsStream("/com/alesandro/biblioteca/reports/" + informe)); // Compilar el informe
-        } catch (JRException e) {
-            System.err.println(e.getMessage());
-            mostrarAlerta(resources.getString("report.load.error"));
-            return null;
-        }
-    }
-
-    /**
      * Función que se ejecuta cuando se pulsa el menu item "Informe Alumnos". Abre el informe de alumnos
      *
      * @param event evento del usuario
@@ -692,7 +676,7 @@ public class MainController implements Initializable {
         try {
             connection = new DBConnect();
             HashMap<String, Object> parameters = new HashMap<String, Object>();
-            parameters.put("informePrestamos", compilar("SubinformePrestamos.jrxml"));
+            parameters.put("informePrestamos", JasperCompileManager.compileReport(getClass().getResourceAsStream("/com/alesandro/biblioteca/reports/SubinformePrestamos.jrxml"))); // Compilar el subinforme
             JasperReport report = (JasperReport) JRLoader.loadObject(getClass().getResource("/com/alesandro/biblioteca/reports/InformeLibros.jasper")); // Obtener el fichero del informe
             JasperPrint jprint = JasperFillManager.fillReport(report, parameters, connection.getConnection()); // Cargar el informe
             JasperViewer viewer = new JasperViewer(jprint, false); // Instanciar la vista del informe para mostrar el informe

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Clase donde se ejecuta la aplicación principal
  *
- * @author alesandroquirosgobbato
+ * @author Alesandro Quirós Gobbato
  */
 public class BibliotecaApplication extends Application {
     /**
